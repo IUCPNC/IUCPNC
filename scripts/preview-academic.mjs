@@ -1,0 +1,10 @@
+import http from 'node:http';
+import {Readable} from 'node:stream';
+import worker from '../dist/server/index.js';
+import {academicFixture,lecturer,admin,verifier,pc,other} from './academic-fixture.mjs';
+import {today} from '../worker/academic-core.js';
+const f=await academicFixture();
+const id=await f.create();await f.publish(id);await f.publishRecord({kind:'integration',code:'student-attendance',title:'Synthetic local attendance source',data:{mode:'Manual',institutionConfirmed:true,owner:'Synthetic Registrar',source:'Synthetic local preview only'}});
+const actors={lecturer,admin,verifier,pc,other};
+const server=http.createServer(async(req,res)=>{try{const url=new URL(req.url,'http://127.0.0.1:4173');if(url.pathname==='/preview-role'){const role=url.searchParams.get('role')||'lecturer';res.writeHead(302,{'set-cookie':'preview_role='+role+'; Path=/; SameSite=Lax',location:'/academic'});return res.end();}let role=(req.headers.cookie||'').match(/preview_role=(\w+)/)?.[1]||'lecturer';const actor=actors[role]||lecturer,headers=new Headers(req.headers);headers.set('oai-authenticated-user-id',actor.userId);headers.set('oai-authenticated-user-email',actor.email);const chunks=[];for await(const p of req)chunks.push(p);const response=await worker.fetch(new Request(url,{method:req.method,headers,...(chunks.length?{body:Buffer.concat(chunks)}:{})}),f.env);res.writeHead(response.status,Object.fromEntries(response.headers));if(response.body)Readable.fromWeb(response.body).pipe(res);else res.end();}catch(e){res.writeHead(500);res.end(e.message);}});
+server.listen(4173,'127.0.0.1',()=>console.log('Local synthetic Academic Hub preview: http://127.0.0.1:4173/academic'));

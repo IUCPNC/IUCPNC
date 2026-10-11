@@ -1,0 +1,15 @@
+work/
+outputs/
+*.tar.gz
+node_modules/
+.pnpm-store/
+dist/
+.next/
+.wrangler/
+.sites-runtime/
+.env*
+!.env.example
+
+# Private source recovery artifacts must remain outside GitHub.
+*.bundle
+nadi-recovery-private/

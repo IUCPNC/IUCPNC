@@ -1,0 +1,24 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+import {fixture,hr,employee} from './test-profiles.mjs';
+import {businessCardRoute,businessContact,contactVcard} from '../worker/business-card-api.js';
+const {env,sqlite}=fixture();let checks=0;
+const req=(id='',user=hr,method='GET')=>businessCardRoute(new Request('https://test.local/api/business-cards'+id,{method}),env,{user,isPc:(_,email)=>email===hr.email});
+async function status(p,s){const r=await p;assert.equal(r.status,s,await r.clone().text());checks++;return r}
+await status(req('',null),401);await status(req('',{userId:'unknown',email:'unknown@example.test'}),403);await status(req('',{...employee,userId:'wrong'}),403);await status(req('',hr,'POST'),405);
+let d=await(await status(req('',employee),200)).json();assert.equal(d.selfEmployeeId,'TEST-001');assert.equal(d.contacts.length,2);checks+=2;
+const c=d.contacts[0];assert.deepEqual(Object.keys(c).sort(),['academicTitle','biography','department','directoryVisible','email','employeeId','expertise','faculty','name','officePhone','organisation','photoUrl','preferredName','professionalTitle','qualifications','roles','staffCategory','title','website']);assert.equal(c.email,'');checks+=2;
+sqlite.prepare("UPDATE employees SET email='person@innovative.edu.my' WHERE employee_id='TEST-002'").run();sqlite.prepare("INSERT INTO employee_profile_sections VALUES ('TEST-002','personal',?,1,'now','hr')").run(JSON.stringify({nric:'PRIVATE-123',personalMobile:'PRIVATE-PHONE',personalEmail:'PRIVATE-EMAIL'}));
+d=await(await status(req('/TEST-002'),200)).json();assert.equal(d.contact.email,'person@innovative.edu.my');assert(!JSON.stringify(d).includes('PRIVATE'));assert(d.vcard.includes('EMAIL;TYPE=INTERNET,WORK:person@innovative.edu.my'));checks+=3;
+await status(req('/unknown'),404);sqlite.prepare("UPDATE employees SET active=0 WHERE employee_id='TEST-002'").run();await status(req('/TEST-002'),404);assert.equal((await(await req()).json()).contacts.length,1);checks++;
+sqlite.prepare("UPDATE employees SET active=1 WHERE employee_id='TEST-002'").run();sqlite.prepare("INSERT INTO employee_profile_sections VALUES ('TEST-002','overview',?,1,'now','hr')").run(JSON.stringify({employmentStatus:'Exited'}));await status(req('/TEST-002'),404);
+sqlite.prepare("UPDATE employee_profile_sections SET data_json='{}' WHERE employee_id='TEST-002' AND section='overview'").run();sqlite.prepare("INSERT INTO employee_profile_sections VALUES ('TEST-002','exit',?,1,'now','hr')").run(JSON.stringify({autoLifecycle:'Enabled',lastWorkingDay:'2020-01-01'}));await status(req('/TEST-002'),404);
+const v=contactVcard(businessContact({employee_id:'t',employee_name:'Zoë; Ali, Test\r\nTEL:private',position:'Director\\Head',department:'P&C',email:'a@innovative.edu.my'}));assert(v.includes('Zoë\\; Ali\\, Test  TEL:private'));assert(!v.includes('\r\nTEL:'));assert(v.includes('TITLE:Director\\\\Head'));checks+=3;
+const qrContext={};vm.createContext(qrContext);vm.runInContext(fs.readFileSync('worker/qr-generator.js','utf8'),qrContext);qrContext.qrcode.stringToBytes=qrContext.qrcode.stringToBytesFuncs['UTF-8'];const qr=qrContext.qrcode(0,'M');qr.addData(v,'Byte');qr.make();assert(qr.getModuleCount()>20);assert(qr.createSvgTag({cellSize:5,margin:20,scalable:true}).includes('<svg'));checks+=2;
+console.log('Business card privacy and contact checks passed:',checks);
+env.BUSINESS_CARD_BRIDGE_KEY='a'.repeat(64);env.BUSINESS_CARD_PUBLIC_ORIGIN='https://cards.test';
+const list=await(await req()).json(),id=list.contacts[0].publicId;assert.match(id,/^[a-f0-9]{64}$/);assert.equal(list.contacts[0].publicUrl,'https://cards.test/c/'+id);
+const bridge=(key,path='')=>businessCardRoute(new Request('https://test.local/api/business-cards/public/'+id+path,{headers:{'x-business-card-key':key}}),env,{user:null,isPc:()=>false});
+await status(bridge('wrong'),401);let pub=await(await status(bridge(env.BUSINESS_CARD_BRIDGE_KEY),200)).json();assert.equal(pub.contact.employeeId,undefined);assert.equal(pub.contact.publicId,undefined);assert(!JSON.stringify(pub).includes('storage_key'));assert.equal(pub.contact.photoUrl,'/api/photos/'+id);await status(bridge(env.BUSINESS_CARD_BRIDGE_KEY,'/photo'),404);
+sqlite.prepare("UPDATE employees SET active=0 WHERE employee_id='TEST-001'").run();await status(bridge(env.BUSINESS_CARD_BRIDGE_KEY),404);await status(bridge(env.BUSINESS_CARD_BRIDGE_KEY,'/photo'),404);console.log('Public bridge checks passed: secret isolation, opaque IDs, public field limits and immediate inactive revocation.');

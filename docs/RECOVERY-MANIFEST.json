@@ -1,0 +1,3045 @@
+{
+  "assessed_at": "2026-10-11",
+  "site": {
+    "project_id": "appgprj_6abe29d9b6bc8191a17de96f35cbcfee",
+    "live_version": 74,
+    "version_id": "appgprj_6abe29d9b6bc8191a17de96f35cbcfee~appgver_93715ec95fac8191ab403300b6caa401",
+    "deployment_id": "appgdep_6aca6b1c1d8c8191aaca3fdc18b438c6",
+    "deployment_status": "succeeded",
+    "url": "https://iuc-nadi-mpc-hr.iuc-people-a-4289.chatgpt.site",
+    "source_commit": "ed2bed22be4c38d9f1b78fed5ce5c65629103a4c"
+  },
+  "recovery": {
+    "method": "Git clone from the official Sites Git endpoint using its native, ephemeral credential.",
+    "original_history_commits": 77,
+    "original_tracked_files": 425,
+    "git_fsck": "passed",
+    "unmodified_files": 419,
+    "modified_files": 6,
+    "original_history_uploaded_to_github": false,
+    "export_kind": "Sanitized source snapshot; not a byte-identical production artifact."
+  },
+  "pending": {
+    "status": "Historical evidence located; Git objects and patch bytes not recovered.",
+    "order_4_commit": "f3d89389244b6bc02268fffa05ba29dce1dfdcdf",
+    "order_5_commit": "671c8eae22c7e35bf942aac74c253422ec200c13",
+    "original_thread_id": "01a126c8-20f5-71e5-a480-f13a3ca870a5",
+    "original_checkout": "/workspace/scratch/nadi-readiness",
+    "patch_path": "/workspace/outputs/NADI-cloud-pending-changes.patch"
+  },
+  "files": [
+    {
+      "path": ".gitignore",
+      "original_git_blob": "3bb6a157e94644fd74c3cb32441618dbd5ebbbfd",
+      "original_sha256": "577fd34317bbb682690f5eaf87f41c899cb15107ca6414a8d2ed8a609261fc78",
+      "export_sha256": "d13297bcd85bf0ddedc328c848bd9241897903cb65b50a985a6ec11a9b99545b",
+      "modified": true,
+      "reason": "Prevent accidental inclusion of original-history bundles and private recovery artifacts."
+    },
+    {
+      "path": ".openai/hosting.json",
+      "original_git_blob": "4a6a517a2a905bdf4adfa671be343e7cfb5f77dc",
+      "original_sha256": "79711827044c29f1bf89f2db9b9bc90a99065827885627c9ac4f111d432e96fd",
+      "export_sha256": "79711827044c29f1bf89f2db9b9bc90a99065827885627c9ac4f111d432e96fd",
+      "modified": false
+    },
+    {
+      "path": "POSITION-MODULE-DESIGN.txt",
+      "original_git_blob": "2034f7eecab252b3072bd2d09e1ada8d6917ce6d",
+      "original_sha256": "7f61efadc8839cc83524a68d834a3dacc98ca7e98553149ae9e5628adbd9a010",
+      "export_sha256": "7f61efadc8839cc83524a68d834a3dacc98ca7e98553149ae9e5628adbd9a010",
+      "modified": false
+    },
+    {
+      "path": "app/api/me/route.ts",
+      "original_git_blob": "ea9cf59725ef60be9ead822f436621a27d974e10",
+      "original_sha256": "1731705946d1f723a17ce1987e6eb60feee9f10ff621e1312a3a09150b5af7da",
+      "export_sha256": "1731705946d1f723a17ce1987e6eb60feee9f10ff621e1312a3a09150b5af7da",
+      "modified": false
+    },
+    {
+      "path": "app/api/people-culture/route.ts",
+      "original_git_blob": "e3c4947269a793f16dfb7bfdd14d54f29e24b8ec",
+      "original_sha256": "0c252d1a356de80ecd9def1705739fd76c421df6653b9db4309b001a471e5a0c",
+      "export_sha256": "0c252d1a356de80ecd9def1705739fd76c421df6653b9db4309b001a471e5a0c",
+      "modified": false
+    },
+    {
+      "path": "app/api/submissions/route.ts",
+      "original_git_blob": "87d74855ec3f8817bf546e8529a12f47c4327df0",
+      "original_sha256": "25aaacd54fe2d7121e5a13628cf8da634c7aded02410eb1a3db46fd50659c916",
+      "export_sha256": "25aaacd54fe2d7121e5a13628cf8da634c7aded02410eb1a3db46fd50659c916",
+      "modified": false
+    },
+    {
+      "path": "app/chatgpt-auth.ts",
+      "original_git_blob": "a0ae2ed9a9771b5fc36a06af554a05c18b2a13b3",
+      "original_sha256": "4265a2e7c2dcb3a6f4b7026f762bf5b6e4caec76cc13c0a45987ee9a9f2e42cc",
+      "export_sha256": "4265a2e7c2dcb3a6f4b7026f762bf5b6e4caec76cc13c0a45987ee9a9f2e42cc",
+      "modified": false
+    },
+    {
+      "path": "app/employee/page.tsx",
+      "original_git_blob": "1278ba30e0700f0fb52f467a3b37995b68282347",
+      "original_sha256": "f912cf3668334e7311b9068e8b4a19ec57e44666f9406c12174445dab89cb745",
+      "export_sha256": "f912cf3668334e7311b9068e8b4a19ec57e44666f9406c12174445dab89cb745",
+      "modified": false
+    },
+    {
+      "path": "app/globals.css",
+      "original_git_blob": "0dabedeb6980e6786a700d9a237adb89d1707d03",
+      "original_sha256": "9f8e5d4ae3f7817fb35e743e1fcc9353a92472ee5d77f70cd88438691471b07a",
+      "export_sha256": "9f8e5d4ae3f7817fb35e743e1fcc9353a92472ee5d77f70cd88438691471b07a",
+      "modified": false
+    },
+    {
+      "path": "app/layout.tsx",
+      "original_git_blob": "dd2eee62eb20721f131a0c1eb02b5a7f219429ca",
+      "original_sha256": "ff78f00ca9b8c230b89f931403fbb9d8eac7f94f91707bd432ebe55a9085f7c9",
+      "export_sha256": "ff78f00ca9b8c230b89f931403fbb9d8eac7f94f91707bd432ebe55a9085f7c9",
+      "modified": false
+    },
+    {
+      "path": "app/page.tsx",
+      "original_git_blob": "94af41ea5dff3575ff77157e8eb5398b4e20b38c",
+      "original_sha256": "e2d5cab64255f18f28480c8c9d7d261912a4d1a0692a35a64f8e9750effbfee0",
+      "export_sha256": "e2d5cab64255f18f28480c8c9d7d261912a4d1a0692a35a64f8e9750effbfee0",
+      "modified": false
+    },
+    {
+      "path": "app/people-culture/dashboard.tsx",
+      "original_git_blob": "a7743a6c8379d72eeb058a9759e364b07f192be2",
+      "original_sha256": "d7d58b4db410722918607b88d4de579b4dd5e21c362109f10a0e82a3c8a72880",
+      "export_sha256": "d7d58b4db410722918607b88d4de579b4dd5e21c362109f10a0e82a3c8a72880",
+      "modified": false
+    },
+    {
+      "path": "app/people-culture/page.tsx",
+      "original_git_blob": "4f51e34eccdace09aa136f4c066ecd4a08a4ba19",
+      "original_sha256": "2c8153abf2f8f819248bdf5165f3f7663b74680e6b07876b3857ddab8005326e",
+      "export_sha256": "2c8153abf2f8f819248bdf5165f3f7663b74680e6b07876b3857ddab8005326e",
+      "modified": false
+    },
+    {
+      "path": "build/sites-vite-plugin.LICENSE",
+      "original_git_blob": "4243cb4a9aaa50f954498e54c850773e9ba13eea",
+      "original_sha256": "7de1e115d165f176e68f962acdb809b5ab8d8ae78d3981e0701392b2ac50c713",
+      "export_sha256": "7de1e115d165f176e68f962acdb809b5ab8d8ae78d3981e0701392b2ac50c713",
+      "modified": false
+    },
+    {
+      "path": "build/sites-vite-plugin.ts",
+      "original_git_blob": "fbe815d6df16c28cb486c60bfabf1a5f16a7e1bd",
+      "original_sha256": "8d88a27f56a081e1a4a5b9b2ad2ff519fb66f83b913c576a24a543ef525513d0",
+      "export_sha256": "8d88a27f56a081e1a4a5b9b2ad2ff519fb66f83b913c576a24a543ef525513d0",
+      "modified": false
+    },
+    {
+      "path": "cloudflare-env.d.ts",
+      "original_git_blob": "417c4d6470ea452062d040edc45a0f9c1251adc4",
+      "original_sha256": "fafde5b57a1dac39fa283625aa88db31037cbf49336c1d5cc758167b1c561796",
+      "export_sha256": "fafde5b57a1dac39fa283625aa88db31037cbf49336c1d5cc758167b1c561796",
+      "modified": false
+    },
+    {
+      "path": "components.json",
+      "original_git_blob": "c8f5bb16f79ed774f67415a8dc2b4a38243e3e90",
+      "original_sha256": "31f4ca67a4a62572571003d3d5aac85ee6fbfca67a192924bac6b168d95e98fd",
+      "export_sha256": "31f4ca67a4a62572571003d3d5aac85ee6fbfca67a192924bac6b168d95e98fd",
+      "modified": false
+    },
+    {
+      "path": "components/ui/accordion.tsx",
+      "original_git_blob": "91e3a250ce6ee0797b0258454d774800650adcc8",
+      "original_sha256": "a4f153089ba886dfcf73fac26b5c01ca933fa12fbe88df6fb723912bfffdfbb0",
+      "export_sha256": "a4f153089ba886dfcf73fac26b5c01ca933fa12fbe88df6fb723912bfffdfbb0",
+      "modified": false
+    },
+    {
+      "path": "components/ui/alert-dialog.tsx",
+      "original_git_blob": "dad327341382f200b84d5f833eb1b7a74b0e7469",
+      "original_sha256": "9a8d950f2b9b4352d5ebb762fb44d5c28c2d353aa29712071973656a8736e311",
+      "export_sha256": "9a8d950f2b9b4352d5ebb762fb44d5c28c2d353aa29712071973656a8736e311",
+      "modified": false
+    },
+    {
+      "path": "components/ui/alert.tsx",
+      "original_git_blob": "f99164ed4b320790482f514342dab5e72f284aca",
+      "original_sha256": "2cc59b5f7bda91c1670884b1bf46bfc8a2a6f226cef184f5762acc037188885b",
+      "export_sha256": "2cc59b5f7bda91c1670884b1bf46bfc8a2a6f226cef184f5762acc037188885b",
+      "modified": false
+    },
+    {
+      "path": "components/ui/aspect-ratio.tsx",
+      "original_git_blob": "57e38fa96f9c0cb767d7b8de0d6dbc171d1b921a",
+      "original_sha256": "b1c157886236782cb92d8fbcd4749532aaf6d8aabefd6e157ca40358f902f407",
+      "export_sha256": "b1c157886236782cb92d8fbcd4749532aaf6d8aabefd6e157ca40358f902f407",
+      "modified": false
+    },
+    {
+      "path": "components/ui/attachment.tsx",
+      "original_git_blob": "5bdd1ce7db5800eb55198cd0291a1e47dc67fb0d",
+      "original_sha256": "ae8a25dd1a896d3964e3ef54d97e51221b418cde287dfd794428b89951c5c790",
+      "export_sha256": "ae8a25dd1a896d3964e3ef54d97e51221b418cde287dfd794428b89951c5c790",
+      "modified": false
+    },
+    {
+      "path": "components/ui/avatar.tsx",
+      "original_git_blob": "ea658505703a577fe93341e5e1a0b478c27245f7",
+      "original_sha256": "58a846bf1617b94b9681921db9b8461d0145f311424663d11678a06b6153cb34",
+      "export_sha256": "58a846bf1617b94b9681921db9b8461d0145f311424663d11678a06b6153cb34",
+      "modified": false
+    },
+    {
+      "path": "components/ui/badge.tsx",
+      "original_git_blob": "6eb2a057aae0e23a74368cc4daf9657210e9a740",
+      "original_sha256": "46a0de5224f6a5d5d63d45246534288518dce888f031064bff925bbc7fe6ad97",
+      "export_sha256": "46a0de5224f6a5d5d63d45246534288518dce888f031064bff925bbc7fe6ad97",
+      "modified": false
+    },
+    {
+      "path": "components/ui/breadcrumb.tsx",
+      "original_git_blob": "004bb63a4c92229e612b6126d79fb7b078aa7565",
+      "original_sha256": "d4c0831bba2212e778248f54a6ace6ef378df8bba4616d1abf27787a31eabae5",
+      "export_sha256": "d4c0831bba2212e778248f54a6ace6ef378df8bba4616d1abf27787a31eabae5",
+      "modified": false
+    },
+    {
+      "path": "components/ui/bubble.tsx",
+      "original_git_blob": "792146e61d80ef595d032d5d09a3d572d50f1374",
+      "original_sha256": "870cc0c5cfc8a515053f7e41e706a6bd017a909b45f1305fd3b164a52cc4483b",
+      "export_sha256": "870cc0c5cfc8a515053f7e41e706a6bd017a909b45f1305fd3b164a52cc4483b",
+      "modified": false
+    },
+    {
+      "path": "components/ui/button-group.tsx",
+      "original_git_blob": "cd550d7afca6562548afe3f595b352406f7f3951",
+      "original_sha256": "784c89d8ee683e1bc972ae69e6ea8225a7f63abe22aa1b5fc3423ae8a2a399c0",
+      "export_sha256": "784c89d8ee683e1bc972ae69e6ea8225a7f63abe22aa1b5fc3423ae8a2a399c0",
+      "modified": false
+    },
+    {
+      "path": "components/ui/button.tsx",
+      "original_git_blob": "4d38506cee5430d95a59ec6a2a0cef2b79217e7a",
+      "original_sha256": "cc36af0f8b5019c33cc039fbf03bb952a513072b15b55b53c592b78af3e5f4c4",
+      "export_sha256": "cc36af0f8b5019c33cc039fbf03bb952a513072b15b55b53c592b78af3e5f4c4",
+      "modified": false
+    },
+    {
+      "path": "components/ui/calendar.tsx",
+      "original_git_blob": "5d31419b130a18c52320f5a21546a9236123b6bf",
+      "original_sha256": "3855fbe0d3f8ad3a4b93071f98b76a9f6782d46ec8b05f5d2ddbee1e4e39bc84",
+      "export_sha256": "3855fbe0d3f8ad3a4b93071f98b76a9f6782d46ec8b05f5d2ddbee1e4e39bc84",
+      "modified": false
+    },
+    {
+      "path": "components/ui/card.tsx",
+      "original_git_blob": "acf57dc5a534792273b8fb86227e92e001f3dc53",
+      "original_sha256": "c48dd3b96be90a7066f1aebf294f0af9d00ebcdc367d5d4aca55429ade570c1c",
+      "export_sha256": "c48dd3b96be90a7066f1aebf294f0af9d00ebcdc367d5d4aca55429ade570c1c",
+      "modified": false
+    },
+    {
+      "path": "components/ui/carousel.tsx",
+      "original_git_blob": "0e05a77ea155fde6af5d9a4848b1d3953df6ea5a",
+      "original_sha256": "b7ea0dda3903d972c186f739e23da61f547bc83b5a0bf13b16856577846d5fc3",
+      "export_sha256": "b7ea0dda3903d972c186f739e23da61f547bc83b5a0bf13b16856577846d5fc3",
+      "modified": false
+    },
+    {
+      "path": "components/ui/chart.tsx",
+      "original_git_blob": "9813c584e125847d88e9e7e7f9edff7e9ba45a97",
+      "original_sha256": "45aa5ea4a386f4fb5b8869ff4bab3a08cf89255190ee322043baf84c3e950b6a",
+      "export_sha256": "45aa5ea4a386f4fb5b8869ff4bab3a08cf89255190ee322043baf84c3e950b6a",
+      "modified": false
+    },
+    {
+      "path": "components/ui/checkbox.tsx",
+      "original_git_blob": "f5a7e433f3795b82a00c5c06a1fc6decf116a84a",
+      "original_sha256": "b23ab9d4deeedf2ac8f512c368361ede681aa383437ef48563a6f9b7dbe95f27",
+      "export_sha256": "b23ab9d4deeedf2ac8f512c368361ede681aa383437ef48563a6f9b7dbe95f27",
+      "modified": false
+    },
+    {
+      "path": "components/ui/collapsible.tsx",
+      "original_git_blob": "2f7a4e7fc64a8874373c1584646a63f28cd63c47",
+      "original_sha256": "c6598e5584f4258b5d9fefadbc5ad6a66888ad58729f4b634a0bb2d9c513188b",
+      "export_sha256": "c6598e5584f4258b5d9fefadbc5ad6a66888ad58729f4b634a0bb2d9c513188b",
+      "modified": false
+    },
+    {
+      "path": "components/ui/combobox.tsx",
+      "original_git_blob": "2415bd801031a16bbcee8343058825feecfaea69",
+      "original_sha256": "2d68e78b2dc7e38a085f222dede60a80b4f8229a6e91732c484605e204d46735",
+      "export_sha256": "2d68e78b2dc7e38a085f222dede60a80b4f8229a6e91732c484605e204d46735",
+      "modified": false
+    },
+    {
+      "path": "components/ui/command.tsx",
+      "original_git_blob": "8fe3ccb406be52d28961b0c0220e87ecd19596ca",
+      "original_sha256": "361193df1e3d64a9e9b5048f045264782fcb387aab3f00f2b805fdcbf538b16a",
+      "export_sha256": "361193df1e3d64a9e9b5048f045264782fcb387aab3f00f2b805fdcbf538b16a",
+      "modified": false
+    },
+    {
+      "path": "components/ui/context-menu.tsx",
+      "original_git_blob": "5aaca76552cf0468b1def03c9e2c42f1f0b60734",
+      "original_sha256": "2cf1fcf59df0649a3e2a126d1df2f639145f6b6bf5689ee54af1f40ab1245017",
+      "export_sha256": "2cf1fcf59df0649a3e2a126d1df2f639145f6b6bf5689ee54af1f40ab1245017",
+      "modified": false
+    },
+    {
+      "path": "components/ui/dialog.tsx",
+      "original_git_blob": "84bdef4bb307087da1bfaf3cadf7be5dbda73f24",
+      "original_sha256": "dce39c6adc47d997bd2567f8b7a72f466b0134715105cd42f9194007b8ecdb14",
+      "export_sha256": "dce39c6adc47d997bd2567f8b7a72f466b0134715105cd42f9194007b8ecdb14",
+      "modified": false
+    },
+    {
+      "path": "components/ui/direction.tsx",
+      "original_git_blob": "22e165774bd595fbf41d0c45efef1cf996897983",
+      "original_sha256": "84ae2ad658207f0e0f367978e5508cd8027cd00c29c41d3d13db21a708c3d1e6",
+      "export_sha256": "84ae2ad658207f0e0f367978e5508cd8027cd00c29c41d3d13db21a708c3d1e6",
+      "modified": false
+    },
+    {
+      "path": "components/ui/drawer.tsx",
+      "original_git_blob": "ad08671442203fe345093f364696bdf43528e0b7",
+      "original_sha256": "cb6eaf58eb0757ca91af284e5d925b89a42ad7eb19cb3f44c575a3487aa9350f",
+      "export_sha256": "cb6eaf58eb0757ca91af284e5d925b89a42ad7eb19cb3f44c575a3487aa9350f",
+      "modified": false
+    },
+    {
+      "path": "components/ui/dropdown-menu.tsx",
+      "original_git_blob": "ae1fcf62f1e3b648554789b8fe02943d92bf00fc",
+      "original_sha256": "98f0dcdae38225b73734aceeb9213dd751fea2c72ea520df31003cd133deac8a",
+      "export_sha256": "98f0dcdae38225b73734aceeb9213dd751fea2c72ea520df31003cd133deac8a",
+      "modified": false
+    },
+    {
+      "path": "components/ui/empty.tsx",
+      "original_git_blob": "ce4b0095f6d19d2eae2e465060e9060b0c210856",
+      "original_sha256": "ae95bdcf367a076ae02e7925f14522a148798f72d9651749c6d55497dba584c0",
+      "export_sha256": "ae95bdcf367a076ae02e7925f14522a148798f72d9651749c6d55497dba584c0",
+      "modified": false
+    },
+    {
+      "path": "components/ui/field.tsx",
+      "original_git_blob": "ec849dae4d3dd06a973ba22e4b2248a25cf18148",
+      "original_sha256": "ba67d76f017ac059fc86cf8c344e0b2991c4322d3619e125498c19b87f6eefbd",
+      "export_sha256": "ba67d76f017ac059fc86cf8c344e0b2991c4322d3619e125498c19b87f6eefbd",
+      "modified": false
+    },
+    {
+      "path": "components/ui/form.tsx",
+      "original_git_blob": "f371fea1bc35380d28678c6cf53df8f65deb2776",
+      "original_sha256": "315b46bb75ab7d1c6061b5d750aa4bedf6e7a455e15e2d7f9182f053d5972b1e",
+      "export_sha256": "315b46bb75ab7d1c6061b5d750aa4bedf6e7a455e15e2d7f9182f053d5972b1e",
+      "modified": false
+    },
+    {
+      "path": "components/ui/hover-card.tsx",
+      "original_git_blob": "91e869c0d3091cbeddf5cb0266e82ddf56f829a6",
+      "original_sha256": "f5d8df42c59370ec14d61bcc54f7d68e9bb7dfa0d6a872b2f7cffc2aafbf23b8",
+      "export_sha256": "f5d8df42c59370ec14d61bcc54f7d68e9bb7dfa0d6a872b2f7cffc2aafbf23b8",
+      "modified": false
+    },
+    {
+      "path": "components/ui/input-group.tsx",
+      "original_git_blob": "a7652d936fffd9c5bca4b88e6b9715bf559e667d",
+      "original_sha256": "6afbd58fea4c438e6252dc4568bddc122e84ababead4ad5cee50ace01100c9a0",
+      "export_sha256": "6afbd58fea4c438e6252dc4568bddc122e84ababead4ad5cee50ace01100c9a0",
+      "modified": false
+    },
+    {
+      "path": "components/ui/input-otp.tsx",
+      "original_git_blob": "6a556afacd71996bf0e385ff2b04869fb2ee4523",
+      "original_sha256": "161946daa89f0eda2575b9271c0494e35807c4ffb55598a49f67160c17fec299",
+      "export_sha256": "161946daa89f0eda2575b9271c0494e35807c4ffb55598a49f67160c17fec299",
+      "modified": false
+    },
+    {
+      "path": "components/ui/input.tsx",
+      "original_git_blob": "f1124aea14eee062fc2f4c55dad5f0d9de0ccc1a",
+      "original_sha256": "8c4612a7c41319ac5049daa3b34b080f9784b6245c17780eb87c127e58e473db",
+      "export_sha256": "8c4612a7c41319ac5049daa3b34b080f9784b6245c17780eb87c127e58e473db",
+      "modified": false
+    },
+    {
+      "path": "components/ui/item.tsx",
+      "original_git_blob": "d5dbb1a9c2e70456e45a39887a4b7cc56d484a45",
+      "original_sha256": "6e2144d6d87142dbbe56d568810bf546318c8aa661447ebb0d76ebbf382cb45f",
+      "export_sha256": "6e2144d6d87142dbbe56d568810bf546318c8aa661447ebb0d76ebbf382cb45f",
+      "modified": false
+    },
+    {
+      "path": "components/ui/kbd.tsx",
+      "original_git_blob": "2459224fbc531f6306b73aaeb22e9022d9985332",
+      "original_sha256": "6088c3a5432338b1719c17e9b5d0e1fa74fd1f66060f248fc88909d33a82cd13",
+      "export_sha256": "6088c3a5432338b1719c17e9b5d0e1fa74fd1f66060f248fc88909d33a82cd13",
+      "modified": false
+    },
+    {
+      "path": "components/ui/label.tsx",
+      "original_git_blob": "1ac80f701ebfe9dc02d632c08cafade732e46625",
+      "original_sha256": "a476e41f08b9de5bd447de66a33d8bc2ad18f2fa6b96c064778bab4b6f439f4c",
+      "export_sha256": "a476e41f08b9de5bd447de66a33d8bc2ad18f2fa6b96c064778bab4b6f439f4c",
+      "modified": false
+    },
+    {
+      "path": "components/ui/marker.tsx",
+      "original_git_blob": "cfa76c6c014ab342befcbf7571eb932917406522",
+      "original_sha256": "3d798763f094b2bb5e7ade2d5cd1b9bab498bc8ca7fd4cfaf4e5835bdedc34a0",
+      "export_sha256": "3d798763f094b2bb5e7ade2d5cd1b9bab498bc8ca7fd4cfaf4e5835bdedc34a0",
+      "modified": false
+    },
+    {
+      "path": "components/ui/menubar.tsx",
+      "original_git_blob": "4af16a428377f81cbb3f66adfe518308e0b690d8",
+      "original_sha256": "9243af8afcea03703398ccd1c2a8c0a87ad6cbaf2bd272fb609f5b79fe46aebb",
+      "export_sha256": "9243af8afcea03703398ccd1c2a8c0a87ad6cbaf2bd272fb609f5b79fe46aebb",
+      "modified": false
+    },
+    {
+      "path": "components/ui/message-scroller.tsx",
+      "original_git_blob": "0b05011259c026a357380c3834bce0ead8565d22",
+      "original_sha256": "bb7660a248e4e9589c3816c7c1c199ea1381a70d2c8476ae895b567a7a4d86cf",
+      "export_sha256": "bb7660a248e4e9589c3816c7c1c199ea1381a70d2c8476ae895b567a7a4d86cf",
+      "modified": false
+    },
+    {
+      "path": "components/ui/message.tsx",
+      "original_git_blob": "53437e8db2b0fad1da06a7499e54ddaf116295c2",
+      "original_sha256": "9d2952bf3b641081f09aa2739535e6bbd1be0a4946789752a2c20d8aaef43185",
+      "export_sha256": "9d2952bf3b641081f09aa2739535e6bbd1be0a4946789752a2c20d8aaef43185",
+      "modified": false
+    },
+    {
+      "path": "components/ui/native-select.tsx",
+      "original_git_blob": "3058398399ad6c029ad527052475b360b114715b",
+      "original_sha256": "007516b111fca8c98a6c40c94ab91bb68cc5b52afce1ed1f5e510c3d86e7347c",
+      "export_sha256": "007516b111fca8c98a6c40c94ab91bb68cc5b52afce1ed1f5e510c3d86e7347c",
+      "modified": false
+    },
+    {
+      "path": "components/ui/navigation-menu.tsx",
+      "original_git_blob": "0a673f513c97fbeaae0872403b7582ab2ba7e3c3",
+      "original_sha256": "889d358a77de88e9cb6f39ea4895ea4c76eaf01d731b74e44f1c41e97a78a044",
+      "export_sha256": "889d358a77de88e9cb6f39ea4895ea4c76eaf01d731b74e44f1c41e97a78a044",
+      "modified": false
+    },
+    {
+      "path": "components/ui/pagination.tsx",
+      "original_git_blob": "1dcfb0cc050c5f2bdd930522d627313d03d3690c",
+      "original_sha256": "374ad135c3d4ff3ec080a0009cd9745cdd0e12faa89d2b0e86074f11e5127fd1",
+      "export_sha256": "374ad135c3d4ff3ec080a0009cd9745cdd0e12faa89d2b0e86074f11e5127fd1",
+      "modified": false
+    },
+    {
+      "path": "components/ui/popover.tsx",
+      "original_git_blob": "30058c4ec284ca9cad1ed1162d084ce3cd94e2b0",
+      "original_sha256": "31c350309ff5d3034e6ecf1b0eda75ba8855bdbf987fc7ad6d71f0ef07c5a447",
+      "export_sha256": "31c350309ff5d3034e6ecf1b0eda75ba8855bdbf987fc7ad6d71f0ef07c5a447",
+      "modified": false
+    },
+    {
+      "path": "components/ui/progress.tsx",
+      "original_git_blob": "b3ae25089ad549b7f13125e482f99b43dd895bd2",
+      "original_sha256": "c8c26e8f5f041c3cdf4915347dc1d9c022f9448f149990fadcaf303e952fa57d",
+      "export_sha256": "c8c26e8f5f041c3cdf4915347dc1d9c022f9448f149990fadcaf303e952fa57d",
+      "modified": false
+    },
+    {
+      "path": "components/ui/radio-group.tsx",
+      "original_git_blob": "fe514536ed771f7adef0a6b9e4d1aeadc2c95481",
+      "original_sha256": "fe5ce39636d0818c2bf9c4eebddff893d1225fa2c81b5fa4bb8cbb39a8c913ce",
+      "export_sha256": "fe5ce39636d0818c2bf9c4eebddff893d1225fa2c81b5fa4bb8cbb39a8c913ce",
+      "modified": false
+    },
+    {
+      "path": "components/ui/resizable.tsx",
+      "original_git_blob": "a76832a10b4c5c2a137e25c16478567ba86daf0d",
+      "original_sha256": "bc63958467aa00557c551bb0d96a5ae4c965c1e1ba2380e595949d933b132f7c",
+      "export_sha256": "bc63958467aa00557c551bb0d96a5ae4c965c1e1ba2380e595949d933b132f7c",
+      "modified": false
+    },
+    {
+      "path": "components/ui/scroll-area.tsx",
+      "original_git_blob": "73c4eb1cdcd4a699b150a9ddc3e87bfb90b63d09",
+      "original_sha256": "8bd9d986b2844c9a87de825c6de4787b6739b36c3dc9a05ccf3eb107160e4043",
+      "export_sha256": "8bd9d986b2844c9a87de825c6de4787b6739b36c3dc9a05ccf3eb107160e4043",
+      "modified": false
+    },
+    {
+      "path": "components/ui/select.tsx",
+      "original_git_blob": "c0dc7120b4f78008ae5efc6d1c8b7ec8205c35d5",
+      "original_sha256": "0b796a108a4eb5ba52d9ad938b7aea36dc56ae66c703a6d0a23dbc24f96daff3",
+      "export_sha256": "0b796a108a4eb5ba52d9ad938b7aea36dc56ae66c703a6d0a23dbc24f96daff3",
+      "modified": false
+    },
+    {
+      "path": "components/ui/separator.tsx",
+      "original_git_blob": "cd873e3631b571060f166897b7b62e033e87c18f",
+      "original_sha256": "6da346505c8629a4668420d2a5ca48891383bbe0b0ceb14163537c671879427e",
+      "export_sha256": "6da346505c8629a4668420d2a5ca48891383bbe0b0ceb14163537c671879427e",
+      "modified": false
+    },
+    {
+      "path": "components/ui/sheet.tsx",
+      "original_git_blob": "cb53bb28b6850745c9519e8e7462e05f85a50c93",
+      "original_sha256": "63863cf2df8f8973e52b3459ac9bdbf81be1262dbc70eb53d5271ffb03488e16",
+      "export_sha256": "63863cf2df8f8973e52b3459ac9bdbf81be1262dbc70eb53d5271ffb03488e16",
+      "modified": false
+    },
+    {
+      "path": "components/ui/sidebar.tsx",
+      "original_git_blob": "f5f6c5aefc88ffa2e999e284b299472215c05161",
+      "original_sha256": "4a8d73e7730a2b1fcecfca31299ed26db65c2307b84197a59c6ec7c01c7ad28e",
+      "export_sha256": "4a8d73e7730a2b1fcecfca31299ed26db65c2307b84197a59c6ec7c01c7ad28e",
+      "modified": false
+    },
+    {
+      "path": "components/ui/skeleton.tsx",
+      "original_git_blob": "3ec6be770b846170b8e7f8916e5f165e2d1730df",
+      "original_sha256": "ba48dd5be5a6a1378bd4e011028654b5bf419f1e7d20ee4b9f8330c1264e7239",
+      "export_sha256": "ba48dd5be5a6a1378bd4e011028654b5bf419f1e7d20ee4b9f8330c1264e7239",
+      "modified": false
+    },
+    {
+      "path": "components/ui/slider.tsx",
+      "original_git_blob": "46ebc4b4df1e9baf1f3997a4b6c08ef80c84a9c9",
+      "original_sha256": "0e37484f4b416e79ac18c655cac961aefacf6e67085cfc2b320ea8af545635a3",
+      "export_sha256": "0e37484f4b416e79ac18c655cac961aefacf6e67085cfc2b320ea8af545635a3",
+      "modified": false
+    },
+    {
+      "path": "components/ui/sonner.tsx",
+      "original_git_blob": "9b20afe2e10fd9b94d1abc1ae732054b2fb9821c",
+      "original_sha256": "13ccc9b0fe4248e622f83a1d3b2f0566b72b5e04162d7d0c8db8945ecc71b55f",
+      "export_sha256": "13ccc9b0fe4248e622f83a1d3b2f0566b72b5e04162d7d0c8db8945ecc71b55f",
+      "modified": false
+    },
+    {
+      "path": "components/ui/spinner.tsx",
+      "original_git_blob": "a70e713c5b4ecb2af186efe3fadea51805f26ba5",
+      "original_sha256": "3e6e6e8d37fb4069f8e43e55318f8db06fbc36e6c8be0096da3c9337c1c798b9",
+      "export_sha256": "3e6e6e8d37fb4069f8e43e55318f8db06fbc36e6c8be0096da3c9337c1c798b9",
+      "modified": false
+    },
+    {
+      "path": "components/ui/switch.tsx",
+      "original_git_blob": "8baa844fdb17d668b3ce07cfbd6a7ef52e2eb5eb",
+      "original_sha256": "386d4d4deb39f34126f9700fe9bf5393d238485dd94018bba9d154dda84c62ae",
+      "export_sha256": "386d4d4deb39f34126f9700fe9bf5393d238485dd94018bba9d154dda84c62ae",
+      "modified": false
+    },
+    {
+      "path": "components/ui/table.tsx",
+      "original_git_blob": "7add5f1a22db954ac6cb3446f1bf8c8a9fc5c335",
+      "original_sha256": "20e5a7f224959c6b75802995706a97e9da171f693d4b6b1b436388fcd9df96f3",
+      "export_sha256": "20e5a7f224959c6b75802995706a97e9da171f693d4b6b1b436388fcd9df96f3",
+      "modified": false
+    },
+    {
+      "path": "components/ui/tabs.tsx",
+      "original_git_blob": "b463afd170637df477e36184aa27d2ad1bd3c3e0",
+      "original_sha256": "865d0194331b9b2be36723fa79d3575dc83078b4cb941cafee87cb72fc2cff46",
+      "export_sha256": "865d0194331b9b2be36723fa79d3575dc83078b4cb941cafee87cb72fc2cff46",
+      "modified": false
+    },
+    {
+      "path": "components/ui/textarea.tsx",
+      "original_git_blob": "e67d8fefe50c41dfa2deed9a5096d5be7691581a",
+      "original_sha256": "253cdeb487c73beaaccdf47fc163e36e7d5b7ae6ddf09a4f64998a109a112979",
+      "export_sha256": "253cdeb487c73beaaccdf47fc163e36e7d5b7ae6ddf09a4f64998a109a112979",
+      "modified": false
+    },
+    {
+      "path": "components/ui/toggle-group.tsx",
+      "original_git_blob": "9894607b212ff7182bf2024f4262da03df0a8973",
+      "original_sha256": "69f643e889e933f05c1439084480d8646f66a161c7d1cf0730ee926382ade35e",
+      "export_sha256": "69f643e889e933f05c1439084480d8646f66a161c7d1cf0730ee926382ade35e",
+      "modified": false
+    },
+    {
+      "path": "components/ui/toggle.tsx",
+      "original_git_blob": "5250c98ff7f11f531af38c227230a76b7d25bf19",
+      "original_sha256": "ba4d0b0a2b2fee75dc36dfc19e32082e721024b919050c97fd5dc70faa924e16",
+      "export_sha256": "ba4d0b0a2b2fee75dc36dfc19e32082e721024b919050c97fd5dc70faa924e16",
+      "modified": false
+    },
+    {
+      "path": "components/ui/tooltip.tsx",
+      "original_git_blob": "ec65c1e4255f050d9555c6cdade90a5f8a6c0c29",
+      "original_sha256": "a0784eb77831a799fad7991df4f1b666f876201565a80175e1aa68733574a2e4",
+      "export_sha256": "a0784eb77831a799fad7991df4f1b666f876201565a80175e1aa68733574a2e4",
+      "modified": false
+    },
+    {
+      "path": "db/academic-schema.ts",
+      "original_git_blob": "14a10a79a88cea648f1ec04acb14bd8ef9ec8dfd",
+      "original_sha256": "7d62b38a17e2b79e58fd9fdbecc3011f2ccd133d6d7644534a1ebfa055867365",
+      "export_sha256": "7d62b38a17e2b79e58fd9fdbecc3011f2ccd133d6d7644534a1ebfa055867365",
+      "modified": false
+    },
+    {
+      "path": "db/attendance-schema.ts",
+      "original_git_blob": "4a149de0a64590c2137b1e34fa84bec8c5639130",
+      "original_sha256": "15ac0562625280094e70717127b31099319c70b1a0df1b90f6f40c56e5d46f56",
+      "export_sha256": "15ac0562625280094e70717127b31099319c70b1a0df1b90f6f40c56e5d46f56",
+      "modified": false
+    },
+    {
+      "path": "db/connect-schema.ts",
+      "original_git_blob": "67234ae08ff24d02357e3587db4978988095d45d",
+      "original_sha256": "143bd91cc19f15a844c9bf0eaf78258a8f3d5d9027b7f9f46eff4f24c4292fbf",
+      "export_sha256": "143bd91cc19f15a844c9bf0eaf78258a8f3d5d9027b7f9f46eff4f24c4292fbf",
+      "modified": false
+    },
+    {
+      "path": "db/cpd-schema.ts",
+      "original_git_blob": "1d1984876ea73f9c7a1a2db005910729bba91249",
+      "original_sha256": "a053a1ffbbe0582ebe8c7cf1fb48feb308eb5837bc15ae129169cc9d454158bb",
+      "export_sha256": "a053a1ffbbe0582ebe8c7cf1fb48feb308eb5837bc15ae129169cc9d454158bb",
+      "modified": false
+    },
+    {
+      "path": "db/hr-service-schema.ts",
+      "original_git_blob": "b3e8078c941499cd4c776f0c83213e93fffcfcf8",
+      "original_sha256": "815a5c0287d6bb556728ed8395ef8fa1a6c6db14cce452ed27ca967c908de981",
+      "export_sha256": "815a5c0287d6bb556728ed8395ef8fa1a6c6db14cce452ed27ca967c908de981",
+      "modified": false
+    },
+    {
+      "path": "db/index.ts",
+      "original_git_blob": "19b379900d94124b674f07ffe2dbba8f70bd8d6d",
+      "original_sha256": "dc7610b00b918e0ffff1360a63626f16655ced3064b2eaf96095a4101fb14bcd",
+      "export_sha256": "dc7610b00b918e0ffff1360a63626f16655ced3064b2eaf96095a4101fb14bcd",
+      "modified": false
+    },
+    {
+      "path": "db/leave-schema.ts",
+      "original_git_blob": "470240d0c9990daee5f6c99b109815c98cf9e223",
+      "original_sha256": "c780bdbba4b810bb271d1e881ee102d57f7ab985ab395e3dc42b66b491f7ed90",
+      "export_sha256": "c780bdbba4b810bb271d1e881ee102d57f7ab985ab395e3dc42b66b491f7ed90",
+      "modified": false
+    },
+    {
+      "path": "db/management-schema.ts",
+      "original_git_blob": "240db8fae9ffedd96d6776c4254ca7142d588fbf",
+      "original_sha256": "da88e07402a607a7d59912783ae1e5d69c7df8ba99453a52ace8b0eb849b8e3d",
+      "export_sha256": "da88e07402a607a7d59912783ae1e5d69c7df8ba99453a52ace8b0eb849b8e3d",
+      "modified": false
+    },
+    {
+      "path": "db/nadi-auth-schema.ts",
+      "original_git_blob": "d6c3e811228e3f188d3f2ca84351f983d717d6c7",
+      "original_sha256": "04fe9441e04cb97eb70c71bd864054a00daac3352926bc902beb91c040de4181",
+      "export_sha256": "04fe9441e04cb97eb70c71bd864054a00daac3352926bc902beb91c040de4181",
+      "modified": false
+    },
+    {
+      "path": "db/nadi-notification-schema.ts",
+      "original_git_blob": "6fb79f5dae2b592971c97fa26b45648c1db868fa",
+      "original_sha256": "246e89e82e25976ef369729f0d78ef1f8b7f1d3c68f9fb4aa3bc7c1329848096",
+      "export_sha256": "246e89e82e25976ef369729f0d78ef1f8b7f1d3c68f9fb4aa3bc7c1329848096",
+      "modified": false
+    },
+    {
+      "path": "db/payroll-schema.ts",
+      "original_git_blob": "437daf6a2f2262c2956a1cd0f39a1955451e1336",
+      "original_sha256": "7a473208c66302b4c53f0cf2b3649768c7c720cf6925318b08fc11596660126a",
+      "export_sha256": "7a473208c66302b4c53f0cf2b3649768c7c720cf6925318b08fc11596660126a",
+      "modified": false
+    },
+    {
+      "path": "db/people-hub-schema.ts",
+      "original_git_blob": "87992ef08420ee921441ebff4c7981f992a8d844",
+      "original_sha256": "364953d1aceb416b3babd8bc96f6e10e7eb60720e7ee13a16fcce05e02415377",
+      "export_sha256": "364953d1aceb416b3babd8bc96f6e10e7eb60720e7ee13a16fcce05e02415377",
+      "modified": false
+    },
+    {
+      "path": "db/position-schema.ts",
+      "original_git_blob": "78bd6063beed1d05484216922efea9ef2c63951f",
+      "original_sha256": "6ad4a1f3d0fee2a543a060c3d5ab414b9a07c18c68d272759303c9e7259b3186",
+      "export_sha256": "6ad4a1f3d0fee2a543a060c3d5ab414b9a07c18c68d272759303c9e7259b3186",
+      "modified": false
+    },
+    {
+      "path": "db/profile-schema.ts",
+      "original_git_blob": "2856803413592c955ce5dbafe069e2e74f9d3006",
+      "original_sha256": "228c846a3a01512305cd8dd9a21edd68677710fc227ac952ecba348d05b15b77",
+      "export_sha256": "228c846a3a01512305cd8dd9a21edd68677710fc227ac952ecba348d05b15b77",
+      "modified": false
+    },
+    {
+      "path": "db/repository.ts",
+      "original_git_blob": "14e7b5cfdd48c532ac994342eb9a4cf1d60f917b",
+      "original_sha256": "35647b80503fed9228a36e68e31fe3e657abf510789b049d455806a6c41b023e",
+      "export_sha256": "35647b80503fed9228a36e68e31fe3e657abf510789b049d455806a6c41b023e",
+      "modified": false
+    },
+    {
+      "path": "db/schema.ts",
+      "original_git_blob": "175323ea879d9e80926f2d15b81a23b85c03208c",
+      "original_sha256": "7a9d1e9e854420b72ac35572c516db00650b6393173a17b42b5aebe571aa1d68",
+      "export_sha256": "7a9d1e9e854420b72ac35572c516db00650b6393173a17b42b5aebe571aa1d68",
+      "modified": false
+    },
+    {
+      "path": "db/sheets-sync-schema.ts",
+      "original_git_blob": "748a43640d14b334e1c012573e17812b08e53bf0",
+      "original_sha256": "c586fcde5054d896ccef41e9468b1bf97ab7346cb710033d41005b6ebbc35837",
+      "export_sha256": "c586fcde5054d896ccef41e9468b1bf97ab7346cb710033d41005b6ebbc35837",
+      "modified": false
+    },
+    {
+      "path": "docs/ACADEMIC_HUB.md",
+      "original_git_blob": "60bc16b33124737f4247ceeed5ee47c234c23492",
+      "original_sha256": "5a234416b5d4f02199a7bf6d37a09fc72f178bc65ce6c6c1f833757a91bdb667",
+      "export_sha256": "5a234416b5d4f02199a7bf6d37a09fc72f178bc65ce6c6c1f833757a91bdb667",
+      "modified": false
+    },
+    {
+      "path": "docs/EMPLOYEE_PROFILE.md",
+      "original_git_blob": "830cfa0887d105774d66d955cdd5f8189e40b33d",
+      "original_sha256": "618dffeaf0b91046ee7a6ffaa5d7f18df8629a1852fc74963a82ca1adee9ceff",
+      "export_sha256": "618dffeaf0b91046ee7a6ffaa5d7f18df8629a1852fc74963a82ca1adee9ceff",
+      "modified": false
+    },
+    {
+      "path": "docs/IUC_PEOPLE_MASTER_DATABASE.md",
+      "original_git_blob": "7ab495654b05e1411977ba6ac2586369135719bf",
+      "original_sha256": "86754716197a32edefc6e752bf85f5ff29d84a36df03ecf1d72a15a894926ef3",
+      "export_sha256": "86754716197a32edefc6e752bf85f5ff29d84a36df03ecf1d72a15a894926ef3",
+      "modified": false
+    },
+    {
+      "path": "docs/MANAGEMENT_VIEWS.md",
+      "original_git_blob": "0faa1f55fbef522ae235495393b113fbe6e61120",
+      "original_sha256": "3769ce59b6a04a4810ec8a9803a8c6ac67febd4b9a91b48db86453d19e59efa6",
+      "export_sha256": "3769ce59b6a04a4810ec8a9803a8c6ac67febd4b9a91b48db86453d19e59efa6",
+      "modified": false
+    },
+    {
+      "path": "docs/NADI-2-P0-review.json",
+      "original_git_blob": "cdaea97274e86c7d85a538df9a7ca6e5e100cacf",
+      "original_sha256": "d0b86dc3b18841c3e5dc795a08d7a2932beb854e18b7fac0a88fd02b2c51d976",
+      "export_sha256": "d0b86dc3b18841c3e5dc795a08d7a2932beb854e18b7fac0a88fd02b2c51d976",
+      "modified": false
+    },
+    {
+      "path": "docs/NADI-2-core-integration.json",
+      "original_git_blob": "04405cd5993a50bf0ebac0e6065f08eb499555be",
+      "original_sha256": "0d732f97a66b0f3d433c4cb57226cf729179894cc675d372d9aadbef7a41b67c",
+      "export_sha256": "0d732f97a66b0f3d433c4cb57226cf729179894cc675d372d9aadbef7a41b67c",
+      "modified": false
+    },
+    {
+      "path": "docs/NADI-2-lifecycle-integration.json",
+      "original_git_blob": "1360f0e7ee7a9260259fab94e5afd8dbbc07219f",
+      "original_sha256": "e433e56abf9f03edbe4ecc9ba90ae81e95c6276b58e0fe4af3ff35dfd6ff6943",
+      "export_sha256": "e433e56abf9f03edbe4ecc9ba90ae81e95c6276b58e0fe4af3ff35dfd6ff6943",
+      "modified": false
+    },
+    {
+      "path": "docs/NADI-2-register.json",
+      "original_git_blob": "e8a9c8a0a3342c0e992176425fd1e49c381bf203",
+      "original_sha256": "98f6546124cce3cc16c0dfab2a6a32b6a570b407bd13b4938f3239c836893391",
+      "export_sha256": "7f606e0a301d12357746f493873f20778c0cff26a3fae7e83065b79e2550f694",
+      "modified": true,
+      "reason": "Withheld the private institutional framework spreadsheet locator."
+    },
+    {
+      "path": "docs/NADI_CONNECT.md",
+      "original_git_blob": "5f67063a18f06bb844171b8c7c13ab7e577d54c8",
+      "original_sha256": "cadc043c0e28a125da113ec60937d7c35d3487d8c845b4ebfaf06f694ca8ff2b",
+      "export_sha256": "cadc043c0e28a125da113ec60937d7c35d3487d8c845b4ebfaf06f694ca8ff2b",
+      "modified": false
+    },
+    {
+      "path": "docs/SMART_LEAVE.md",
+      "original_git_blob": "29869d311ba853f936d93a71db0a8f296a27e66d",
+      "original_sha256": "53c51f994fd73317f7253579bdfbaa8a53aa90dcedbc3067083b3fdc780db6fb",
+      "export_sha256": "53c51f994fd73317f7253579bdfbaa8a53aa90dcedbc3067083b3fdc780db6fb",
+      "modified": false
+    },
+    {
+      "path": "docs/automatic-sheets-sync.md",
+      "original_git_blob": "a6eb2371f9d44c27f9227b47645dbc51619d13e6",
+      "original_sha256": "d7ee8434181ece50ab0f32926d9f39d068d51dab530e07c5946236b0e92e7735",
+      "export_sha256": "d7ee8434181ece50ab0f32926d9f39d068d51dab530e07c5946236b0e92e7735",
+      "modified": false
+    },
+    {
+      "path": "docs/document-screening.md",
+      "original_git_blob": "c0ac4ec10616f00ef2aec046e75713f30e324aea",
+      "original_sha256": "cf343710c4e1c56f77a0a3d24d3099abd36fbcd1f06a00664244644782657e1a",
+      "export_sha256": "cf343710c4e1c56f77a0a3d24d3099abd36fbcd1f06a00664244644782657e1a",
+      "modified": false
+    },
+    {
+      "path": "drizzle.config.ts",
+      "original_git_blob": "1e9d7095d95f7a1558df7747ca112a242697211d",
+      "original_sha256": "f84a971e0bbc34ab758ab104251d8a1e541674ed8f801cd11e78868b4d9168f9",
+      "export_sha256": "f84a971e0bbc34ab758ab104251d8a1e541674ed8f801cd11e78868b4d9168f9",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0000_initial_mpc.sql",
+      "original_git_blob": "cddbdf5d77b7aad617e4dd27f4f96a86a9c18fe2",
+      "original_sha256": "f17dfc23f13eea3f00832593fa372d7e6b4dd6f4679cd5f614277f62489092cb",
+      "export_sha256": "f17dfc23f13eea3f00832593fa372d7e6b4dd6f4679cd5f614277f62489092cb",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0001_employee_directory_audit.sql",
+      "original_git_blob": "4752e084afbef48d9c53d817aa0a1b75a6113699",
+      "original_sha256": "9935b1063c7b8776cbcc515ce10bce9bcd5f16bdca54147d8c6f1342d7642ae7",
+      "export_sha256": "9935b1063c7b8776cbcc515ce10bce9bcd5f16bdca54147d8c6f1342d7642ae7",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0002_iuc_people_master.sql",
+      "original_git_blob": "0ebc3777138cacd07bd6931b1ddc2620e3ba48c5",
+      "original_sha256": "cef2e139f26c191dea4b0d10c2c7573d4d8df648b272e70426419598cc649f01",
+      "export_sha256": "cef2e139f26c191dea4b0d10c2c7573d4d8df648b272e70426419598cc649f01",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0003_employee_profiles.sql",
+      "original_git_blob": "267d213055e48f0b2a32212357a7398b48dbf61a",
+      "original_sha256": "d551ea8d466b8aae5b934af9b162d1d68b5205fb8e8d4946600d4e766ca2b568",
+      "export_sha256": "d551ea8d466b8aae5b934af9b162d1d68b5205fb8e8d4946600d4e766ca2b568",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0004_management_access.sql",
+      "original_git_blob": "5584c4fef0f8ee4f578b6aade0447948be5f109e",
+      "original_sha256": "0dd8a6b7437550f185cd94fa4aba68d1d837a704e37c27a8e6df4eb3abb3fdbb",
+      "export_sha256": "0dd8a6b7437550f185cd94fa4aba68d1d837a704e37c27a8e6df4eb3abb3fdbb",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0005_people_hub.sql",
+      "original_git_blob": "0a5b80f4a134aab46a53428d5f960e4b38185dd2",
+      "original_sha256": "4479c174d5b2420a6250f70f70858e7050bae331a991f3b4959778b03f384e12",
+      "export_sha256": "4479c174d5b2420a6250f70f70858e7050bae331a991f3b4959778b03f384e12",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0006_sheets_sync.sql",
+      "original_git_blob": "5d2f9c16c90c62fb25f2a0f3f82a08fd52c985cc",
+      "original_sha256": "825690368de045ddd7ece2c311405c6aac9981a753504c3b3bf272d5ead31ce8",
+      "export_sha256": "825690368de045ddd7ece2c311405c6aac9981a753504c3b3bf272d5ead31ce8",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0007_nadi_announcements.sql",
+      "original_git_blob": "3a619a841b89fc56b27c358ca8fa4789880739eb",
+      "original_sha256": "cabde294e8e4f18726480bfd6cc9e00b2156a307fab0e29b2bb6ace8a5b5cff5",
+      "export_sha256": "cabde294e8e4f18726480bfd6cc9e00b2156a307fab0e29b2bb6ace8a5b5cff5",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0008_document_screenings.sql",
+      "original_git_blob": "cb5d684713621f1ef7f316acfe2d424bff5d0f5b",
+      "original_sha256": "60ed3f0a2a76a2a0aeb63956ae8d5727b32b13f867c648b5cad2c9b32ff93104",
+      "export_sha256": "60ed3f0a2a76a2a0aeb63956ae8d5727b32b13f867c648b5cad2c9b32ff93104",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0009_cpd_training.sql",
+      "original_git_blob": "90585336114d9e52bdce05567b5e1a70621de4ab",
+      "original_sha256": "5f0a6d896ba1782fcf7e561be8c3199410ff577e16e658e465fd761bd20fd252",
+      "export_sha256": "5f0a6d896ba1782fcf7e561be8c3199410ff577e16e658e465fd761bd20fd252",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0010_attendance_work_trace.sql",
+      "original_git_blob": "3b5ff9d74282ca1003c2832e6cf804eb5672f475",
+      "original_sha256": "ec80dbeec4a33668d4c3ef1d20774d696a31142b3364ba320d2681cc7d636415",
+      "export_sha256": "ec80dbeec4a33668d4c3ef1d20774d696a31142b3364ba320d2681cc7d636415",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0011_attendance_required_presence.sql",
+      "original_git_blob": "204cdbdbb724455bb72f5c0919fe354d579d713c",
+      "original_sha256": "0bd56d65aacdcbba24e6744f2caf64a1dc825d7d9806161f9110c3942ff682ce",
+      "export_sha256": "0bd56d65aacdcbba24e6744f2caf64a1dc825d7d9806161f9110c3942ff682ce",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0012_hr_service_desk.sql",
+      "original_git_blob": "e30913104f230f53c8366d3f48553a8fdab690e2",
+      "original_sha256": "8abba9bcf1aba1d79d7dfb984f796fc61d880aaa1b5c904d01f6ec28f13b4daa",
+      "export_sha256": "8abba9bcf1aba1d79d7dfb984f796fc61d880aaa1b5c904d01f6ec28f13b4daa",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0013_hr_service_letters.sql",
+      "original_git_blob": "c864c594c543f89d8c8af60336f1415edd6cb7f3",
+      "original_sha256": "8900ee285d26e05103dff8fa3f2000e472f7b615a8201843aca086e5aaf68f6c",
+      "export_sha256": "8900ee285d26e05103dff8fa3f2000e472f7b615a8201843aca086e5aaf68f6c",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0014_nadi_connect.sql",
+      "original_git_blob": "50ee7c6f38e03d3c5a67bb8c595fa999b37928a9",
+      "original_sha256": "ea3f7355bc334752b42a8077154364b397bd5a1186e6a24ab9961007436393ca",
+      "export_sha256": "ea3f7355bc334752b42a8077154364b397bd5a1186e6a24ab9961007436393ca",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0015_position_management.sql",
+      "original_git_blob": "793feb898cf2613f23dccf609f429698afd5ece3",
+      "original_sha256": "60b7e0174bfd6d6742c6ee4f3979bef32a0ce657bea0e6ee3e662b793b049fdd",
+      "export_sha256": "60b7e0174bfd6d6742c6ee4f3979bef32a0ce657bea0e6ee3e662b793b049fdd",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0016_position_employee_sync.sql",
+      "original_git_blob": "ac1563d4670cdd2ee89027cbe40c81cc911780bf",
+      "original_sha256": "334a74ee3bce46b9bb4f89a0a5b46b39af91af982b05497d816a0b50a881e0cb",
+      "export_sha256": "334a74ee3bce46b9bb4f89a0a5b46b39af91af982b05497d816a0b50a881e0cb",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0017_nadi_password_signin.sql",
+      "original_git_blob": "ad47f847d98b09a6da1a8e8d0da1e13bba1ea607",
+      "original_sha256": "0907f831c1838b39da2bb08e0446287ea3542b77dcc64aa49f39c2d4809ac665",
+      "export_sha256": "0907f831c1838b39da2bb08e0446287ea3542b77dcc64aa49f39c2d4809ac665",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0018_nadi_invitation_email.sql",
+      "original_git_blob": "a2ee6033edf0199a3b268e119abe0aed7fd76876",
+      "original_sha256": "fb10bd258b65882566ffa80843c0c5d1a6c5fa0ab9d2713f0783586becb3d584",
+      "export_sha256": "fb10bd258b65882566ffa80843c0c5d1a6c5fa0ab9d2713f0783586becb3d584",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0019_nadi_notifications.sql",
+      "original_git_blob": "2b73e4973f2572a9f3c87a7428c0f18852cc6316",
+      "original_sha256": "df35d887b5301716fe8400a18508556720ff3b1b212722a78f3129215bf02ddd",
+      "export_sha256": "df35d887b5301716fe8400a18508556720ff3b1b212722a78f3129215bf02ddd",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0020_smart_leave.sql",
+      "original_git_blob": "65dbf8bbe7db6d730a7887c0cc459f3e621decf6",
+      "original_sha256": "2c577fc8ade89afe35ce1ac5e024be6b8a2a7741d0585b598f146f7caa209322",
+      "export_sha256": "2c577fc8ade89afe35ce1ac5e024be6b8a2a7741d0585b598f146f7caa209322",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0021_secure_account_mail.sql",
+      "original_git_blob": "e2afe14ef4f896471bde21610a93ad310daf14f3",
+      "original_sha256": "ccca252e9e731c920b650fa2793ad294e7ed2109b410d2c3ddb394898d9ca7d7",
+      "export_sha256": "ccca252e9e731c920b650fa2793ad294e7ed2109b410d2c3ddb394898d9ca7d7",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0022_payroll.sql",
+      "original_git_blob": "7a7f7588e76ef1e16e2df3f860f7267cc93ba993",
+      "original_sha256": "04a00fac06a6f73bb8ee66729166925c29639707af1a84ba3a01f713ec6a4ff2",
+      "export_sha256": "04a00fac06a6f73bb8ee66729166925c29639707af1a84ba3a01f713ec6a4ff2",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0023_payroll_selfservice.sql",
+      "original_git_blob": "c8c606cb5b340acaea3100b7b948b489c5635845",
+      "original_sha256": "7e6acf1992cf364377fb3633960fa1ef3c3dd2a58ccc3f57a4a4cb3d178699a8",
+      "export_sha256": "7e6acf1992cf364377fb3633960fa1ef3c3dd2a58ccc3f57a4a4cb3d178699a8",
+      "modified": false
+    },
+    {
+      "path": "drizzle/0024_academic_hub.sql",
+      "original_git_blob": "2260edd64edb6a415519e645d1a5c36170f99357",
+      "original_sha256": "98caa65761df8223f5be08405e50216bcf7aa4d4cea16312cd3549da6bec857b",
+      "export_sha256": "98caa65761df8223f5be08405e50216bcf7aa4d4cea16312cd3549da6bec857b",
+      "modified": false
+    },
+    {
+      "path": "drizzle/meta/0003_snapshot.json",
+      "original_git_blob": "6bb3af03a740ad0b1b606dbad3dadcf52923eb30",
+      "original_sha256": "f736fa1386e05c5fc025c9c9784fb3bc9a836eafc49ae7957bb9d3c0298fbdec",
+      "export_sha256": "f736fa1386e05c5fc025c9c9784fb3bc9a836eafc49ae7957bb9d3c0298fbdec",
+      "modified": false
+    },
+    {
+      "path": "drizzle/meta/0004_snapshot.json",
+      "original_git_blob": "20b82e395262af3848c00e1b0f82f3e183f70095",
+      "original_sha256": "37ea476c9703125dd2bf4666ea40eff6a1e431d9b90a901c4ceececcbf37dd99",
+      "export_sha256": "37ea476c9703125dd2bf4666ea40eff6a1e431d9b90a901c4ceececcbf37dd99",
+      "modified": false
+    },
+    {
+      "path": "drizzle/meta/0005_snapshot.json",
+      "original_git_blob": "01dd415e489d58e5a897c46bca321fe7ef6a9456",
+      "original_sha256": "7c95ef4424bea3d2add2c6cc12606174ef803324f3dd954b37f53e86b824b639",
+      "export_sha256": "7c95ef4424bea3d2add2c6cc12606174ef803324f3dd954b37f53e86b824b639",
+      "modified": false
+    },
+    {
+      "path": "drizzle/meta/0006_snapshot.json",
+      "original_git_blob": "f082b71abd21a5f59b50b470e3e4b5f75163078c",
+      "original_sha256": "91d1617e2c518f91d3489ee838d76b69d8cc4320d8c597f62006566a23114c87",
+      "export_sha256": "91d1617e2c518f91d3489ee838d76b69d8cc4320d8c597f62006566a23114c87",
+      "modified": false
+    },
+    {
+      "path": "drizzle/meta/0009_snapshot.json",
+      "original_git_blob": "1a76db4464c03535c9ca60787283008edc497bee",
+      "original_sha256": "b01ce60337eb0b13f737319553fd97182f056bf50717332e2152bc6a09a3433c",
+      "export_sha256": "b01ce60337eb0b13f737319553fd97182f056bf50717332e2152bc6a09a3433c",
+      "modified": false
+    },
+    {
+      "path": "drizzle/meta/0010_snapshot.json",
+      "original_git_blob": "34fa0192151eb072702c48225cee6ca802c0de14",
+      "original_sha256": "5a341ad3b34b4a356a1e67f2623fe56cde42de0d4c00481abf464c9d0042c91e",
+      "export_sha256": "5a341ad3b34b4a356a1e67f2623fe56cde42de0d4c00481abf464c9d0042c91e",
+      "modified": false
+    },
+    {
+      "path": "drizzle/meta/0011_snapshot.json",
+      "original_git_blob": "371e2d16ac646d17cf31b92d3267f9ad3cbc37d0",
+      "original_sha256": "c9515c712fe6ecd537facebc62354a17eeedf368588eabfd153ce295cb55fd63",
+      "export_sha256": "c9515c712fe6ecd537facebc62354a17eeedf368588eabfd153ce295cb55fd63",
+      "modified": false
+    },
+    {
+      "path": "drizzle/meta/0012_snapshot.json",
+      "original_git_blob": "f5d163cc5487ec7dd2522db029b477d885e14c9c",
+      "original_sha256": "84a4e9a2ac3c545a472f0603ab6c4b66af9815478183a14f5e2712be424d90a1",
+      "export_sha256": "84a4e9a2ac3c545a472f0603ab6c4b66af9815478183a14f5e2712be424d90a1",
+      "modified": false
+    },
+    {
+      "path": "drizzle/meta/0013_snapshot.json",
+      "original_git_blob": "199733f411ee12f92312d2cd41fbd177792e9328",
+      "original_sha256": "660a509b9bafe8aaca270a6b8c5c553e39d4d59b2a4dc93d9bccbe7dc734808f",
+      "export_sha256": "660a509b9bafe8aaca270a6b8c5c553e39d4d59b2a4dc93d9bccbe7dc734808f",
+      "modified": false
+    },
+    {
+      "path": "drizzle/meta/0014_snapshot.json",
+      "original_git_blob": "ea57bd233c42b47d5c95955430fc08153ec7661d",
+      "original_sha256": "83e01187bcb8e60289733d680793b404b3945eec4a94bd6086f25f18d071ae94",
+      "export_sha256": "83e01187bcb8e60289733d680793b404b3945eec4a94bd6086f25f18d071ae94",
+      "modified": false
+    },
+    {
+      "path": "drizzle/meta/0015_snapshot.json",
+      "original_git_blob": "663bdf9da8927d571a231499e14240d37cc95c6e",
+      "original_sha256": "14d0595c0fa866690a9d01f5a6ca82174d44f04c0de3ff333d84f9b2b724fbc3",
+      "export_sha256": "14d0595c0fa866690a9d01f5a6ca82174d44f04c0de3ff333d84f9b2b724fbc3",
+      "modified": false
+    },
+    {
+      "path": "drizzle/meta/0016_snapshot.json",
+      "original_git_blob": "992ae8ae09a55daf82419320b163675ea2e130fe",
+      "original_sha256": "11633e698c0c138baf5def341781ee57318ac7a4843ce309474b21a5775669c4",
+      "export_sha256": "11633e698c0c138baf5def341781ee57318ac7a4843ce309474b21a5775669c4",
+      "modified": false
+    },
+    {
+      "path": "drizzle/meta/0017_snapshot.json",
+      "original_git_blob": "d10c931ef8f9274abf14c185e66bd5602001b514",
+      "original_sha256": "11815dac58077cbd6e30c884ce20da87cd014cf634441d2282170082b4f3a39e",
+      "export_sha256": "11815dac58077cbd6e30c884ce20da87cd014cf634441d2282170082b4f3a39e",
+      "modified": false
+    },
+    {
+      "path": "drizzle/meta/0018_snapshot.json",
+      "original_git_blob": "61a315d45022b363bb8806cf87fbb62723f6ddb6",
+      "original_sha256": "1e3359c513749fb5b466576b85efaaf4b56a58de48df047e8669cc265866aace",
+      "export_sha256": "1e3359c513749fb5b466576b85efaaf4b56a58de48df047e8669cc265866aace",
+      "modified": false
+    },
+    {
+      "path": "drizzle/meta/0019_snapshot.json",
+      "original_git_blob": "4b97ae225f316236ddf987d713bcf73a871302bf",
+      "original_sha256": "d990f04a839cbe9b906dd29dd3ff193958eac948668478bfcb7693ca13857079",
+      "export_sha256": "d990f04a839cbe9b906dd29dd3ff193958eac948668478bfcb7693ca13857079",
+      "modified": false
+    },
+    {
+      "path": "drizzle/meta/0020_snapshot.json",
+      "original_git_blob": "6e84ec9c1bd4db8df5c7b6362c714478909895b8",
+      "original_sha256": "cc13eea6bd8689b0d7db8a4b186fc1f669aaeced135333b137a64e8114c96c27",
+      "export_sha256": "cc13eea6bd8689b0d7db8a4b186fc1f669aaeced135333b137a64e8114c96c27",
+      "modified": false
+    },
+    {
+      "path": "drizzle/meta/0021_snapshot.json",
+      "original_git_blob": "fd71bcde4abfe2d56faf60d9d53fa8caecbaa3ff",
+      "original_sha256": "abc5f6989b70ed9dbd538d869d202302369900b69256c499ec42cb6e9d734cb5",
+      "export_sha256": "abc5f6989b70ed9dbd538d869d202302369900b69256c499ec42cb6e9d734cb5",
+      "modified": false
+    },
+    {
+      "path": "drizzle/meta/0022_snapshot.json",
+      "original_git_blob": "c53f810b5420c350ab6bf99a1bc9c41598860794",
+      "original_sha256": "82a812ca57270fbc6f807afcc48556231af0a9c2bfc007764b2163a3019b208a",
+      "export_sha256": "82a812ca57270fbc6f807afcc48556231af0a9c2bfc007764b2163a3019b208a",
+      "modified": false
+    },
+    {
+      "path": "drizzle/meta/0023_snapshot.json",
+      "original_git_blob": "eb35c1e9fde8988670d2050d80d4dca6bbbd8bec",
+      "original_sha256": "03245443a9440f46b12a6b071aa7062ac10c8d2c327e9ce533d02c83a42e7ec1",
+      "export_sha256": "03245443a9440f46b12a6b071aa7062ac10c8d2c327e9ce533d02c83a42e7ec1",
+      "modified": false
+    },
+    {
+      "path": "drizzle/meta/0024_snapshot.json",
+      "original_git_blob": "2a52010a37975dd1473335e46b35ca6d977f5484",
+      "original_sha256": "7ca7be9478c6ec00dff8fb53e7a0f531d4d3ddfc30c1763a413afc3b6441ff95",
+      "export_sha256": "7ca7be9478c6ec00dff8fb53e7a0f531d4d3ddfc30c1763a413afc3b6441ff95",
+      "modified": false
+    },
+    {
+      "path": "drizzle/meta/_journal.json",
+      "original_git_blob": "7690203bca0bcb112d9898f476599a1ff8d42d30",
+      "original_sha256": "54aa68603b964b944e156cf9cd8c554ac1df60b3e6f843a1dca1163884336b52",
+      "export_sha256": "54aa68603b964b944e156cf9cd8c554ac1df60b3e6f843a1dca1163884336b52",
+      "modified": false
+    },
+    {
+      "path": "eslint.config.mjs",
+      "original_git_blob": "1c56c0144ce558825265a2d79d06b1ce6150d24f",
+      "original_sha256": "f22a254df7d934bbf9be499d3c969a13abb7f7f64c03f5967d0095cad81dfe06",
+      "export_sha256": "f22a254df7d934bbf9be499d3c969a13abb7f7f64c03f5967d0095cad81dfe06",
+      "modified": false
+    },
+    {
+      "path": "hooks/use-mobile.ts",
+      "original_git_blob": "2b0fe1dfef3b17850bbac040665f514a8ffd0f15",
+      "original_sha256": "ad0936f84f1df79d3697bfbff9c18f8ad58431c1cbaf2359c6a853b0fcc9f28b",
+      "export_sha256": "ad0936f84f1df79d3697bfbff9c18f8ad58431c1cbaf2359c6a853b0fcc9f28b",
+      "modified": false
+    },
+    {
+      "path": "integrations/authentication/README.md",
+      "original_git_blob": "015e34d913a24fbeb455270fe68432d5a7699ca9",
+      "original_sha256": "0fd32c9c5a903000fb0346145c15650dc19a11b0264a3a07a0b4dc05f60b6491",
+      "export_sha256": "0fd32c9c5a903000fb0346145c15650dc19a11b0264a3a07a0b4dc05f60b6491",
+      "modified": false
+    },
+    {
+      "path": "integrations/google-sheets/Code.gs",
+      "original_git_blob": "7fc007ec9e90f3a7d89942576399ce58306c6bef",
+      "original_sha256": "1265415afdeff34c23ec92822becea2e3773a0bd5bdd2e84b1ebe1dae8e3b20f",
+      "export_sha256": "1265415afdeff34c23ec92822becea2e3773a0bd5bdd2e84b1ebe1dae8e3b20f",
+      "modified": false
+    },
+    {
+      "path": "integrations/google-sheets/README.md",
+      "original_git_blob": "be687fb7bc5e7edfd98de96ac6c1bca9d74b5702",
+      "original_sha256": "9f561ca008b5b799acdf1e3fc360cb52aaf331053719577fa23f9ce1df08f659",
+      "export_sha256": "9f561ca008b5b799acdf1e3fc360cb52aaf331053719577fa23f9ce1df08f659",
+      "modified": false
+    },
+    {
+      "path": "integrations/google-sheets/appsscript.json",
+      "original_git_blob": "ad278411c880665842f83db02e258ddf5cd94219",
+      "original_sha256": "49ed4402fba23c14ba86ce6c60b706ce4c4395f7b7b2864a662443f563940cba",
+      "export_sha256": "49ed4402fba23c14ba86ce6c60b706ce4c4395f7b7b2864a662443f563940cba",
+      "modified": false
+    },
+    {
+      "path": "lib/employee-seed.ts",
+      "original_git_blob": "c0f431f91fe3e5ac6b9a82094d299fe50a7538b3",
+      "original_sha256": "8f9249397d4525365e5dc71e2836433ca5e8eb704b1bc21436a0c399dc72cef4",
+      "export_sha256": "14110e599f16e5fb541a11e45fe4d84dd3f5942af02ae4dc664974b32a42f46f",
+      "modified": true,
+      "reason": "Removed legacy employee records; retained the type and empty data interface."
+    },
+    {
+      "path": "lib/mpc-scoring.ts",
+      "original_git_blob": "cf94018746ba41b5c0162f117d3762cbd3da3389",
+      "original_sha256": "aadb1d13df4d01a5e0649aa9d80ec45be4d0f600b03cff8dbc6b392bb9129215",
+      "export_sha256": "aadb1d13df4d01a5e0649aa9d80ec45be4d0f600b03cff8dbc6b392bb9129215",
+      "modified": false
+    },
+    {
+      "path": "lib/request-auth.ts",
+      "original_git_blob": "23937695f204350eb1c80d679e836706dc57de56",
+      "original_sha256": "0541fa89d280f595740e3522ed63b2bd91942d626d9b0e18edd66439b3d6525f",
+      "export_sha256": "0541fa89d280f595740e3522ed63b2bd91942d626d9b0e18edd66439b3d6525f",
+      "modified": false
+    },
+    {
+      "path": "lib/utils.ts",
+      "original_git_blob": "b500fb167fdaa78785feb0ff03b51f8a182a44ae",
+      "original_sha256": "53f3d3d070f0a9082934da25b875f9499855c2b0693868dd28be8c23d8730f68",
+      "export_sha256": "53f3d3d070f0a9082934da25b875f9499855c2b0693868dd28be8c23d8730f68",
+      "modified": false
+    },
+    {
+      "path": "next.config.ts",
+      "original_git_blob": "e9ffa3083ad279ecf95fd8eae59cb253e9a539c4",
+      "original_sha256": "614bce25b089c3f19b1e17a6346c74b858034040154c6621e7d35303004767cc",
+      "export_sha256": "614bce25b089c3f19b1e17a6346c74b858034040154c6621e7d35303004767cc",
+      "modified": false
+    },
+    {
+      "path": "package-lock.json",
+      "original_git_blob": "9fa69a4d2435fad36e8361b76850ee37359994ca",
+      "original_sha256": "a8ed3541b98f94fcda50dbd412c001cb45b7a35d8ac28f3a674540990f3569b0",
+      "export_sha256": "a8ed3541b98f94fcda50dbd412c001cb45b7a35d8ac28f3a674540990f3569b0",
+      "modified": false
+    },
+    {
+      "path": "package.json",
+      "original_git_blob": "21bbb39d24c64ee1319697ad94edca22a73625d5",
+      "original_sha256": "21d38b7aff54c9fdccc1b1d6711090e4950d702ade63d0ab28f7061a4db316ee",
+      "export_sha256": "21d38b7aff54c9fdccc1b1d6711090e4950d702ade63d0ab28f7061a4db316ee",
+      "modified": false
+    },
+    {
+      "path": "postcss.config.mjs",
+      "original_git_blob": "61e36849cf7cfa9f1f71b4a3964a4953e3e243d3",
+      "original_sha256": "dfac7ac2d86d326a0e5adb024e7943c181393ed17a5fcb8f0315b24c7da6ddde",
+      "export_sha256": "dfac7ac2d86d326a0e5adb024e7943c181393ed17a5fcb8f0315b24c7da6ddde",
+      "modified": false
+    },
+    {
+      "path": "public/iuc-logo.png",
+      "original_git_blob": "80c98fb92c018e6d1ca979f145f1f7d7ec72452f",
+      "original_sha256": "b79e5221264a57cc4885705b816ccd459205d42bbfd0146663fa9e43bdf93bc4",
+      "export_sha256": "b79e5221264a57cc4885705b816ccd459205d42bbfd0146663fa9e43bdf93bc4",
+      "modified": false
+    },
+    {
+      "path": "public/mpc/app.js",
+      "original_git_blob": "69cbfc813200ae952e0e98b5c6085f9e60309f4c",
+      "original_sha256": "a7c0eea52fe48b09915ca5bc81ee26f84faefb4be672ae17f3f0d4e982e23f80",
+      "export_sha256": "a7c0eea52fe48b09915ca5bc81ee26f84faefb4be672ae17f3f0d4e982e23f80",
+      "modified": false
+    },
+    {
+      "path": "public/mpc/assets/iuc-logo.png",
+      "original_git_blob": "80c98fb92c018e6d1ca979f145f1f7d7ec72452f",
+      "original_sha256": "b79e5221264a57cc4885705b816ccd459205d42bbfd0146663fa9e43bdf93bc4",
+      "export_sha256": "b79e5221264a57cc4885705b816ccd459205d42bbfd0146663fa9e43bdf93bc4",
+      "modified": false
+    },
+    {
+      "path": "public/mpc/index.html",
+      "original_git_blob": "31254be452a541560d9a43a96d16585089ba8824",
+      "original_sha256": "5357534b9e8c8c994dc0cd8aad1cb431370119e05137c74445ddb0c5ca0afafa",
+      "export_sha256": "5357534b9e8c8c994dc0cd8aad1cb431370119e05137c74445ddb0c5ca0afafa",
+      "modified": false
+    },
+    {
+      "path": "public/mpc/styles.css",
+      "original_git_blob": "85c6ae304ec7fb18deaa088509bbd8f0715d5bac",
+      "original_sha256": "66bdb5514d484bd98c51400a6f07692492b8b891bd29c049ed21bac679832faf",
+      "export_sha256": "66bdb5514d484bd98c51400a6f07692492b8b891bd29c049ed21bac679832faf",
+      "modified": false
+    },
+    {
+      "path": "scripts/academic-fixture.mjs",
+      "original_git_blob": "964fcc0a47ecbe3af8b51aa2134c4135fafec028",
+      "original_sha256": "835b5a806cdf82579f4dc86c53117aa43296165c1199af8b52e3003e69f61e9d",
+      "export_sha256": "835b5a806cdf82579f4dc86c53117aa43296165c1199af8b52e3003e69f61e9d",
+      "modified": false
+    },
+    {
+      "path": "scripts/build-worker.mjs",
+      "original_git_blob": "423b9c434569d0e55ad0cfb3ea9e218e16cce562",
+      "original_sha256": "d759ed3d806c64e960745f61ec6c8215644f93841249479932a38066f7cb2316",
+      "export_sha256": "1d5e1f29bd752af0f171e8be3ea316b412f3f86425913d78a48961c1bd32a7fa",
+      "modified": true,
+      "reason": "Replaced the personal owner address in sample local configuration with an example address."
+    },
+    {
+      "path": "scripts/execute-migration.mjs",
+      "original_git_blob": "fc57719a53bcc8f4fc465c32f0b3162cb21e05b7",
+      "original_sha256": "63abc8345b5ed7867f965b8ab44855dd7223de041b620997e7ae2814f3da8737",
+      "export_sha256": "63abc8345b5ed7867f965b8ab44855dd7223de041b620997e7ae2814f3da8737",
+      "modified": false
+    },
+    {
+      "path": "scripts/generate-academic-migration.mjs",
+      "original_git_blob": "0d5035dba9282ef6d7e0cdef7b13a65d14a19125",
+      "original_sha256": "2b40861e2a0d7eb27b9f4596acdae1f0a65629471b513da7be9987e6a20a5a96",
+      "export_sha256": "2b40861e2a0d7eb27b9f4596acdae1f0a65629471b513da7be9987e6a20a5a96",
+      "modified": false
+    },
+    {
+      "path": "scripts/generate-attendance-migration.mjs",
+      "original_git_blob": "6c9e8e36b712661fc73910fefdcac15339982dc6",
+      "original_sha256": "ffcd86c9f5b4f82d1823d28c6a432ac9a30f46a0f9ab05ee8065e4753e778e62",
+      "export_sha256": "ffcd86c9f5b4f82d1823d28c6a432ac9a30f46a0f9ab05ee8065e4753e778e62",
+      "modified": false
+    },
+    {
+      "path": "scripts/generate-attendance-monitoring-migration.mjs",
+      "original_git_blob": "9dc15fc249477e98b387c543da2165df1cffe820",
+      "original_sha256": "5ff26bdae7e80c225b0d6e7fa7407f76eb3e4df29300f4dc27a24b71f72c57ca",
+      "export_sha256": "5ff26bdae7e80c225b0d6e7fa7407f76eb3e4df29300f4dc27a24b71f72c57ca",
+      "modified": false
+    },
+    {
+      "path": "scripts/generate-connect-migration.mjs",
+      "original_git_blob": "e44411800490ff8c3a68b9c58c03c0d47fb8bcea",
+      "original_sha256": "2e461d8c9a8320e2d96866a55d26abfc44c1b7f00385961d79ea315c6670fc95",
+      "export_sha256": "2e461d8c9a8320e2d96866a55d26abfc44c1b7f00385961d79ea315c6670fc95",
+      "modified": false
+    },
+    {
+      "path": "scripts/generate-cpd-migration.mjs",
+      "original_git_blob": "de32068807267ed774526a06f839cb08358424c0",
+      "original_sha256": "f7835aad58e5164b465edba13897b3b89e6e9ef664107ea37d50f6410494dc88",
+      "export_sha256": "f7835aad58e5164b465edba13897b3b89e6e9ef664107ea37d50f6410494dc88",
+      "modified": false
+    },
+    {
+      "path": "scripts/generate-hr-letter-migration.mjs",
+      "original_git_blob": "fa489693ababede2bb1f6f0a0e5378f7d9d59ee5",
+      "original_sha256": "fe4cd5e94877faf48d66ba55ec840a9ca858dbb43a9ebe539dbc8d878e7c1797",
+      "export_sha256": "fe4cd5e94877faf48d66ba55ec840a9ca858dbb43a9ebe539dbc8d878e7c1797",
+      "modified": false
+    },
+    {
+      "path": "scripts/generate-hr-service-migration.mjs",
+      "original_git_blob": "8b8aa4aebea55d665d68dfb48defaddf68aa371c",
+      "original_sha256": "3481b7994df7e36e8080d14d142e8ba79aaaf5e14f995466e3b31323235f0c89",
+      "export_sha256": "3481b7994df7e36e8080d14d142e8ba79aaaf5e14f995466e3b31323235f0c89",
+      "modified": false
+    },
+    {
+      "path": "scripts/generate-leave-migration.mjs",
+      "original_git_blob": "18c41483b5571fbf6ac2c3e5a81da999f535ea79",
+      "original_sha256": "15abfc6d53606ee7c1bcbfd985eb1f83b8f04839c785c3624ca67f363a91dc98",
+      "export_sha256": "15abfc6d53606ee7c1bcbfd985eb1f83b8f04839c785c3624ca67f363a91dc98",
+      "modified": false
+    },
+    {
+      "path": "scripts/generate-management-migration.mjs",
+      "original_git_blob": "9894715dff5e2ae40bddf47de7f04055e690a953",
+      "original_sha256": "8bda2fb73ddc34955adb8784de444661c31d5a24c01e8590173e20f15d5b8b92",
+      "export_sha256": "8bda2fb73ddc34955adb8784de444661c31d5a24c01e8590173e20f15d5b8b92",
+      "modified": false
+    },
+    {
+      "path": "scripts/generate-nadi-auth-migration.mjs",
+      "original_git_blob": "73788987359d786a9b045cf76455d3e70d1d2492",
+      "original_sha256": "3f85e05d2199021037b09cd0bcccd59389c2b1dc76597d7d4a668a7661601f1a",
+      "export_sha256": "3f85e05d2199021037b09cd0bcccd59389c2b1dc76597d7d4a668a7661601f1a",
+      "modified": false
+    },
+    {
+      "path": "scripts/generate-nadi-invitation-migration.mjs",
+      "original_git_blob": "e04d24a98085e2e38d278c0a434b7046f38e3575",
+      "original_sha256": "3213fb49fdcefac00ddab0c648000e3a996c420f8acd02dea9e3c490cdb97b9e",
+      "export_sha256": "3213fb49fdcefac00ddab0c648000e3a996c420f8acd02dea9e3c490cdb97b9e",
+      "modified": false
+    },
+    {
+      "path": "scripts/generate-notifications-migration.mjs",
+      "original_git_blob": "c402817cdd614e63a97ea807bb3586e666cec687",
+      "original_sha256": "735c463b13a09650c2cef72411fcec355320d5b4a8ec89bcea6a28d50d9adc92",
+      "export_sha256": "735c463b13a09650c2cef72411fcec355320d5b4a8ec89bcea6a28d50d9adc92",
+      "modified": false
+    },
+    {
+      "path": "scripts/generate-payroll-migration.mjs",
+      "original_git_blob": "5babbb7657e93eef02991726406a1a16418daf56",
+      "original_sha256": "f6bf87f768c660d99f920024ad0c7550011aca6ada426cbebf613b9886e03842",
+      "export_sha256": "f6bf87f768c660d99f920024ad0c7550011aca6ada426cbebf613b9886e03842",
+      "modified": false
+    },
+    {
+      "path": "scripts/generate-payroll-selfservice-migration.mjs",
+      "original_git_blob": "bdec4acb5fb500d4030e101175ae8e402e154f2a",
+      "original_sha256": "f3918396f6af89a22d28f4662a53f0b9a066e4c1a17e495d80d38b671fcc452c",
+      "export_sha256": "f3918396f6af89a22d28f4662a53f0b9a066e4c1a17e495d80d38b671fcc452c",
+      "modified": false
+    },
+    {
+      "path": "scripts/generate-people-hub-migration.mjs",
+      "original_git_blob": "3f411632e5be4f09d181f69c9bb515cc328a5079",
+      "original_sha256": "55bc8ed784a13e54f4d184adf133d127bb117b268b1772eb7be314313058fbaf",
+      "export_sha256": "55bc8ed784a13e54f4d184adf133d127bb117b268b1772eb7be314313058fbaf",
+      "modified": false
+    },
+    {
+      "path": "scripts/generate-position-migration.mjs",
+      "original_git_blob": "f0ba8f58e7027b9630a02c7ec5ede4f1f4f6aebb",
+      "original_sha256": "59f4024005c7a9489690f2b294c7bc8bf1e8a0bb45688ec4db67d58cb676149f",
+      "export_sha256": "59f4024005c7a9489690f2b294c7bc8bf1e8a0bb45688ec4db67d58cb676149f",
+      "modified": false
+    },
+    {
+      "path": "scripts/generate-position-sync-migration.mjs",
+      "original_git_blob": "fdcaec8a18213f5170373b2967c8268a052dc66a",
+      "original_sha256": "169f34bef6d771d5113bf50ee7d7af49fd391a2b3de960a4775339af3ada2fac",
+      "export_sha256": "169f34bef6d771d5113bf50ee7d7af49fd391a2b3de960a4775339af3ada2fac",
+      "modified": false
+    },
+    {
+      "path": "scripts/generate-profile-migration.mjs",
+      "original_git_blob": "54b511a25f0f7bdfb961e7c462136c89ca917b9f",
+      "original_sha256": "cc282be1f99c586751b1f55eece4ea5bb654024726eaa650ac4c2da039cb3cc3",
+      "export_sha256": "cc282be1f99c586751b1f55eece4ea5bb654024726eaa650ac4c2da039cb3cc3",
+      "modified": false
+    },
+    {
+      "path": "scripts/generate-reset-mail-migration.mjs",
+      "original_git_blob": "2e25e815923389c9f099022f1ce1ff71379bf769",
+      "original_sha256": "f48bd48669cbd554c859d89a6e12d914ec4cd90edd3ba5d3dac3da6040f571fb",
+      "export_sha256": "f48bd48669cbd554c859d89a6e12d914ec4cd90edd3ba5d3dac3da6040f571fb",
+      "modified": false
+    },
+    {
+      "path": "scripts/generate-sheets-sync-migration.mjs",
+      "original_git_blob": "09c5afe3540ea28071547a67ac4f67a50d6dcbe8",
+      "original_sha256": "e6b7042d74a63071ee0b514198e5bf89a9b543ed93d62051e2067cbc7a8b39ae",
+      "export_sha256": "e6b7042d74a63071ee0b514198e5bf89a9b543ed93d62051e2067cbc7a8b39ae",
+      "modified": false
+    },
+    {
+      "path": "scripts/install-ci.mjs",
+      "original_git_blob": "f204feb237f3076559abac2316052c470fe3dc90",
+      "original_sha256": "8a9adfc84cebc2a5df9abe62dbfdd20673af1ef0b9485e87a07c05ab54389be4",
+      "export_sha256": "8a9adfc84cebc2a5df9abe62dbfdd20673af1ef0b9485e87a07c05ab54389be4",
+      "modified": false
+    },
+    {
+      "path": "scripts/payroll-epf-reference.json",
+      "original_git_blob": "3fed2a013ebd554fc979ad04f1eff1047e0576c1",
+      "original_sha256": "4b6c233d1e587479236e502d374f6378c9e0706814d6fdbe6645bdd321b7a617",
+      "export_sha256": "4b6c233d1e587479236e502d374f6378c9e0706814d6fdbe6645bdd321b7a617",
+      "modified": false
+    },
+    {
+      "path": "scripts/payroll-fixture.mjs",
+      "original_git_blob": "c1d032f00cbc69ee3d110efb90ba6926996c889e",
+      "original_sha256": "8e4a75ce4a3846620c605485009e653d6bb0ad6efa1666d10d31507d401bf1ea",
+      "export_sha256": "8e4a75ce4a3846620c605485009e653d6bb0ad6efa1666d10d31507d401bf1ea",
+      "modified": false
+    },
+    {
+      "path": "scripts/prepare-migration.mjs",
+      "original_git_blob": "14162049980aa944f74d18e2159e90b1eb0a83ae",
+      "original_sha256": "d0fa655ce93de84bff027823814e01608a079eda5e03af5e99f08573cee17376",
+      "export_sha256": "d0fa655ce93de84bff027823814e01608a079eda5e03af5e99f08573cee17376",
+      "modified": false
+    },
+    {
+      "path": "scripts/preview-academic.mjs",
+      "original_git_blob": "d5f7497c942fb2af956e28f66f386b8545b824ba",
+      "original_sha256": "cfc5860ef17eb8b48a19e56f6a20a952b03eee4243d5f69e7a0e43176d71db98",
+      "export_sha256": "cfc5860ef17eb8b48a19e56f6a20a952b03eee4243d5f69e7a0e43176d71db98",
+      "modified": false
+    },
+    {
+      "path": "scripts/preview-leave.mjs",
+      "original_git_blob": "aacca6d2a705618f12690c7a5f50b8fe466f2af5",
+      "original_sha256": "95d692d5e3404b18144a7ed29218553c610724085c5267510cccc561d5f8f207",
+      "export_sha256": "95d692d5e3404b18144a7ed29218553c610724085c5267510cccc561d5f8f207",
+      "modified": false
+    },
+    {
+      "path": "scripts/preview-payroll.mjs",
+      "original_git_blob": "569e6bcb7b783b4fe6620fde4e3ef84e822f3382",
+      "original_sha256": "95710b6ecc44bb3b5e351888fbf96b927c65bc5976761bf418f2ecd4f889ef23",
+      "export_sha256": "95710b6ecc44bb3b5e351888fbf96b927c65bc5976761bf418f2ecd4f889ef23",
+      "modified": false
+    },
+    {
+      "path": "scripts/sites-env.mjs",
+      "original_git_blob": "1eeedb5e13e4b9af70d89446d981dfd4cd92a3fd",
+      "original_sha256": "5de99d6806b01f0ee0b941af3684d75dcf1afbbcff22cb95bfa2e584c5dafa88",
+      "export_sha256": "5de99d6806b01f0ee0b941af3684d75dcf1afbbcff22cb95bfa2e584c5dafa88",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-academic-governance.mjs",
+      "original_git_blob": "dffe97784af1052968fb186ca0c0bd1ab0142b3e",
+      "original_sha256": "c65fc448fbccab03ce3f566e2b54a1e0b7cd4de5e91a636488043659fbff2c3b",
+      "export_sha256": "c65fc448fbccab03ce3f566e2b54a1e0b7cd4de5e91a636488043659fbff2c3b",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-academic.mjs",
+      "original_git_blob": "128e96387f9f529e77ee741419f6fb2924ed21ce",
+      "original_sha256": "2de6bcca7f138ef9d18bb53ac3bfaac65bd5fe7ae98d09f4f4c6fc3877d7038f",
+      "export_sha256": "2de6bcca7f138ef9d18bb53ac3bfaac65bd5fe7ae98d09f4f4c6fc3877d7038f",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-admin-routes.mjs",
+      "original_git_blob": "c2f42c5b816774ce9754a3796bd10ba3af928865",
+      "original_sha256": "983412bcae756dd62803793a96a9da349fa625bf2adf9620eb3c815f58c0190a",
+      "export_sha256": "983412bcae756dd62803793a96a9da349fa625bf2adf9620eb3c815f58c0190a",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-attendance-monitoring.mjs",
+      "original_git_blob": "9c5d3d144a2ad49b496e7d6adc6fdd3d8e25b938",
+      "original_sha256": "cf8cd9a8dc3ef1b3f3f978aea24f34297a33a846fe2873283f9214c014e97dfc",
+      "export_sha256": "cf8cd9a8dc3ef1b3f3f978aea24f34297a33a846fe2873283f9214c014e97dfc",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-attendance-race.mjs",
+      "original_git_blob": "4bcd2d207f993be231a70041c5ef471e54818c97",
+      "original_sha256": "3986fa81c9ee76d844486d84f1e4eb0205e53b49c70dde6c11f2723181764606",
+      "export_sha256": "3986fa81c9ee76d844486d84f1e4eb0205e53b49c70dde6c11f2723181764606",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-attendance.mjs",
+      "original_git_blob": "4005cc186cd889ae88bff739557de7e73c22ae2e",
+      "original_sha256": "c194e464489245f252f64f8c63ed1d72455d1ce27e0b7ce8caa03ee4405ac692",
+      "export_sha256": "c194e464489245f252f64f8c63ed1d72455d1ce27e0b7ce8caa03ee4405ac692",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-automatic-sync.mjs",
+      "original_git_blob": "99b06d3bf88b0e383ceb00015280d03671e9a88a",
+      "original_sha256": "e226d4d8f71d579d29995c3eb6c087a2f5c5f64c5252f7d579f162a28ece05a6",
+      "export_sha256": "e226d4d8f71d579d29995c3eb6c087a2f5c5f64c5252f7d579f162a28ece05a6",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-business-cards.mjs",
+      "original_git_blob": "92c894810b6c17d145b8e0e3d39b00ff7e124ab8",
+      "original_sha256": "da19eda39882c6cd56d1e7f328f158795e8e3532ea2bb9829afb739cf6ab463e",
+      "export_sha256": "da19eda39882c6cd56d1e7f328f158795e8e3532ea2bb9829afb739cf6ab463e",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-calendar.mjs",
+      "original_git_blob": "4909152b705f34da3dd9c33a8687d1f14cc5b6d1",
+      "original_sha256": "d8b970d4f9f037d7fd3d9f5d6df6e689d5abeec299af007129beda9a9c0dd1d5",
+      "export_sha256": "d8b970d4f9f037d7fd3d9f5d6df6e689d5abeec299af007129beda9a9c0dd1d5",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-connect.mjs",
+      "original_git_blob": "ac54fc3d970effc5614f60c3a61463e8147a3e6a",
+      "original_sha256": "a401454d280f171395bb3f5204e9aa88444122941012b1a98ccc742fed537c8a",
+      "export_sha256": "a401454d280f171395bb3f5204e9aa88444122941012b1a98ccc742fed537c8a",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-core-integration.mjs",
+      "original_git_blob": "9e44a6ba384c0e938f585b19a2c59782c4acc452",
+      "original_sha256": "e14c2827a60aed032e07a3e3018868590a30bb7790ee833fe506a3c01bd78cb5",
+      "export_sha256": "e14c2827a60aed032e07a3e3018868590a30bb7790ee833fe506a3c01bd78cb5",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-cpd-worker.mjs",
+      "original_git_blob": "d5ad4c34ba6858291966f259c1828f16047a38dd",
+      "original_sha256": "c5e1b236b5ac56f47f6a3d4e2b3dc8cf95794a1aef53a110e826b3b66de5a076",
+      "export_sha256": "c5e1b236b5ac56f47f6a3d4e2b3dc8cf95794a1aef53a110e826b3b66de5a076",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-cpd.mjs",
+      "original_git_blob": "c69cd13cdb6a34d8bdf6df17584128875a00da53",
+      "original_sha256": "e09b5d2f0a26dd36e95fd711f594451aa85113cb7728afaa0d6fed06478fdf7f",
+      "export_sha256": "e09b5d2f0a26dd36e95fd711f594451aa85113cb7728afaa0d6fed06478fdf7f",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-culture.mjs",
+      "original_git_blob": "f350ca5f1becfa7086e128b70d0f508cd14ffcc5",
+      "original_sha256": "d4b06ecd6054ecfca12d204ab7a4ca1a339942e73c58a890073de14ce9e8947d",
+      "export_sha256": "d4b06ecd6054ecfca12d204ab7a4ca1a339942e73c58a890073de14ce9e8947d",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-directory-organisation.mjs",
+      "original_git_blob": "989cf92b0c098874e316a69b3c1a3ee36c90f176",
+      "original_sha256": "f2388ba81407f8117e2d362b254cd92fd711544ad3dd298daeae9f1a10d1a0cf",
+      "export_sha256": "f2388ba81407f8117e2d362b254cd92fd711544ad3dd298daeae9f1a10d1a0cf",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-document-screening.mjs",
+      "original_git_blob": "c4911fb4a7c4cbd95574e042ae6c0f43922d8ce3",
+      "original_sha256": "d9fdb545a8e8669d5352d003c457936e89027a95ae9201d3b332117185a082b0",
+      "export_sha256": "d9fdb545a8e8669d5352d003c457936e89027a95ae9201d3b332117185a082b0",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-employee-eligibility.mjs",
+      "original_git_blob": "cadd80711efb36df6184a4979a3463e5d1e9c2b4",
+      "original_sha256": "ef9355d56504211990b6cde110ca6f53bdc33fc53709e7eef8c3d74360d184b8",
+      "export_sha256": "ef9355d56504211990b6cde110ca6f53bdc33fc53709e7eef8c3d74360d184b8",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-entity-assignments.mjs",
+      "original_git_blob": "8ca7b7c142f4703f4835f956ec1628ac90918051",
+      "original_sha256": "152bd1ba8f0ba3669558422ffcd64bb9373f0edae3be5d687904a6def5ff9662",
+      "export_sha256": "152bd1ba8f0ba3669558422ffcd64bb9373f0edae3be5d687904a6def5ff9662",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-home-priorities.mjs",
+      "original_git_blob": "4d40bf727d0bded7674ebfe167868388794fb322",
+      "original_sha256": "350d19d1a268619b8a87a258c7ca9455c5a231901375c731a4cf9a141378bb62",
+      "export_sha256": "350d19d1a268619b8a87a258c7ca9455c5a231901375c731a4cf9a141378bb62",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-homepage.mjs",
+      "original_git_blob": "9f359351d17c28537fc72e7cb23f1ef1319561e9",
+      "original_sha256": "342b0591a8d6b99fb7c1fcc56c461b7b853442899bb4b91806039d023c59a889",
+      "export_sha256": "342b0591a8d6b99fb7c1fcc56c461b7b853442899bb4b91806039d023c59a889",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-hr-letters.mjs",
+      "original_git_blob": "e0e3b27166302ac7dcd78294b4beca235b6e5dee",
+      "original_sha256": "d505431215517ccd17ca9385fc9a6ff3feea754430049b109de674690f540295",
+      "export_sha256": "d505431215517ccd17ca9385fc9a6ff3feea754430049b109de674690f540295",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-hr-service.mjs",
+      "original_git_blob": "33cc3dad0be07f07d444f2699e27354eb7b4f738",
+      "original_sha256": "157a2b8df493d04fe042508a8c83574b044eeb9215ae2c75da52de39779b48d9",
+      "export_sha256": "157a2b8df493d04fe042508a8c83574b044eeb9215ae2c75da52de39779b48d9",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-leave-benefits.mjs",
+      "original_git_blob": "bc4e003c554ebe286e56278876c2c4ccc980b789",
+      "original_sha256": "3d6c9871483d90b81ee2faab906f2fef9df521a5f422c454422ab1920beaa7e7",
+      "export_sha256": "3d6c9871483d90b81ee2faab906f2fef9df521a5f422c454422ab1920beaa7e7",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-leave-integration.mjs",
+      "original_git_blob": "10595f3f79c9a7e3553e14a03e1795352f96d630",
+      "original_sha256": "6da83f077db041e7653e1bdd4eeb2d67ffd34b22966c30f9885e1a45b86efc6a",
+      "export_sha256": "6da83f077db041e7653e1bdd4eeb2d67ffd34b22966c30f9885e1a45b86efc6a",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-leave.mjs",
+      "original_git_blob": "3e73c7596f2f480bed5b79449f46a13c5532ba92",
+      "original_sha256": "2170755bd4877a686887d3b8be2f1832976f11cca65bc2eda6d64e5fa20301dc",
+      "export_sha256": "2170755bd4877a686887d3b8be2f1832976f11cca65bc2eda6d64e5fa20301dc",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-lifecycle-integration.mjs",
+      "original_git_blob": "91a6ae67212f746504e6f3e8b03e718b7149edbf",
+      "original_sha256": "d7de3ac15fbdcc92d5240249e955398fd0a0d64fc416284ded90d55e35242eb9",
+      "export_sha256": "d7de3ac15fbdcc92d5240249e955398fd0a0d64fc416284ded90d55e35242eb9",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-management.mjs",
+      "original_git_blob": "c58d6c51ab394e75266f1379d304d449cee8641a",
+      "original_sha256": "26ceef897b7f9339028e9bdbf084fbbc29d7ccfa51ce187d45618841426d2f9f",
+      "export_sha256": "26ceef897b7f9339028e9bdbf084fbbc29d7ccfa51ce187d45618841426d2f9f",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-migration.mjs",
+      "original_git_blob": "e524a5578f3106f51c8817a1b9f53ecd0b8de33f",
+      "original_sha256": "abc4153798c2e66884b5b9f750f28afdd0010deeb33fd9b95a3acdf51c5c1799",
+      "export_sha256": "abc4153798c2e66884b5b9f750f28afdd0010deeb33fd9b95a3acdf51c5c1799",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-nadi-auth.mjs",
+      "original_git_blob": "f29c9a129df608d6212a26d6891aa51f711da2f5",
+      "original_sha256": "5ed378d9e4c6dfef9031921961894939172d0590d5c879f6d2bbeec8c0182210",
+      "export_sha256": "5ed378d9e4c6dfef9031921961894939172d0590d5c879f6d2bbeec8c0182210",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-nadi-invitations.mjs",
+      "original_git_blob": "48fe3626f60b3c987e30e0fdc7a8edf9a62d96fd",
+      "original_sha256": "03f0cf2900e7c63de3df352c2576cdca128a3ff88250aea511d4119b9eb97143",
+      "export_sha256": "03f0cf2900e7c63de3df352c2576cdca128a3ff88250aea511d4119b9eb97143",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-navigation.mjs",
+      "original_git_blob": "0f96a73af6a5deb384b1d867e1bf8af28428768a",
+      "original_sha256": "ad531bb530c8277d7864287225fd4421112ef46d4d6e271353e9f8c200dff172",
+      "export_sha256": "ad531bb530c8277d7864287225fd4421112ef46d4d6e271353e9f8c200dff172",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-notifications.mjs",
+      "original_git_blob": "c835c45e54faedf685c2195148deb7392a386448",
+      "original_sha256": "b466f02f0c5eef38c07ac7dcf8ca3c45a1fbe48d0069870f8bd2125fe480e858",
+      "export_sha256": "b466f02f0c5eef38c07ac7dcf8ca3c45a1fbe48d0069870f8bd2125fe480e858",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-payroll-foundation.mjs",
+      "original_git_blob": "296d1e526f06a67788e37d0063e15e0952326211",
+      "original_sha256": "0b01b4da39ebb07caf9369cde47410bb123e9bd8f18323c0434d0fecbddb3fd6",
+      "export_sha256": "0b01b4da39ebb07caf9369cde47410bb123e9bd8f18323c0434d0fecbddb3fd6",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-payroll-governance.mjs",
+      "original_git_blob": "6289870a652d1449b89dc20ee5a6115f9e34bf49",
+      "original_sha256": "9fe1b4be2a83754e7e4dd3d0733e42992296387db480034c1463f26bbb5614c1",
+      "export_sha256": "9fe1b4be2a83754e7e4dd3d0733e42992296387db480034c1463f26bbb5614c1",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-payroll-integration.mjs",
+      "original_git_blob": "b4dd6709cfc860f42e4e55aa2a83a4f56a248d66",
+      "original_sha256": "0d18d9edb7845f29225849ed20a2856cb9ab96839cab40f224e0756c773980bc",
+      "export_sha256": "0d18d9edb7845f29225849ed20a2856cb9ab96839cab40f224e0756c773980bc",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-payroll-notifications.mjs",
+      "original_git_blob": "b31ea2f42ea19f20173bf52f178eb106cea0bd1f",
+      "original_sha256": "0f60b0c8f49a13a15c89f7ae30ce76feb083ec6a82bc17246400cee6145ef950",
+      "export_sha256": "0f60b0c8f49a13a15c89f7ae30ce76feb083ec6a82bc17246400cee6145ef950",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-payroll-processing.mjs",
+      "original_git_blob": "af1d46a5349935d79b8814ecfa11429f264d7c72",
+      "original_sha256": "d8ab47f4257da9081f8a07c49b18307267c8bf0f0e9d8aa586a54928252b53e1",
+      "export_sha256": "d8ab47f4257da9081f8a07c49b18307267c8bf0f0e9d8aa586a54928252b53e1",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-payroll-race.mjs",
+      "original_git_blob": "6c2342d1e15090b40b62f3f1c7c47833d4959e8f",
+      "original_sha256": "367d10c050966c5a63901d4c492833b917c6742812cb43eae3306b9cb9b0cf9a",
+      "export_sha256": "367d10c050966c5a63901d4c492833b917c6742812cb43eae3306b9cb9b0cf9a",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-payroll-readiness.mjs",
+      "original_git_blob": "fa5d783bafb48e083d8f39dac3a9361f363cc357",
+      "original_sha256": "d3f6df285e752139dc66b1d8d4b5e6a3f52290230e4c035551b599dc221f73f2",
+      "export_sha256": "d3f6df285e752139dc66b1d8d4b5e6a3f52290230e4c035551b599dc221f73f2",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-payroll-remuneration.mjs",
+      "original_git_blob": "16ced114bbc71c9115af862d386d21df2b34f02d",
+      "original_sha256": "22a73125892596664ccdc107051a01dc4b9e14e8e27f4ce9825a91192dcdc7db",
+      "export_sha256": "22a73125892596664ccdc107051a01dc4b9e14e8e27f4ce9825a91192dcdc7db",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-payroll-selfservice.mjs",
+      "original_git_blob": "b7e6688358de721dd0ece428f9c4a5619d5e19f7",
+      "original_sha256": "5d077ca83fa2910b9e400daa19663fde7d93e66cb31ee92875b2f3045e9443e4",
+      "export_sha256": "5d077ca83fa2910b9e400daa19663fde7d93e66cb31ee92875b2f3045e9443e4",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-payroll-statutory.mjs",
+      "original_git_blob": "9a77afe020f7255a9c0cb4bf379c39a050c18b8b",
+      "original_sha256": "fcfe11e82ee3e618331d88853da0a7a9769d3381d862544691ffed701e97eca6",
+      "export_sha256": "fcfe11e82ee3e618331d88853da0a7a9769d3381d862544691ffed701e97eca6",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-people-hub.mjs",
+      "original_git_blob": "2a603340ca7ee31c54f60dde4f5d5e13856eb58c",
+      "original_sha256": "45f79202a54a3b9730134c7bd53019e875cf05ea6804ea281ea029cc77915323",
+      "export_sha256": "45f79202a54a3b9730134c7bd53019e875cf05ea6804ea281ea029cc77915323",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-policies.mjs",
+      "original_git_blob": "067c2785c5f2276a36cd446b7611e5354912493d",
+      "original_sha256": "0238beba8711f4ceb5eba8da0b97a3b3ed0d4dec444524ecd765e9b976777f33",
+      "export_sha256": "0238beba8711f4ceb5eba8da0b97a3b3ed0d4dec444524ecd765e9b976777f33",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-position-consistency.mjs",
+      "original_git_blob": "c98cb9cd0da2c6d5a7e1c8272b7bfa9696c689f8",
+      "original_sha256": "7fd179e007b1d92ced1d534c410f4c66a303c0c35ee7465153562e3e0288c9d4",
+      "export_sha256": "7fd179e007b1d92ced1d534c410f4c66a303c0c35ee7465153562e3e0288c9d4",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-position-library-refresh.mjs",
+      "original_git_blob": "d85228a5c768cd05763c964490cb335443a92410",
+      "original_sha256": "06293d523ff855f98747e8ebfaeac941c3499ab814e871e44d7eb60e280a6bec",
+      "export_sha256": "06293d523ff855f98747e8ebfaeac941c3499ab814e871e44d7eb60e280a6bec",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-position-sync.mjs",
+      "original_git_blob": "a71e4adaea61f8991e141d765babbd5aa50d16ab",
+      "original_sha256": "faad50c77301465f469a64c8471442277dd42a80884710c0b407eb3321b996a8",
+      "export_sha256": "faad50c77301465f469a64c8471442277dd42a80884710c0b407eb3321b996a8",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-positions.mjs",
+      "original_git_blob": "f6f0a0ad8147c2a676754f378482bd8c7c025367",
+      "original_sha256": "39bff82205c3aeffed18966c8b44e96b94c60076a89f4439eaeb913c706cc246",
+      "export_sha256": "39bff82205c3aeffed18966c8b44e96b94c60076a89f4439eaeb913c706cc246",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-profile-enrichment.mjs",
+      "original_git_blob": "a26470f5dca26ac5a0df37f8243723a78bff3be5",
+      "original_sha256": "a95b0c94d2ed8e12b14721a6798192d041bfdd899cacbf3e3525f4d0d8ff5836",
+      "export_sha256": "a95b0c94d2ed8e12b14721a6798192d041bfdd899cacbf3e3525f4d0d8ff5836",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-profiles.mjs",
+      "original_git_blob": "b4dedaaa3f7ddbddcdf1ee6b3f56edafb0b2a88f",
+      "original_sha256": "65e895667be239a30a3f76d78f9778aa8d06b98f608fedf56bf753eb8b431817",
+      "export_sha256": "65e895667be239a30a3f76d78f9778aa8d06b98f608fedf56bf753eb8b431817",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-public-ui-assets.mjs",
+      "original_git_blob": "9c35dbf8141bacbd0e8fddfaaaac1ff17b29e026",
+      "original_sha256": "87f2ab195aa4c5bc84cdbd14916380e10712c3e5593ee57af63e1677bc46e6cc",
+      "export_sha256": "87f2ab195aa4c5bc84cdbd14916380e10712c3e5593ee57af63e1677bc46e6cc",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-sheet-deletions.mjs",
+      "original_git_blob": "4b8c3ff00cafbb33191868e5862a4f6bfba54116",
+      "original_sha256": "1bad10a79f6fb96cf781451bf90d76549dc81fb0bf15e53ff13f6f4edc7bb1db",
+      "export_sha256": "1bad10a79f6fb96cf781451bf90d76549dc81fb0bf15e53ff13f6f4edc7bb1db",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-sheets-fetch-receiver.mjs",
+      "original_git_blob": "f7044b92552ba74640e4dabdff2d902d0fbde5cf",
+      "original_sha256": "19d102908620d8a3312932a206f8277e458505a45defbdd426f70187151cc745",
+      "export_sha256": "19d102908620d8a3312932a206f8277e458505a45defbdd426f70187151cc745",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-sheets-sync.mjs",
+      "original_git_blob": "a1e26270e62ce870d9748cf5e156cd924e935300",
+      "original_sha256": "3bc47222b9345dd9a7299f59c0747b5c058e1761748c35fe8c469fd5fb6312a0",
+      "export_sha256": "3bc47222b9345dd9a7299f59c0747b5c058e1761748c35fe8c469fd5fb6312a0",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-sync-worker.mjs",
+      "original_git_blob": "9436ab02a2a770d0ffca2ba9106da7ddcd43d273",
+      "original_sha256": "478afa9a591646404f28f704634323bf0e5350fc084271e66542430f8a8789c5",
+      "export_sha256": "478afa9a591646404f28f704634323bf0e5350fc084271e66542430f8a8789c5",
+      "modified": false
+    },
+    {
+      "path": "scripts/test-workforce.mjs",
+      "original_git_blob": "8d8391a6f17422bf1342385b4f192c8d11c0e481",
+      "original_sha256": "c91795f6691ace640507d6208cc39383a47e84a24171d1ee0e3f02f838507cf9",
+      "export_sha256": "c91795f6691ace640507d6208cc39383a47e84a24171d1ee0e3f02f838507cf9",
+      "modified": false
+    },
+    {
+      "path": "scripts/validate-payroll-suite.mjs",
+      "original_git_blob": "5d9bb55cf0c98e43b28cebb38a459decb4a29cbf",
+      "original_sha256": "44cc479e42850bf68027687f19026d0562ac2a0336fac70e4da2db6b2dd91fef",
+      "export_sha256": "44cc479e42850bf68027687f19026d0562ac2a0336fac70e4da2db6b2dd91fef",
+      "modified": false
+    },
+    {
+      "path": "scripts/verify-master-database.sql",
+      "original_git_blob": "194492430d312a21aa3a0f78c350ea6544dfaec5",
+      "original_sha256": "346d62faf39436946734d4138c10a988670e11d5e0513f8228ebf2772219c911",
+      "export_sha256": "346d62faf39436946734d4138c10a988670e11d5e0513f8228ebf2772219c911",
+      "modified": false
+    },
+    {
+      "path": "tsconfig.json",
+      "original_git_blob": "be170f57ec372cc118f2d343092a53b85fc189a4",
+      "original_sha256": "7199c6e4e400921e8049729840165a39f1476fa97901bed00239e7697bfe8da4",
+      "export_sha256": "7199c6e4e400921e8049729840165a39f1476fa97901bed00239e7697bfe8da4",
+      "modified": false
+    },
+    {
+      "path": "vendor/shadcn-tailwind-4.13.0.LICENSE.md",
+      "original_git_blob": "fad4d887a681dd49233e5ed01ee2c7a1513089a0",
+      "original_sha256": "1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f",
+      "export_sha256": "1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f",
+      "modified": false
+    },
+    {
+      "path": "vendor/shadcn-tailwind-4.13.0.css",
+      "original_git_blob": "7807c58eb94de8b764b9b6b7b5d8cde6d012b17f",
+      "original_sha256": "bc7d83425702955b4cb67cb14ede9d603f9d912376d57a2d81d661094d2a782a",
+      "export_sha256": "bc7d83425702955b4cb67cb14ede9d603f9d912376d57a2d81d661094d2a782a",
+      "modified": false
+    },
+    {
+      "path": "vite.config.ts",
+      "original_git_blob": "30ae76c1e8c7b95a50a5b97f931adbc2c55aeab0",
+      "original_sha256": "d1975642d60fe15972c0f25feaa958da5716a5a018f5578d7c8612827ea8f61d",
+      "export_sha256": "d1975642d60fe15972c0f25feaa958da5716a5a018f5578d7c8612827ea8f61d",
+      "modified": false
+    },
+    {
+      "path": "worker/academic-api.js",
+      "original_git_blob": "00a39df7f6d12dd2f4c54da9e8453ca5757a5bf3",
+      "original_sha256": "604e40eff60d74144c703fb38d6d862762d9da6563c6f1c04fe27ee87f581786",
+      "export_sha256": "604e40eff60d74144c703fb38d6d862762d9da6563c6f1c04fe27ee87f581786",
+      "modified": false
+    },
+    {
+      "path": "worker/academic-bridge.js",
+      "original_git_blob": "63588b73ce1ac04735313be76e82347d248a6c86",
+      "original_sha256": "cd6b981c192b253d4ecb822fb6c6096b04d730088d195149b087baa3dd507dc8",
+      "export_sha256": "cd6b981c192b253d4ecb822fb6c6096b04d730088d195149b087baa3dd507dc8",
+      "modified": false
+    },
+    {
+      "path": "worker/academic-core.js",
+      "original_git_blob": "973e19663082a477550ac68f099005a5e8569ae9",
+      "original_sha256": "13024aff0d37046ace4366ed797399e5864fbfbfe73e1d0ccdd62010f79ee10e",
+      "export_sha256": "13024aff0d37046ace4366ed797399e5864fbfbfe73e1d0ccdd62010f79ee10e",
+      "modified": false
+    },
+    {
+      "path": "worker/academic-evidence.js",
+      "original_git_blob": "3f85af768cc24e909562e0fce320e3973b0f1e66",
+      "original_sha256": "492b773da780a6ace2b2d1b150c02a2d9f04d4d5967f2320663566b4b9a2db98",
+      "export_sha256": "492b773da780a6ace2b2d1b150c02a2d9f04d4d5967f2320663566b4b9a2db98",
+      "modified": false
+    },
+    {
+      "path": "worker/academic-foundation.js",
+      "original_git_blob": "8bdaeada12c2b5421ff0743a5ecdf476c395660d",
+      "original_sha256": "bb265419dffc5a0c325044052612aa3a89b70f9d407b4967bd87ccfd03e21e05",
+      "export_sha256": "bb265419dffc5a0c325044052612aa3a89b70f9d407b4967bd87ccfd03e21e05",
+      "modified": false
+    },
+    {
+      "path": "worker/academic-notifications.js",
+      "original_git_blob": "24c12dcc5af1c51fa1a56cfe24b1ff1ece4d8d15",
+      "original_sha256": "84a76464f5666e8dda12eae5454b5b8d829657009b79e84362af1608b426052b",
+      "export_sha256": "84a76464f5666e8dda12eae5454b5b8d829657009b79e84362af1608b426052b",
+      "modified": false
+    },
+    {
+      "path": "worker/academic-payroll-adapter.js",
+      "original_git_blob": "3addd454441f671ef86551a9864a3d4f9575e814",
+      "original_sha256": "337f13464092b5e697fe98c24a901ca95243b717ef4888e762c423b8f6fe41e5",
+      "export_sha256": "337f13464092b5e697fe98c24a901ca95243b717ef4888e762c423b8f6fe41e5",
+      "modified": false
+    },
+    {
+      "path": "worker/academic-sessions.js",
+      "original_git_blob": "5bf74272444a1468f06c4b48b70e38ab81bf628a",
+      "original_sha256": "53957f9eaa2c04dee622f74fc5244e3857ed3321e24e55ecbce6b7535344629b",
+      "export_sha256": "53957f9eaa2c04dee622f74fc5244e3857ed3321e24e55ecbce6b7535344629b",
+      "modified": false
+    },
+    {
+      "path": "worker/academic.css",
+      "original_git_blob": "209c6731baa5f0bbcbadaa204933a000696f9918",
+      "original_sha256": "ee266d7823434ea8ecab9a938da22ea504408382d17992f484d953835bb46b2b",
+      "export_sha256": "ee266d7823434ea8ecab9a938da22ea504408382d17992f484d953835bb46b2b",
+      "modified": false
+    },
+    {
+      "path": "worker/academic.html",
+      "original_git_blob": "b9a9b9929f25709af4ab627b37299b628f68a9a2",
+      "original_sha256": "3125b7d84c5b10018c966d7d4b88bbc4cf0453bfad657b736592af44b7f2a880",
+      "export_sha256": "3125b7d84c5b10018c966d7d4b88bbc4cf0453bfad657b736592af44b7f2a880",
+      "modified": false
+    },
+    {
+      "path": "worker/academic.js",
+      "original_git_blob": "0928e9fe0a2993515258544dfeb7f25188e2cebf",
+      "original_sha256": "79110d8bf8bb251bca5c88e25aeeebc551bc6827698de1c693f57edeab9dc96f",
+      "export_sha256": "79110d8bf8bb251bca5c88e25aeeebc551bc6827698de1c693f57edeab9dc96f",
+      "modified": false
+    },
+    {
+      "path": "worker/appointment-source.js",
+      "original_git_blob": "57ded2b39bf4321af69189cdf5eab27018c39651",
+      "original_sha256": "5e6833d27fe4161df687b3dced060bc3c0cfe9faa40cb97e0062118b0f6f8262",
+      "export_sha256": "5e6833d27fe4161df687b3dced060bc3c0cfe9faa40cb97e0062118b0f6f8262",
+      "modified": false
+    },
+    {
+      "path": "worker/assets/hr-letterhead.jpg",
+      "original_git_blob": "d09c019907024e00ba1cab1b27a1978ff8d165f4",
+      "original_sha256": "b353018d570a504d6ad5430644833c9263f3ce87a4ba496ad21f3fcf3c1aa214",
+      "export_sha256": "b353018d570a504d6ad5430644833c9263f3ce87a4ba496ad21f3fcf3c1aa214",
+      "modified": false
+    },
+    {
+      "path": "worker/attendance-api.js",
+      "original_git_blob": "c610fa5a77ff45c731400b46c173b8c9d9871ba6",
+      "original_sha256": "bc1c9cee980476ae702c3e48f6f820c98f25800c8ca5c98e696bee14601c220b",
+      "export_sha256": "bc1c9cee980476ae702c3e48f6f820c98f25800c8ca5c98e696bee14601c220b",
+      "modified": false
+    },
+    {
+      "path": "worker/attendance-core.js",
+      "original_git_blob": "54e2077ca33bc9838a6b4abc4dd69afc1ede7a13",
+      "original_sha256": "55f0ebc382e231217c970b1a62d80d09c13a412188ca4c4d312cb44c265993b3",
+      "export_sha256": "55f0ebc382e231217c970b1a62d80d09c13a412188ca4c4d312cb44c265993b3",
+      "modified": false
+    },
+    {
+      "path": "worker/attendance.css",
+      "original_git_blob": "6000ec55f57d323422d6ca63b608e727e3f54125",
+      "original_sha256": "cd61fb07e9efd0f04335ac4166adb7081e311d0fcbfc5dd9499bfb615157342c",
+      "export_sha256": "cd61fb07e9efd0f04335ac4166adb7081e311d0fcbfc5dd9499bfb615157342c",
+      "modified": false
+    },
+    {
+      "path": "worker/attendance.html",
+      "original_git_blob": "e1c709580087af1a1eb3bd9b8916ca186323596c",
+      "original_sha256": "cf6622273937d0ab83e8c556dbfec7597c926fc56d1bee4593f5b8ec4b39a095",
+      "export_sha256": "cf6622273937d0ab83e8c556dbfec7597c926fc56d1bee4593f5b8ec4b39a095",
+      "modified": false
+    },
+    {
+      "path": "worker/attendance.js",
+      "original_git_blob": "a45027ac44bb8b6acbdd0871d98fa711c7e18afe",
+      "original_sha256": "a8593dd630a2c8ade0bfde7f9855cfcaa99d7d44aebca282ff631016e65ea4a9",
+      "export_sha256": "a8593dd630a2c8ade0bfde7f9855cfcaa99d7d44aebca282ff631016e65ea4a9",
+      "modified": false
+    },
+    {
+      "path": "worker/business-card-api.js",
+      "original_git_blob": "b868888b0116611fa8e76121adca463be658b69f",
+      "original_sha256": "9392412db066940ba13effb86775e32b4b6051103c2065be6b6c2af52777ead8",
+      "export_sha256": "9392412db066940ba13effb86775e32b4b6051103c2065be6b6c2af52777ead8",
+      "modified": false
+    },
+    {
+      "path": "worker/business-card-professional.js",
+      "original_git_blob": "84d4a99e8667c09d777b6babd4050161df050296",
+      "original_sha256": "e17bf4e229ae2a3f2fb5de759f4d7f539459db8fe8dbc7dc1b46d08210dc59f3",
+      "export_sha256": "e17bf4e229ae2a3f2fb5de759f4d7f539459db8fe8dbc7dc1b46d08210dc59f3",
+      "modified": false
+    },
+    {
+      "path": "worker/business-card.css",
+      "original_git_blob": "220fced78ce1af9705b03eb7d3b7e194c90ae058",
+      "original_sha256": "61d6bfe4b98e9dca0540b5e00aec9229326565e8a0903ef670fcc1a46dc24921",
+      "export_sha256": "61d6bfe4b98e9dca0540b5e00aec9229326565e8a0903ef670fcc1a46dc24921",
+      "modified": false
+    },
+    {
+      "path": "worker/business-card.html",
+      "original_git_blob": "d135b8a05a39cf00559d374e100719c314cd6624",
+      "original_sha256": "df5f992a0426a811e7f5e6476c34c19875d0760151ca51b6ae8096b64593c2a2",
+      "export_sha256": "df5f992a0426a811e7f5e6476c34c19875d0760151ca51b6ae8096b64593c2a2",
+      "modified": false
+    },
+    {
+      "path": "worker/business-card.js",
+      "original_git_blob": "c102aa8050e7c270b32c3ef03a696767bb164679",
+      "original_sha256": "9577730ec75eaece46f22bee45c273d41242534c655ece0a854ebf0e3d969ebd",
+      "export_sha256": "9577730ec75eaece46f22bee45c273d41242534c655ece0a854ebf0e3d969ebd",
+      "modified": false
+    },
+    {
+      "path": "worker/calendar-api.js",
+      "original_git_blob": "904ef864fd6ee8a317550773b83d752b553db56c",
+      "original_sha256": "d8becf8121fb061c43ebeb982c8fe2e4280a8690fcc109665c68921d7f06f474",
+      "export_sha256": "d8becf8121fb061c43ebeb982c8fe2e4280a8690fcc109665c68921d7f06f474",
+      "modified": false
+    },
+    {
+      "path": "worker/calendar-cache.js",
+      "original_git_blob": "cea62b93f2c2c8e119838fc7434b191e51843914",
+      "original_sha256": "71d73691f6f438fc508dd3bffc4d3b3bc3e0119b62cca001aad194a7f13b667b",
+      "export_sha256": "71d73691f6f438fc508dd3bffc4d3b3bc3e0119b62cca001aad194a7f13b667b",
+      "modified": false
+    },
+    {
+      "path": "worker/calendar-compact.css",
+      "original_git_blob": "5be93b19d7eaa92bb936c61e58aafd635bee385e",
+      "original_sha256": "256dcc2e9d4238eb0926466b198915cdbb4b54b8fb4460611bc1536f73b3fd05",
+      "export_sha256": "256dcc2e9d4238eb0926466b198915cdbb4b54b8fb4460611bc1536f73b3fd05",
+      "modified": false
+    },
+    {
+      "path": "worker/calendar-holidays.js",
+      "original_git_blob": "279cc031409f36afbad3ff42cb5a2c9acbe56cec",
+      "original_sha256": "9ad396273545db267d551b0ab7e8b43e324415ca6b3efc3222a8011a8c16f0a3",
+      "export_sha256": "9ad396273545db267d551b0ab7e8b43e324415ca6b3efc3222a8011a8c16f0a3",
+      "modified": false
+    },
+    {
+      "path": "worker/calendar-section.js",
+      "original_git_blob": "cdeeee730dbb9ce98bc01112c6609a5385a506a2",
+      "original_sha256": "1175e3f9230e15ca4e5e85722468d9eea5505d933ce0dfdbeef1cfd147cf2418",
+      "export_sha256": "1175e3f9230e15ca4e5e85722468d9eea5505d933ce0dfdbeef1cfd147cf2418",
+      "modified": false
+    },
+    {
+      "path": "worker/calendar.css",
+      "original_git_blob": "f36bcea48f0c50b625475560893a796a3acd2620",
+      "original_sha256": "a16f7081b240610cf9998234b9e3988b5e8e594ebf86bc8bc0a10ecc28b780c9",
+      "export_sha256": "a16f7081b240610cf9998234b9e3988b5e8e594ebf86bc8bc0a10ecc28b780c9",
+      "modified": false
+    },
+    {
+      "path": "worker/calendar.js",
+      "original_git_blob": "112e6f27f39847b93e39ff3a37b85b8d353c2ad7",
+      "original_sha256": "11febae83cc9f6e4a7cbb72f6cb144a4d241572f918a44ec8b4d21faa3867530",
+      "export_sha256": "11febae83cc9f6e4a7cbb72f6cb144a4d241572f918a44ec8b4d21faa3867530",
+      "modified": false
+    },
+    {
+      "path": "worker/connect-admin.js",
+      "original_git_blob": "afc831eace39220af4b0ac4b3d0ba2930bf0a372",
+      "original_sha256": "dcc826fdb98d2ea7a2b39089bbd182e6cef8b28228c51a13aa56aee56ab387d2",
+      "export_sha256": "dcc826fdb98d2ea7a2b39089bbd182e6cef8b28228c51a13aa56aee56ab387d2",
+      "modified": false
+    },
+    {
+      "path": "worker/connect-api.js",
+      "original_git_blob": "c599e1c9e7b71e17f1f1abfdc9fbd5c7bccc3513",
+      "original_sha256": "6a8e445a550aa24bf2d714fb3da4bc988dcbdbd896cbc2469a6f9ef9029bd57a",
+      "export_sha256": "6a8e445a550aa24bf2d714fb3da4bc988dcbdbd896cbc2469a6f9ef9029bd57a",
+      "modified": false
+    },
+    {
+      "path": "worker/connect-core.js",
+      "original_git_blob": "862d667643fc6ab6252d06a3e27532a3d2ce5990",
+      "original_sha256": "5dd646f573adec2970297a71f9d90be582051bb5bf9179ebde2bb0ef36939c3e",
+      "export_sha256": "5dd646f573adec2970297a71f9d90be582051bb5bf9179ebde2bb0ef36939c3e",
+      "modified": false
+    },
+    {
+      "path": "worker/connect-feeling.js",
+      "original_git_blob": "1f24491a5723c472a251901968cc4ecb0a404dd4",
+      "original_sha256": "2ebfdca48340b41d4ecb9d219037f7c0a92e0125d0586785efa56ce190658038",
+      "export_sha256": "2ebfdca48340b41d4ecb9d219037f7c0a92e0125d0586785efa56ce190658038",
+      "modified": false
+    },
+    {
+      "path": "worker/connect.css",
+      "original_git_blob": "e6e1e9d60718d73dc5cdf3acc6bc4aa86bfb6e4b",
+      "original_sha256": "ebbe0d2536c941fe9c097ce00503e3d690f4b2d05a3747665433af796ac6240c",
+      "export_sha256": "ebbe0d2536c941fe9c097ce00503e3d690f4b2d05a3747665433af796ac6240c",
+      "modified": false
+    },
+    {
+      "path": "worker/connect.html",
+      "original_git_blob": "57463b8d40b714ca843ce4326058c3b517c61f56",
+      "original_sha256": "56d5d20a1995c2e8cb2467d1a1b5da0ad66afa859eccfb777b9b2a4ccbf1f9d1",
+      "export_sha256": "56d5d20a1995c2e8cb2467d1a1b5da0ad66afa859eccfb777b9b2a4ccbf1f9d1",
+      "modified": false
+    },
+    {
+      "path": "worker/connect.js",
+      "original_git_blob": "39a69392a6cf003474a07860667bd7a5ba7ecc65",
+      "original_sha256": "779fb6f40d15892977ac6d49cafce2f644aa0b77f2ce0ac5e0a755aecfae9db7",
+      "export_sha256": "779fb6f40d15892977ac6d49cafce2f644aa0b77f2ce0ac5e0a755aecfae9db7",
+      "modified": false
+    },
+    {
+      "path": "worker/cpd-api.js",
+      "original_git_blob": "53067a429899c984b39a99005dc7a5510d934819",
+      "original_sha256": "2bf1dc7fec064b56bcd5edb88c6e12f4af7587c345c503b4b54292c6d4d88539",
+      "export_sha256": "2bf1dc7fec064b56bcd5edb88c6e12f4af7587c345c503b4b54292c6d4d88539",
+      "modified": false
+    },
+    {
+      "path": "worker/cpd-ledger.js",
+      "original_git_blob": "a26e2b2a647363ceae1cd92019e7a333d08fe1f9",
+      "original_sha256": "fa7bf7a71a2f84dbc2bcfbb5bbdd6745d05ff69fccb51f0decfdb4b16fa7f4c4",
+      "export_sha256": "fa7bf7a71a2f84dbc2bcfbb5bbdd6745d05ff69fccb51f0decfdb4b16fa7f4c4",
+      "modified": false
+    },
+    {
+      "path": "worker/cpd-mpc.js",
+      "original_git_blob": "daba7d4b637de4173c4fe05395385232f0cb8db5",
+      "original_sha256": "83fe4d663023873f82718f5578d1f59f0d560603ffcbedeb3545137cc95b5945",
+      "export_sha256": "83fe4d663023873f82718f5578d1f59f0d560603ffcbedeb3545137cc95b5945",
+      "modified": false
+    },
+    {
+      "path": "worker/cpd.css",
+      "original_git_blob": "8332db7ba467c40cac183f7970c689760a64d393",
+      "original_sha256": "7e97cd4d1f8d37bc6b910ddc5a97361b6b0d252ae8d259f2b5cf084b24fc67f5",
+      "export_sha256": "7e97cd4d1f8d37bc6b910ddc5a97361b6b0d252ae8d259f2b5cf084b24fc67f5",
+      "modified": false
+    },
+    {
+      "path": "worker/cpd.html",
+      "original_git_blob": "08764db49aa5ce4ebe90531987962f400f9a153a",
+      "original_sha256": "2251039b0c6f8d899244806af4640a3d694bd11b7078da5b10b3ae12cf5b6fd6",
+      "export_sha256": "2251039b0c6f8d899244806af4640a3d694bd11b7078da5b10b3ae12cf5b6fd6",
+      "modified": false
+    },
+    {
+      "path": "worker/cpd.js",
+      "original_git_blob": "4c0cd36327ea4ac61a5b0e4827cff559b152b125",
+      "original_sha256": "b53bf8e5076a8257ac624d78ee73c4568bd4f70270209398d5672b6bd74a940a",
+      "export_sha256": "b53bf8e5076a8257ac624d78ee73c4568bd4f70270209398d5672b6bd74a940a",
+      "modified": false
+    },
+    {
+      "path": "worker/culture.css",
+      "original_git_blob": "cee7a12a6294e43fcff59363d35545fc86c54358",
+      "original_sha256": "91ecfb8b49ae0ee7a8e4e06942db25dc2778a864ca6365fe74dc8ff8214c0e36",
+      "export_sha256": "91ecfb8b49ae0ee7a8e4e06942db25dc2778a864ca6365fe74dc8ff8214c0e36",
+      "modified": false
+    },
+    {
+      "path": "worker/culture.html",
+      "original_git_blob": "870bf16f2c8c2cdb372d011e3c8bcf306598efd2",
+      "original_sha256": "4edfe28b3d0c85a9d05ad312114be2c114719c5a1bb89637154cf7f61cf03609",
+      "export_sha256": "4edfe28b3d0c85a9d05ad312114be2c114719c5a1bb89637154cf7f61cf03609",
+      "modified": false
+    },
+    {
+      "path": "worker/directory-organisation.js",
+      "original_git_blob": "5b7b37b6727d602f1f9f2c4e95a102085b6e3740",
+      "original_sha256": "e1c0ff76d087e822a237b949cdafebcc4ac11c5839040732875916cac98fd1d9",
+      "export_sha256": "e1c0ff76d087e822a237b949cdafebcc4ac11c5839040732875916cac98fd1d9",
+      "modified": false
+    },
+    {
+      "path": "worker/directory.css",
+      "original_git_blob": "c4a28a88e888db32999d756b0cd6109840618754",
+      "original_sha256": "47e5ed2698efa8a3b65cca450af90d3985ff25037eede8aef8803bf3fc404e5d",
+      "export_sha256": "47e5ed2698efa8a3b65cca450af90d3985ff25037eede8aef8803bf3fc404e5d",
+      "modified": false
+    },
+    {
+      "path": "worker/document-screening-api.js",
+      "original_git_blob": "002db86aaedfca5c5b9977de35c5fa21d7dfdbf9",
+      "original_sha256": "5e894f1296b5c8d92f5837de5d2b2de9c14e8ef83e12bd7b6a9dabd09c2d009f",
+      "export_sha256": "5e894f1296b5c8d92f5837de5d2b2de9c14e8ef83e12bd7b6a9dabd09c2d009f",
+      "modified": false
+    },
+    {
+      "path": "worker/document-screening-core.js",
+      "original_git_blob": "900fcc13e1cc75d700a31c95b5fd91a3d86086f5",
+      "original_sha256": "8e115fe221b95e6c07f7e478b13d60d3eb5f83fccd2b2c908a5683d5b0040eb6",
+      "export_sha256": "8e115fe221b95e6c07f7e478b13d60d3eb5f83fccd2b2c908a5683d5b0040eb6",
+      "modified": false
+    },
+    {
+      "path": "worker/document-screening-ui.js",
+      "original_git_blob": "8783292e6d5849596a7f0696e9342f970e6e7a97",
+      "original_sha256": "8c3a6950123b65a69a7a114d9e71db15e63d91b794b15eb35f47977c38e495ea",
+      "export_sha256": "8c3a6950123b65a69a7a114d9e71db15e63d91b794b15eb35f47977c38e495ea",
+      "modified": false
+    },
+    {
+      "path": "worker/document-screening.css",
+      "original_git_blob": "c393c99f6f920961f245b0156211fdbea182ddd4",
+      "original_sha256": "8315fef27f76bcd1e5e84ba5a6d2b19895ef7f69b024175fe53d9253117ba8fb",
+      "export_sha256": "8315fef27f76bcd1e5e84ba5a6d2b19895ef7f69b024175fe53d9253117ba8fb",
+      "modified": false
+    },
+    {
+      "path": "worker/document-screening.html",
+      "original_git_blob": "f8b842fdf84d33a51dc0352c84f4959927e97f07",
+      "original_sha256": "c52b4f03b98147e14ca0406e0a7a88e16a8410b38880913d3fb70ab8a84b916a",
+      "export_sha256": "c52b4f03b98147e14ca0406e0a7a88e16a8410b38880913d3fb70ab8a84b916a",
+      "modified": false
+    },
+    {
+      "path": "worker/employee-eligibility.js",
+      "original_git_blob": "94d9884613bbee7cf4b02acecf0a471042d070b7",
+      "original_sha256": "424ce9ae3eee7c99aac61e7de983a6bec0afaa67495d85abd128983a372448e6",
+      "export_sha256": "424ce9ae3eee7c99aac61e7de983a6bec0afaa67495d85abd128983a372448e6",
+      "modified": false
+    },
+    {
+      "path": "worker/employee-master.js",
+      "original_git_blob": "8374c0b2f14d3ad6c8b9721b6e150b835e60029c",
+      "original_sha256": "db771baa466620fb66bc775dfb2c8e234bdde6f6a8ba8fd52634ecc7c3596e21",
+      "export_sha256": "db771baa466620fb66bc775dfb2c8e234bdde6f6a8ba8fd52634ecc7c3596e21",
+      "modified": false
+    },
+    {
+      "path": "worker/employee-seed.js",
+      "original_git_blob": "b52b50e802aa6918df7fa84ba23b76d869fa7c62",
+      "original_sha256": "944cd8dbc3d29d3f5b0fefcf7f0e5027ea453e625a7c72a434ad56d01acbccb7",
+      "export_sha256": "944cd8dbc3d29d3f5b0fefcf7f0e5027ea453e625a7c72a434ad56d01acbccb7",
+      "modified": false
+    },
+    {
+      "path": "worker/home-announcements.js",
+      "original_git_blob": "883ea36f3458db52ce4cbcf5593689751fdf6478",
+      "original_sha256": "0b3f3e10a444f5872c2fd6211a9e6bf48296e36791a7bc72065260a7b2e1e629",
+      "export_sha256": "0b3f3e10a444f5872c2fd6211a9e6bf48296e36791a7bc72065260a7b2e1e629",
+      "modified": false
+    },
+    {
+      "path": "worker/home-community.css",
+      "original_git_blob": "7f679d37671b32084554867a9c3c7364adb8f1e4",
+      "original_sha256": "3b014f4298a0de4f6ba3b59360752bc077cd3401688ee9bc12d7ed23ed3062fc",
+      "export_sha256": "3b014f4298a0de4f6ba3b59360752bc077cd3401688ee9bc12d7ed23ed3062fc",
+      "modified": false
+    },
+    {
+      "path": "worker/home-page.js",
+      "original_git_blob": "ea62915e9c428cfe7afadd5fae40c99f1413ed62",
+      "original_sha256": "8c136186c6588f607c3a43e03012080a79cedc0ef7cfa2fd3cbdcdb33a6d6922",
+      "export_sha256": "8c136186c6588f607c3a43e03012080a79cedc0ef7cfa2fd3cbdcdb33a6d6922",
+      "modified": false
+    },
+    {
+      "path": "worker/home-priorities.js",
+      "original_git_blob": "1c1971131f0423d0362c968a363094a108026d0b",
+      "original_sha256": "54e32112ae3a1659f2d46b9b5d50a30820a8d9d179d0783e8df7dbc650fe10d6",
+      "export_sha256": "54e32112ae3a1659f2d46b9b5d50a30820a8d9d179d0783e8df7dbc650fe10d6",
+      "modified": false
+    },
+    {
+      "path": "worker/home-refinement.css",
+      "original_git_blob": "637810738177f0779b4e76172fa480c7e97c9a99",
+      "original_sha256": "7ab7f25e65ea1617983b45c5c7f88ac9925683bdcc022d4cea79c8eba216cc7f",
+      "export_sha256": "7ab7f25e65ea1617983b45c5c7f88ac9925683bdcc022d4cea79c8eba216cc7f",
+      "modified": false
+    },
+    {
+      "path": "worker/home.css",
+      "original_git_blob": "3b464e304eb7707a8d36092b73f4e22a8b60ecd0",
+      "original_sha256": "b8db37a6d4c3c04ae132b82796767abcf9f5bddfbe53a881e677a7b0f89a0eda",
+      "export_sha256": "b8db37a6d4c3c04ae132b82796767abcf9f5bddfbe53a881e677a7b0f89a0eda",
+      "modified": false
+    },
+    {
+      "path": "worker/home.js",
+      "original_git_blob": "2006739d969b34e127f3c286ee3c83123864ce11",
+      "original_sha256": "b422930b6dc68f5b7208b831668d083998818d45dd1f9acfc920baaf03fadc2e",
+      "export_sha256": "b422930b6dc68f5b7208b831668d083998818d45dd1f9acfc920baaf03fadc2e",
+      "modified": false
+    },
+    {
+      "path": "worker/hr-letter.js",
+      "original_git_blob": "c890553f906f1318405a85ba58ab0ad80bad5f83",
+      "original_sha256": "e699a7bc3d1c71ffd8ed426d69cbdc2ee0e47c2785817e4cfff0de98ea58b12d",
+      "export_sha256": "e699a7bc3d1c71ffd8ed426d69cbdc2ee0e47c2785817e4cfff0de98ea58b12d",
+      "modified": false
+    },
+    {
+      "path": "worker/hr-letterhead.js",
+      "original_git_blob": "e5c160cdd2f867afa38551a45fa4f3e572fd10e3",
+      "original_sha256": "24f2204ba9f3dc904172103adeb000afa4645240815031b2c8c8fe6d021eddae",
+      "export_sha256": "24f2204ba9f3dc904172103adeb000afa4645240815031b2c8c8fe6d021eddae",
+      "modified": false
+    },
+    {
+      "path": "worker/hr-service-api.js",
+      "original_git_blob": "bb92fcda4616fa131e16fd439908066cdfe8babd",
+      "original_sha256": "f8d01c6b564933a539eb3874cc07ae74e35aad402ca6b50a7c7328ebf26f830c",
+      "export_sha256": "f8d01c6b564933a539eb3874cc07ae74e35aad402ca6b50a7c7328ebf26f830c",
+      "modified": false
+    },
+    {
+      "path": "worker/hr-service.css",
+      "original_git_blob": "8bbb65164e556b7b7448e23bfec3f357c7690f11",
+      "original_sha256": "0a59f760a893e2060cb9600e73dca142f9b6cdab79de503fbb3d8857e468ede0",
+      "export_sha256": "0a59f760a893e2060cb9600e73dca142f9b6cdab79de503fbb3d8857e468ede0",
+      "modified": false
+    },
+    {
+      "path": "worker/hr-service.html",
+      "original_git_blob": "b7f912b468cffbb556a7af1222991c3594253420",
+      "original_sha256": "0e070f80b9b85c9d4063f16733befed25ad7ff7cf345c48e0f05504c65857c18",
+      "export_sha256": "0e070f80b9b85c9d4063f16733befed25ad7ff7cf345c48e0f05504c65857c18",
+      "modified": false
+    },
+    {
+      "path": "worker/hr-service.js",
+      "original_git_blob": "4db122183d35746cc7e2d22b54c780a61082f9f2",
+      "original_sha256": "7d9e0877b5fbd1dbd7946d3c38036e89e2766183da0496ce16181cf0da8a74dc",
+      "export_sha256": "7d9e0877b5fbd1dbd7946d3c38036e89e2766183da0496ce16181cf0da8a74dc",
+      "modified": false
+    },
+    {
+      "path": "worker/index.js",
+      "original_git_blob": "38d5a772d43ee933f483234df07ae691ec7c1e46",
+      "original_sha256": "96cf0ccf6b51ccce161f2c3ceec0e73adfa230c97ec85db7682a54716325ea60",
+      "export_sha256": "96cf0ccf6b51ccce161f2c3ceec0e73adfa230c97ec85db7682a54716325ea60",
+      "modified": false
+    },
+    {
+      "path": "worker/integration-guards.js",
+      "original_git_blob": "817496a5e6c52ca871f7a5cf10cf1972940d3a3f",
+      "original_sha256": "1b35dda99a4f2e0a9955982089855ad4591a4358fe47b39cf71b1941cc92408f",
+      "export_sha256": "1b35dda99a4f2e0a9955982089855ad4591a4358fe47b39cf71b1941cc92408f",
+      "modified": false
+    },
+    {
+      "path": "worker/leave-api.js",
+      "original_git_blob": "a3dc66097ad958c40dd9b73754daf8ca6cb52db4",
+      "original_sha256": "6f47df2b112a8de7b2d4dcb25d9f576f3f6e6d75d502d06eefca4218bc5e4733",
+      "export_sha256": "6f47df2b112a8de7b2d4dcb25d9f576f3f6e6d75d502d06eefca4218bc5e4733",
+      "modified": false
+    },
+    {
+      "path": "worker/leave-benefits.js",
+      "original_git_blob": "52978fbddea3229c7364432336b54ffdde7d6826",
+      "original_sha256": "9531cf1be2089d6ffda3b72a3105a94e322c5ed54d4ed019162482396e0092a1",
+      "export_sha256": "9531cf1be2089d6ffda3b72a3105a94e322c5ed54d4ed019162482396e0092a1",
+      "modified": false
+    },
+    {
+      "path": "worker/leave-core.js",
+      "original_git_blob": "7df65785f77898361c7d5d6139dcd001af907f48",
+      "original_sha256": "1914a5dd7bfad7df9d6d58e8a73504885437452f462456fc9103a277629e92e4",
+      "export_sha256": "1914a5dd7bfad7df9d6d58e8a73504885437452f462456fc9103a277629e92e4",
+      "modified": false
+    },
+    {
+      "path": "worker/leave-export.js",
+      "original_git_blob": "248f1adaa7dda00db284fb06c2a93ba221e9dcec",
+      "original_sha256": "02ef9d7f456da16094b33e09d50169bd76dea754abfbb377d9031dc37b322d14",
+      "export_sha256": "02ef9d7f456da16094b33e09d50169bd76dea754abfbb377d9031dc37b322d14",
+      "modified": false
+    },
+    {
+      "path": "worker/leave-files.js",
+      "original_git_blob": "2613b9e27468de123b9546dff94f83ba37e6b61b",
+      "original_sha256": "93251504acde8c7f69bf8e34e262f67c1c358290be6aa9f898e7e15528e967f1",
+      "export_sha256": "93251504acde8c7f69bf8e34e262f67c1c358290be6aa9f898e7e15528e967f1",
+      "modified": false
+    },
+    {
+      "path": "worker/leave.css",
+      "original_git_blob": "c14ffc53cda6c49626bc750e0f2dd011df793684",
+      "original_sha256": "064c10e4eb78e045bb2683aa0b0ae9fb3fa51c4aaea57d77e34b24e64a24349c",
+      "export_sha256": "064c10e4eb78e045bb2683aa0b0ae9fb3fa51c4aaea57d77e34b24e64a24349c",
+      "modified": false
+    },
+    {
+      "path": "worker/leave.html",
+      "original_git_blob": "9acdb72bf0f84c18b956557d2cc0104b129152cf",
+      "original_sha256": "4b111ded0fa83afa8433361c30585d455dd0fc40aa7c6137e454f947bc329ec5",
+      "export_sha256": "4b111ded0fa83afa8433361c30585d455dd0fc40aa7c6137e454f947bc329ec5",
+      "modified": false
+    },
+    {
+      "path": "worker/leave.js",
+      "original_git_blob": "839922020f563384c4451224ca19c075ce3049b5",
+      "original_sha256": "3f14154f885a5418643f3aaa45d5efa7d085bdc2b97119b65a57280ce59c4fe6",
+      "export_sha256": "3f14154f885a5418643f3aaa45d5efa7d085bdc2b97119b65a57280ce59c4fe6",
+      "modified": false
+    },
+    {
+      "path": "worker/management-api.js",
+      "original_git_blob": "b6425fab06a603efa304e29522e1c56cad44382c",
+      "original_sha256": "aa9645cc1311c57db589fa87ade24bae2cfceb96e9cab412452de20bbb111795",
+      "export_sha256": "aa9645cc1311c57db589fa87ade24bae2cfceb96e9cab412452de20bbb111795",
+      "modified": false
+    },
+    {
+      "path": "worker/management.css",
+      "original_git_blob": "9e1ccec58ebd2e16d82316dc69a789bc00322749",
+      "original_sha256": "515f4bcddcef256aea33f35b76002814ef225400bae88c554e57e0c3ee421ad6",
+      "export_sha256": "515f4bcddcef256aea33f35b76002814ef225400bae88c554e57e0c3ee421ad6",
+      "modified": false
+    },
+    {
+      "path": "worker/management.html",
+      "original_git_blob": "48208e04c16f634c47ce3f7ac9182907e62f963d",
+      "original_sha256": "77812efa8fee197e3d8e09ba1cc10e8ec7fd658bf9858c267516ded67d1c77c1",
+      "export_sha256": "77812efa8fee197e3d8e09ba1cc10e8ec7fd658bf9858c267516ded67d1c77c1",
+      "modified": false
+    },
+    {
+      "path": "worker/management.js",
+      "original_git_blob": "9b7bf7fc048c6332fdd66e5a5d81445f82e59f09",
+      "original_sha256": "cf6e55ec45d5af4fe14c088286040b096b38562150ad0e44d74310ce11db2801",
+      "export_sha256": "cf6e55ec45d5af4fe14c088286040b096b38562150ad0e44d74310ce11db2801",
+      "modified": false
+    },
+    {
+      "path": "worker/master.css",
+      "original_git_blob": "93713539e1f811cdaf7a928cc8764719253fdff8",
+      "original_sha256": "023a67d97dcd9529f6400085e09a2e5da940a7bf58a3abd3fcb9f2db8645d6a2",
+      "export_sha256": "023a67d97dcd9529f6400085e09a2e5da940a7bf58a3abd3fcb9f2db8645d6a2",
+      "modified": false
+    },
+    {
+      "path": "worker/master.html",
+      "original_git_blob": "df968b4c64b71ca189ff1186d12cdd2c1e148bd6",
+      "original_sha256": "4c1dfc284f26ade1de7b5165c6e7d0370a81e3d5786c0c857d3ab7b4901b98e0",
+      "export_sha256": "4c1dfc284f26ade1de7b5165c6e7d0370a81e3d5786c0c857d3ab7b4901b98e0",
+      "modified": false
+    },
+    {
+      "path": "worker/master.js",
+      "original_git_blob": "5eaee51a406f2126bdeb72f289e92b0f39e1c5a3",
+      "original_sha256": "f47cb4ab62b059e2c6ada4c2890192de799ddbdbbfbffa2e869d8bf3239fd7c7",
+      "export_sha256": "f47cb4ab62b059e2c6ada4c2890192de799ddbdbbfbffa2e869d8bf3239fd7c7",
+      "modified": false
+    },
+    {
+      "path": "worker/migration.js",
+      "original_git_blob": "2183f50531cb136ee10890c014c6319a21bbbdef",
+      "original_sha256": "4a1dcb411a4d2f4dc3e1c35e41d0bbdead9d78f4c031168eb7c9844a1b41ac15",
+      "export_sha256": "4a1dcb411a4d2f4dc3e1c35e41d0bbdead9d78f4c031168eb7c9844a1b41ac15",
+      "modified": false
+    },
+    {
+      "path": "worker/nadi-auth-page.js",
+      "original_git_blob": "7ba1d2cce73846659b5b618099f7b855346e810b",
+      "original_sha256": "fd9335fc20f6a10ffd88c478c703d2d94c1d47f23b27c28559ef5abe8a13e8dd",
+      "export_sha256": "fd9335fc20f6a10ffd88c478c703d2d94c1d47f23b27c28559ef5abe8a13e8dd",
+      "modified": false
+    },
+    {
+      "path": "worker/nadi-auth-ui.js",
+      "original_git_blob": "acee1b927c571f86cc0a462a361d1ffb6bc5bffe",
+      "original_sha256": "7cfb5823ea66f35a8aecfe901b574b4c05299e5ca37d0c5650afbea90f008189",
+      "export_sha256": "7cfb5823ea66f35a8aecfe901b574b4c05299e5ca37d0c5650afbea90f008189",
+      "modified": false
+    },
+    {
+      "path": "worker/nadi-auth.css",
+      "original_git_blob": "84f8d81aec9a37f7511242bbb33ee615501c98a1",
+      "original_sha256": "b12cac8d98e63ebde7059b9416e8e89c5a8b0dba9926c378c470300d373c8284",
+      "export_sha256": "b12cac8d98e63ebde7059b9416e8e89c5a8b0dba9926c378c470300d373c8284",
+      "modified": false
+    },
+    {
+      "path": "worker/nadi-auth.js",
+      "original_git_blob": "86ffdc03f5f329fe4470a2c928da62daddff2277",
+      "original_sha256": "b00c517da8ce13645c6b07a1c2dac727fc40a6fd3c8987142b93b14ca12946d8",
+      "export_sha256": "b00c517da8ce13645c6b07a1c2dac727fc40a6fd3c8987142b93b14ca12946d8",
+      "modified": false
+    },
+    {
+      "path": "worker/nadi-invitations.js",
+      "original_git_blob": "c3b7e672ea05031dc1b610c321a8ff583b208f78",
+      "original_sha256": "89a717237a1922e36013111f3fc4c20907df9e8f22c00bd5be5832432c59c19a",
+      "export_sha256": "89a717237a1922e36013111f3fc4c20907df9e8f22c00bd5be5832432c59c19a",
+      "modified": false
+    },
+    {
+      "path": "worker/nadi-notifications.js",
+      "original_git_blob": "ab9322c5e43ab9f45d09599ae4ae719d58549227",
+      "original_sha256": "a3e16f8259c4a3679c2778e0cc84cd9a63d871a1e65fbc8d1ce98b3ce96f7bad",
+      "export_sha256": "a3e16f8259c4a3679c2778e0cc84cd9a63d871a1e65fbc8d1ce98b3ce96f7bad",
+      "modified": false
+    },
+    {
+      "path": "worker/nadi-reset-page.js",
+      "original_git_blob": "8a768ac35cedbe25678bca8f68a7202b43e8e062",
+      "original_sha256": "f2562ea920b547c70ff417f4be776c4068ade3573489a7fa28e9859ca75f2f45",
+      "export_sha256": "f2562ea920b547c70ff417f4be776c4068ade3573489a7fa28e9859ca75f2f45",
+      "modified": false
+    },
+    {
+      "path": "worker/nadi-session.js",
+      "original_git_blob": "84e9d9c13ea20bce5b10880bc3b6e40a160df6b0",
+      "original_sha256": "6190fa5faaa171689f0ec16985bdfa5442957f7866fbc0dd20fe64f942a61753",
+      "export_sha256": "6190fa5faaa171689f0ec16985bdfa5442957f7866fbc0dd20fe64f942a61753",
+      "modified": false
+    },
+    {
+      "path": "worker/notification-ui.css",
+      "original_git_blob": "2cd7b933fcf15e9855b35d5a1cfe425da54034af",
+      "original_sha256": "cbd21fa631a87b78f070a47dc7b7ffbafe019e3b0728c8775c884bb27743b3f0",
+      "export_sha256": "cbd21fa631a87b78f070a47dc7b7ffbafe019e3b0728c8775c884bb27743b3f0",
+      "modified": false
+    },
+    {
+      "path": "worker/notification-ui.js",
+      "original_git_blob": "675737f762c7b1416eaf22195d5633ec9fbe9d2f",
+      "original_sha256": "0e5cda94c2e3621e3da26a0ae530afa0772962c0c5ec14f8fc302f272af9acff",
+      "export_sha256": "0e5cda94c2e3621e3da26a0ae530afa0772962c0c5ec14f8fc302f272af9acff",
+      "modified": false
+    },
+    {
+      "path": "worker/payroll-api.js",
+      "original_git_blob": "04bff844c9b1eee9c3eb9cb29dba9eb7997d3720",
+      "original_sha256": "a1d2e8d6e4faf6eb2b3a29c863edc27ef16d558b5d39705a118c09ad6c721474",
+      "export_sha256": "a1d2e8d6e4faf6eb2b3a29c863edc27ef16d558b5d39705a118c09ad6c721474",
+      "modified": false
+    },
+    {
+      "path": "worker/payroll-calculation.js",
+      "original_git_blob": "aaf2ccf3bd8d045788f7a697b2bd7ebb6bbf50af",
+      "original_sha256": "0ef7e42c981b12faafc6ac82f5186ca6a3d9936ebf4665e2bf69e7e32a25f0fa",
+      "export_sha256": "0ef7e42c981b12faafc6ac82f5186ca6a3d9936ebf4665e2bf69e7e32a25f0fa",
+      "modified": false
+    },
+    {
+      "path": "worker/payroll-core.js",
+      "original_git_blob": "3089a85dd2a26ba8fc7eac7880ab30ac7fec88de",
+      "original_sha256": "91d07384661bbe606b2297e0fdeefde21a537a56f6d2c8b2fe7fa772d74e76c5",
+      "export_sha256": "91d07384661bbe606b2297e0fdeefde21a537a56f6d2c8b2fe7fa772d74e76c5",
+      "modified": false
+    },
+    {
+      "path": "worker/payroll-documents.js",
+      "original_git_blob": "3bb1978807b539bd5f5aded2401bdccce61e63c3",
+      "original_sha256": "0411a9a504ecff9e33d4eb42e8c2e11f3331fbb9b967e3e3f6b455d3cc93c1c4",
+      "export_sha256": "0411a9a504ecff9e33d4eb42e8c2e11f3331fbb9b967e3e3f6b455d3cc93c1c4",
+      "modified": false
+    },
+    {
+      "path": "worker/payroll-foundation.js",
+      "original_git_blob": "be73adbc1b8a0ffbc8fbb599a2a8cf8a843b749b",
+      "original_sha256": "e6c4459a2945803827d9104e67b0c93a57c7afab20964efa6d7f7d1526eb80cd",
+      "export_sha256": "e6c4459a2945803827d9104e67b0c93a57c7afab20964efa6d7f7d1526eb80cd",
+      "modified": false
+    },
+    {
+      "path": "worker/payroll-governance.js",
+      "original_git_blob": "c0ee2c31f8ce566c9b190ccd1f9dd9bbdf456fd6",
+      "original_sha256": "19313c3a4ee7b94625362364d39f8205789f24672582875db751a60db8a79ec0",
+      "export_sha256": "19313c3a4ee7b94625362364d39f8205789f24672582875db751a60db8a79ec0",
+      "modified": false
+    },
+    {
+      "path": "worker/payroll-integration.js",
+      "original_git_blob": "96b970cdd6478b4b1bff2825c7296bbcdf4de47e",
+      "original_sha256": "126af1527e41b66c659e345334dedd21904d8bbf7b58c09fb5b7f6648d5f6db2",
+      "export_sha256": "126af1527e41b66c659e345334dedd21904d8bbf7b58c09fb5b7f6648d5f6db2",
+      "modified": false
+    },
+    {
+      "path": "worker/payroll-notifications.js",
+      "original_git_blob": "026b591c3010257752aaea71d64df2b52e910cc2",
+      "original_sha256": "2c39904ca741ee971d915dad968b0fb4313c0df49ebdee31180ccef24a69431b",
+      "export_sha256": "2c39904ca741ee971d915dad968b0fb4313c0df49ebdee31180ccef24a69431b",
+      "modified": false
+    },
+    {
+      "path": "worker/payroll-processing.js",
+      "original_git_blob": "a77a0c578ed0e933f3bf4a6e4372dcfdd98811f9",
+      "original_sha256": "c97b9ef445ff31261a39d41fe6117caf80f382779254a04117a056e5dba5f470",
+      "export_sha256": "c97b9ef445ff31261a39d41fe6117caf80f382779254a04117a056e5dba5f470",
+      "modified": false
+    },
+    {
+      "path": "worker/payroll-reports.js",
+      "original_git_blob": "b3006c60130a1c3a7588fdb8f1daf63df75d839c",
+      "original_sha256": "912d3bc195598a3baae4b322de3aac47a9fdd5615587b4e036cd5b6716b161da",
+      "export_sha256": "912d3bc195598a3baae4b322de3aac47a9fdd5615587b4e036cd5b6716b161da",
+      "modified": false
+    },
+    {
+      "path": "worker/payroll-schedules.js",
+      "original_git_blob": "82f64c31aa5b3f3de13096b4b57665fe484ca724",
+      "original_sha256": "6c8e107f96327150d504a6af18e6d28a89ee85fd10fb0f256df341c9d9587bae",
+      "export_sha256": "6c8e107f96327150d504a6af18e6d28a89ee85fd10fb0f256df341c9d9587bae",
+      "modified": false
+    },
+    {
+      "path": "worker/payroll-selfservice.js",
+      "original_git_blob": "8a3485819bf020e7a3243b200ffa9f88ef93174c",
+      "original_sha256": "351f663cae9d5bd62797347e4b59037fdb249c2844a4f9d52c18d67ab4c3f247",
+      "export_sha256": "351f663cae9d5bd62797347e4b59037fdb249c2844a4f9d52c18d67ab4c3f247",
+      "modified": false
+    },
+    {
+      "path": "worker/payroll-statutory.js",
+      "original_git_blob": "bea0b537a1fa2f4c28eb751ef9d9968321e63dfe",
+      "original_sha256": "35f255379b8c9e2f910e940b5d5f29305dd9f17441eb2a0a7ea9f9e4fb3b85ca",
+      "export_sha256": "35f255379b8c9e2f910e940b5d5f29305dd9f17441eb2a0a7ea9f9e4fb3b85ca",
+      "modified": false
+    },
+    {
+      "path": "worker/payroll.css",
+      "original_git_blob": "19aa0184f6a2fcaed4a56fe045a8703c186475f1",
+      "original_sha256": "f056f1d3879acbe0b347fe6c72d311e028f2263a07587a7298a4ba9f5826ebfb",
+      "export_sha256": "f056f1d3879acbe0b347fe6c72d311e028f2263a07587a7298a4ba9f5826ebfb",
+      "modified": false
+    },
+    {
+      "path": "worker/payroll.html",
+      "original_git_blob": "360310e46f2ae395296f5b78b451f1eb22d1573f",
+      "original_sha256": "5fc6b315327632e72c9369dac32b5536da78fdf4bb7e053e2eb212a554fc93df",
+      "export_sha256": "5fc6b315327632e72c9369dac32b5536da78fdf4bb7e053e2eb212a554fc93df",
+      "modified": false
+    },
+    {
+      "path": "worker/payroll.js",
+      "original_git_blob": "5130a2bc73d531a3a54023c86e381492f391041c",
+      "original_sha256": "5c4721832601e795bb951158deb4cfb3fd044d88a7ffa89ded4e88ffaf127087",
+      "export_sha256": "5c4721832601e795bb951158deb4cfb3fd044d88a7ffa89ded4e88ffaf127087",
+      "modified": false
+    },
+    {
+      "path": "worker/pc.css",
+      "original_git_blob": "5885a99daf525c81f8aaa3b6f9d2fa65d42e6a6a",
+      "original_sha256": "ac97221e7672b59383b195bc37eaf2efdb5ec2371827d5f7f9f357e15bf3a9aa",
+      "export_sha256": "ac97221e7672b59383b195bc37eaf2efdb5ec2371827d5f7f9f357e15bf3a9aa",
+      "modified": false
+    },
+    {
+      "path": "worker/pc.html",
+      "original_git_blob": "9a6034f4db4ee67be5207cd46bb93dcdacd60969",
+      "original_sha256": "59f86c21e7aebe3c2638b424ef9f6d136ce577c92b8ccd4aa1c2a708fb1542a0",
+      "export_sha256": "59f86c21e7aebe3c2638b424ef9f6d136ce577c92b8ccd4aa1c2a708fb1542a0",
+      "modified": false
+    },
+    {
+      "path": "worker/pc.js",
+      "original_git_blob": "98050f781865d5caa5816a65f354220db78491be",
+      "original_sha256": "a8161ea3516d50c830ce822abf8b605cfbf9fe5d290423cd08b94aa25d6e6545",
+      "export_sha256": "a8161ea3516d50c830ce822abf8b605cfbf9fe5d290423cd08b94aa25d6e6545",
+      "modified": false
+    },
+    {
+      "path": "worker/people-hub-api.js",
+      "original_git_blob": "7c56a5192f351b5849c57f767f517a98865eae1b",
+      "original_sha256": "6be58656339f2cdc5b78c3aa5bae428830ebf9343fef4d45247d1b36492d5566",
+      "export_sha256": "6be58656339f2cdc5b78c3aa5bae428830ebf9343fef4d45247d1b36492d5566",
+      "modified": false
+    },
+    {
+      "path": "worker/people-hub.css",
+      "original_git_blob": "f35af60a568ebad1ad1dcdfb56dd921f576f3d20",
+      "original_sha256": "a2dea5da57cad1d3397801534f6115930048f5497fdad6224aefd117bc939737",
+      "export_sha256": "a2dea5da57cad1d3397801534f6115930048f5497fdad6224aefd117bc939737",
+      "modified": false
+    },
+    {
+      "path": "worker/people-hub.html",
+      "original_git_blob": "7b0ebf6eb0fca1acf17b4671114a6ad8d249e02f",
+      "original_sha256": "42992ffa0fa99dccf15d526ffccd2bcdf271446608cd1db5c59565612c528c52",
+      "export_sha256": "42992ffa0fa99dccf15d526ffccd2bcdf271446608cd1db5c59565612c528c52",
+      "modified": false
+    },
+    {
+      "path": "worker/people-hub.js",
+      "original_git_blob": "4c5647db691bc33025d03e8c6096e13baca415ac",
+      "original_sha256": "cb437fa7678feae105ec4b22854d16f23c183e949af4ffbc9953052567cd2ee3",
+      "export_sha256": "cb437fa7678feae105ec4b22854d16f23c183e949af4ffbc9953052567cd2ee3",
+      "modified": false
+    },
+    {
+      "path": "worker/policies-ui.js",
+      "original_git_blob": "fb17de0b05d06c82d8ba776b1d7e6f14f259e64c",
+      "original_sha256": "759e7e9c24b75542ee50efcdc4ebed72e8f1bc239ae3d93327e00fec64520934",
+      "export_sha256": "759e7e9c24b75542ee50efcdc4ebed72e8f1bc239ae3d93327e00fec64520934",
+      "modified": false
+    },
+    {
+      "path": "worker/policies.css",
+      "original_git_blob": "da810bf2834dd10e825edb908f3c80d3b3005749",
+      "original_sha256": "e3713e57d22c0a51c77a535b02a58bacdf56a218e449d602760bc3bc8b99e22d",
+      "export_sha256": "e3713e57d22c0a51c77a535b02a58bacdf56a218e449d602760bc3bc8b99e22d",
+      "modified": false
+    },
+    {
+      "path": "worker/policy-catalog.json",
+      "original_git_blob": "df8ef9d302e2967a7d2251392fc344f8311b5d77",
+      "original_sha256": "f82809863b61b0bf51144efd30aca93fc4ca7aa3cbd655ff1b0ba24064522da8",
+      "export_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "modified": true,
+      "reason": "Withheld institutional policy catalogue and full-text search data; retained an empty catalogue."
+    },
+    {
+      "path": "worker/policy-library.js",
+      "original_git_blob": "b5cb2ea41096de35d3ba9e8159473e7a3fe32f7a",
+      "original_sha256": "da32bb2a823d580300ece04a764d9c9db7e2781d53af32077887f02f88198260",
+      "export_sha256": "da32bb2a823d580300ece04a764d9c9db7e2781d53af32077887f02f88198260",
+      "modified": false
+    },
+    {
+      "path": "worker/portal-navigation.js",
+      "original_git_blob": "90ec76a4b544d9562d4767f18cc0ea44b6dfe5fe",
+      "original_sha256": "0edf19d710c1156d7f7a3945815cf4252c5ae32c4ac69754b42460b243c071bf",
+      "export_sha256": "0edf19d710c1156d7f7a3945815cf4252c5ae32c4ac69754b42460b243c071bf",
+      "modified": false
+    },
+    {
+      "path": "worker/position-api.js",
+      "original_git_blob": "d1d75dcd0b295f10aae85cc2611628649f1f2d8d",
+      "original_sha256": "6c8f81cda29344d389b7262e72678bceed77e3b65f566b1360694154e44b5681",
+      "export_sha256": "6c8f81cda29344d389b7262e72678bceed77e3b65f566b1360694154e44b5681",
+      "modified": false
+    },
+    {
+      "path": "worker/position-core.js",
+      "original_git_blob": "353b6684d786e32ba29376af2bd43d5272c8f15b",
+      "original_sha256": "bd4cb05a31b2e0f898992ad0eaf120f6a97e490f52106dae68d79770d665566d",
+      "export_sha256": "bd4cb05a31b2e0f898992ad0eaf120f6a97e490f52106dae68d79770d665566d",
+      "modified": false
+    },
+    {
+      "path": "worker/position-model.js",
+      "original_git_blob": "d127fdc89be075dfce71a39bd54bd7e1e6312ce8",
+      "original_sha256": "8ca53a04d051297f42f950872bd790e11aecd574f2f6c9e6cea95c7c26cb29dd",
+      "export_sha256": "8ca53a04d051297f42f950872bd790e11aecd574f2f6c9e6cea95c7c26cb29dd",
+      "modified": false
+    },
+    {
+      "path": "worker/position-sheets.js",
+      "original_git_blob": "022fda40cd5eb28160bb6341e4ceee041a02c904",
+      "original_sha256": "8229395ddf46c8ba7996787fe526c9fb77dc3e48fcac3f5813d3787d1b21dbb4",
+      "export_sha256": "8229395ddf46c8ba7996787fe526c9fb77dc3e48fcac3f5813d3787d1b21dbb4",
+      "modified": false
+    },
+    {
+      "path": "worker/position-sources.js",
+      "original_git_blob": "fa5e30d58f55097e73bf0085bbbd03d3ed282913",
+      "original_sha256": "a01c8e7a131cee91e70af76f85ab61e54f7d1e077cb57b3b009745884e767db4",
+      "export_sha256": "94de20ab1a80af39b22e25fec6d7b5716b1831cf38522c3d0f2f82a179ac8a82",
+      "modified": true,
+      "reason": "Withheld private institutional job-description source records; retained an empty interface."
+    },
+    {
+      "path": "worker/position-sync.js",
+      "original_git_blob": "ec1491cbb6da2837e473b7c1b56f3f61516b44c1",
+      "original_sha256": "2cedbc98d3ec0e3dc80f2354ba6d62b64ce1fa5cee5d26a31072bf5c4e4350ec",
+      "export_sha256": "2cedbc98d3ec0e3dc80f2354ba6d62b64ce1fa5cee5d26a31072bf5c4e4350ec",
+      "modified": false
+    },
+    {
+      "path": "worker/positions.css",
+      "original_git_blob": "64ebafabb683e7e6e55ac869263f8a08d955ee73",
+      "original_sha256": "fb67b8b9d75896656399a1d2b981289236b8936b0586a82e45cb1c133be16d36",
+      "export_sha256": "fb67b8b9d75896656399a1d2b981289236b8936b0586a82e45cb1c133be16d36",
+      "modified": false
+    },
+    {
+      "path": "worker/positions.html",
+      "original_git_blob": "a58421984b48d3c500269c42f4e7274d346af0e8",
+      "original_sha256": "aa2790c5d3b5951a5eef4c87093a9805e8b80b87ad9753ec1da4ecbcd7cf5d11",
+      "export_sha256": "aa2790c5d3b5951a5eef4c87093a9805e8b80b87ad9753ec1da4ecbcd7cf5d11",
+      "modified": false
+    },
+    {
+      "path": "worker/positions.js",
+      "original_git_blob": "c23edea2d910ddd78b1d39de34692c9f70aa90d8",
+      "original_sha256": "a213cdf1e5143a5f0630df0461b745bd6e1c50cc721046add9a44db89feb016e",
+      "export_sha256": "a213cdf1e5143a5f0630df0461b745bd6e1c50cc721046add9a44db89feb016e",
+      "modified": false
+    },
+    {
+      "path": "worker/profile-api.js",
+      "original_git_blob": "70e1495c027d7a3acc008ded0269ca45903d64e6",
+      "original_sha256": "8dd65722e424fbb20c1105e339f912bab0b90d16060ea3f0ed90a848ae355778",
+      "export_sha256": "8dd65722e424fbb20c1105e339f912bab0b90d16060ea3f0ed90a848ae355778",
+      "modified": false
+    },
+    {
+      "path": "worker/profile-enrichment.js",
+      "original_git_blob": "7b879757ce17643a1a0b9f8e92994a11c2cafd23",
+      "original_sha256": "1b0fe8f26542b568c20a11bcaddbef8e059bc0bccb774795a88cc2744855d7e1",
+      "export_sha256": "1b0fe8f26542b568c20a11bcaddbef8e059bc0bccb774795a88cc2744855d7e1",
+      "modified": false
+    },
+    {
+      "path": "worker/profile-record-ids.js",
+      "original_git_blob": "1df3d5dddbe098a29b77ed3b3508ecbe70cefdf4",
+      "original_sha256": "5d270cea1e930c6bb8bc847fce2a69293ace9dec9df55f272f26571f62dcacef",
+      "export_sha256": "5d270cea1e930c6bb8bc847fce2a69293ace9dec9df55f272f26571f62dcacef",
+      "modified": false
+    },
+    {
+      "path": "worker/profile-schema.js",
+      "original_git_blob": "55f3a2c1454b7630a62d30ed38450499e1ca6744",
+      "original_sha256": "275ac31bf838b49288aa1540f1afd94064ea52ae8ad9ad31315be7cdb694da46",
+      "export_sha256": "275ac31bf838b49288aa1540f1afd94064ea52ae8ad9ad31315be7cdb694da46",
+      "modified": false
+    },
+    {
+      "path": "worker/profile.css",
+      "original_git_blob": "58af16e06c782790833cca4474c5d418b6b1abd9",
+      "original_sha256": "0a50be6e26b5cc18ad2489f34f3cee57d705818b731e9bc6022f337a71d0ca3e",
+      "export_sha256": "0a50be6e26b5cc18ad2489f34f3cee57d705818b731e9bc6022f337a71d0ca3e",
+      "modified": false
+    },
+    {
+      "path": "worker/profile.html",
+      "original_git_blob": "1befa31d0497c6fe4df45a7e3ecbae17a970c4d0",
+      "original_sha256": "6b637ec2dffa26bf8ecef6a8a459e93dc3a29dbfbb30beee950fb8c3ef218703",
+      "export_sha256": "6b637ec2dffa26bf8ecef6a8a459e93dc3a29dbfbb30beee950fb8c3ef218703",
+      "modified": false
+    },
+    {
+      "path": "worker/profile.js",
+      "original_git_blob": "42ec0a753236b2a5c1822eab9c12cc4b3bc04e01",
+      "original_sha256": "c1f13e742e96588d6a74644e32720d1d3242737559b450b129792af5f5e8ccc8",
+      "export_sha256": "c1f13e742e96588d6a74644e32720d1d3242737559b450b129792af5f5e8ccc8",
+      "modified": false
+    },
+    {
+      "path": "worker/qr-generator-LICENSE.txt",
+      "original_git_blob": "148c0e02a0664adf15eb12f4de79370e732cc306",
+      "original_sha256": "d4febcb17476df7d820522a5d9a7b9bc52e959506a77d6508dabb57caeee53aa",
+      "export_sha256": "d4febcb17476df7d820522a5d9a7b9bc52e959506a77d6508dabb57caeee53aa",
+      "modified": false
+    },
+    {
+      "path": "worker/qr-generator.js",
+      "original_git_blob": "76889b589ec831dd9b791601f6592793356ce9cd",
+      "original_sha256": "18ae399f81182bc9de916e9c77b195df20cc58d6f2d55a62b085a299f1bf1780",
+      "export_sha256": "18ae399f81182bc9de916e9c77b195df20cc58d6f2d55a62b085a299f1bf1780",
+      "modified": false
+    },
+    {
+      "path": "worker/sheets-client.js",
+      "original_git_blob": "6abc0277bec425f33ba49b48f5c21c02d5ff78f5",
+      "original_sha256": "14c8accd32ab1855cc67b57ddff3b8843c8d9b6f6715fbda0fdfe0a831754091",
+      "export_sha256": "14c8accd32ab1855cc67b57ddff3b8843c8d9b6f6715fbda0fdfe0a831754091",
+      "modified": false
+    },
+    {
+      "path": "worker/sheets-field-map.js",
+      "original_git_blob": "8d257c694c87b94c291094dd81f204f44bba6797",
+      "original_sha256": "4f9dc626416203f154396d6c4519dd8508ffc97ecb07f89543acf1239ecd4669",
+      "export_sha256": "4f9dc626416203f154396d6c4519dd8508ffc97ecb07f89543acf1239ecd4669",
+      "modified": false
+    },
+    {
+      "path": "worker/sheets-headers.js",
+      "original_git_blob": "f75d91197a1b1dc59f1216516e0ddc3990e4ac0c",
+      "original_sha256": "1bcb0f3507832730f30f3ab07c32af20960ce9dedf3e033eedb009df7267d650",
+      "export_sha256": "1bcb0f3507832730f30f3ab07c32af20960ce9dedf3e033eedb009df7267d650",
+      "modified": false
+    },
+    {
+      "path": "worker/sheets-model.js",
+      "original_git_blob": "78113a659ce9a6de5f9643828368c7ae878a1184",
+      "original_sha256": "2e9a43e480dbe3a835c5d501642523bd4f0445a88b2770d8142aeac482ef40ac",
+      "export_sha256": "2e9a43e480dbe3a835c5d501642523bd4f0445a88b2770d8142aeac482ef40ac",
+      "modified": false
+    },
+    {
+      "path": "worker/sheets-sync-ui.js",
+      "original_git_blob": "841c168c53b35fd3d25fc0fbec0066818e60e1c2",
+      "original_sha256": "7f38bef7b7c3680262640ddfff88d0821301c03cec4be90fd6dee5fd19d0f544",
+      "export_sha256": "7f38bef7b7c3680262640ddfff88d0821301c03cec4be90fd6dee5fd19d0f544",
+      "modified": false
+    },
+    {
+      "path": "worker/sheets-sync.css",
+      "original_git_blob": "aec517587cd6c8226cbf282610b5c6391fb9c9ea",
+      "original_sha256": "96444251cb9de03a671e19df84102b4ea217afbd55bbe416a8803c183421d0e9",
+      "export_sha256": "96444251cb9de03a671e19df84102b4ea217afbd55bbe416a8803c183421d0e9",
+      "modified": false
+    },
+    {
+      "path": "worker/sheets-sync.html",
+      "original_git_blob": "bd903f669c3cc555f9a49926ada0c7ef97008f2f",
+      "original_sha256": "cfaf5e95264c9c295f3fb3d082ac87fdbff5e8b4b719cdbe3669daebff4f8eb5",
+      "export_sha256": "cfaf5e95264c9c295f3fb3d082ac87fdbff5e8b4b719cdbe3669daebff4f8eb5",
+      "modified": false
+    },
+    {
+      "path": "worker/sheets-sync.js",
+      "original_git_blob": "ff06a9fb0bf6faf72921de530243d86ec53b82f0",
+      "original_sha256": "13d052f8400e6d443acdbf4939e8fe5a62858a82205d08ad820e65e473bb2fd1",
+      "export_sha256": "13d052f8400e6d443acdbf4939e8fe5a62858a82205d08ad820e65e473bb2fd1",
+      "modified": false
+    },
+    {
+      "path": "worker/utilities.css",
+      "original_git_blob": "cf46b5e9d02c5fe22bc5f9cb64efcd35b9fac277",
+      "original_sha256": "f726ebdaf28c612caaaf19be7968f1d71d00764824bb853f9cadd260cfd0a5bb",
+      "export_sha256": "f726ebdaf28c612caaaf19be7968f1d71d00764824bb853f9cadd260cfd0a5bb",
+      "modified": false
+    },
+    {
+      "path": "worker/vendor/bcryptjs.LICENSE",
+      "original_git_blob": "6ffc6d982945fa5ea6d5685ce14f85c88308b42a",
+      "original_sha256": "095017ef78d2c818465eea7d71ebed918eb415aee9d38d36ce0b1240ae5781ee",
+      "export_sha256": "095017ef78d2c818465eea7d71ebed918eb415aee9d38d36ce0b1240ae5781ee",
+      "modified": false
+    },
+    {
+      "path": "worker/vendor/bcryptjs.mjs",
+      "original_git_blob": "4a19b3d12f433624ba5159f857d6a1ea0cb945f1",
+      "original_sha256": "e2f9a84ca97cf0330da7af00f4b93dd4672f391c912306f7047d244cc19e0a5b",
+      "export_sha256": "e2f9a84ca97cf0330da7af00f4b93dd4672f391c912306f7047d244cc19e0a5b",
+      "modified": false
+    },
+    {
+      "path": "worker/vendor/pdf-lib.LICENSE.md",
+      "original_git_blob": "7a237e68e37abe7ac934c4e89f49e1a94f161f33",
+      "original_sha256": "f2c9fc00fdb66eb99ac156ba52d734af66d8d309f65753ae809ad34ee2883bcb",
+      "export_sha256": "f2c9fc00fdb66eb99ac156ba52d734af66d8d309f65753ae809ad34ee2883bcb",
+      "modified": false
+    },
+    {
+      "path": "worker/vendor/pdf-lib.mjs",
+      "original_git_blob": "861bff489601cc6ba73313546871b09f8e54278b",
+      "original_sha256": "72c052d97b4d5d9fa6cdbdcb7ad709f03d4ddb1122390cb3afeba4d88651d969",
+      "export_sha256": "72c052d97b4d5d9fa6cdbdcb7ad709f03d4ddb1122390cb3afeba4d88651d969",
+      "modified": false
+    },
+    {
+      "path": "worker/workforce-api.js",
+      "original_git_blob": "8b24dbc33ba76c72006d77ab41e046ce8f3acffb",
+      "original_sha256": "8b65994d8b91385924fd203f641cdde8239d63d524c74c783d513c7af964e3d4",
+      "export_sha256": "8b65994d8b91385924fd203f641cdde8239d63d524c74c783d513c7af964e3d4",
+      "modified": false
+    },
+    {
+      "path": "worker/workforce.css",
+      "original_git_blob": "79c12619343f89fc5e99986bd78d8802cc4c1d0c",
+      "original_sha256": "2e758377bd45494fc6c5bab91cb79f36bc8e078ac1dd6f4e16b0f7b63036e08e",
+      "export_sha256": "2e758377bd45494fc6c5bab91cb79f36bc8e078ac1dd6f4e16b0f7b63036e08e",
+      "modified": false
+    },
+    {
+      "path": "worker/workforce.html",
+      "original_git_blob": "fefbe19e05b69019d7d5f6753de70fa80b15fcfb",
+      "original_sha256": "ee116db953675aa635052302d44f092d6c977ee074029dbe1a9453ccbb267415",
+      "export_sha256": "ee116db953675aa635052302d44f092d6c977ee074029dbe1a9453ccbb267415",
+      "modified": false
+    },
+    {
+      "path": "worker/workforce.js",
+      "original_git_blob": "dd62f9cc5219d6e3506cf5d52cae6bba35c9f254",
+      "original_sha256": "d4f48b3afdc4fb7a1417d2778a4d5265904bf20bd51cf3d3d98ba81954b99db6",
+      "export_sha256": "d4f48b3afdc4fb7a1417d2778a4d5265904bf20bd51cf3d3d98ba81954b99db6",
+      "modified": false
+    }
+  ],
+  "validation": {
+    "local_worker_build": "passed",
+    "focused_checks": 391,
+    "suites": [
+      {
+        "name": "lifecycle-integration",
+        "checks": 77
+      },
+      {
+        "name": "profiles",
+        "checks": 49
+      },
+      {
+        "name": "employee-eligibility",
+        "checks": 114
+      },
+      {
+        "name": "core-integration",
+        "checks": 55
+      },
+      {
+        "name": "hr-service",
+        "checks": 96
+      }
+    ],
+    "file_manifest_verified": true,
+    "legacy_directory_names_and_emails_absent": true,
+    "private_data_interfaces_empty": true,
+    "standard_secret_signature_matches": 0,
+    "production_data_used_in_tests": false,
+    "original_checkout_unchanged": true
+  }
+}

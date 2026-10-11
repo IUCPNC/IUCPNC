@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import worker from '../dist/server/index.js';
+import {fixture} from './test-profiles.mjs';
+const {env,sqlite}=fixture();env.MIGRATION_PENDING='true';env.MIGRATION_IMPORT_KEY='test-only-migration-secret';
+const record={employee:{employeeId:'MIG-001',employeeName:'Migration Example',email:'migration@example.test',position:'Executive',department:'Finance',appraiser:'Manager'},sections:{personal:{legalName:'Migration Example',nric:'TEST-IDENTIFIER'},learning:{cpdTarget:192}},active:'No'};
+const call=(body=record,key=env.MIGRATION_IMPORT_KEY)=>worker.fetch(new Request('https://example.test/api/migration/employee',{method:'POST',headers:{'x-migration-key':key,'content-type':'application/json'},body:JSON.stringify(body)}),env,{});
+assert.equal((await call(record,'wrong')).status,403);
+assert.equal((await call({...record,employee:{...record.employee,email:''}})).status,400);
+let result=await call();assert.equal(result.status,200,await result.clone().text());assert.equal((await result.json()).importedSections,2);
+assert.equal(sqlite.prepare("SELECT active FROM employees WHERE employee_id='MIG-001'").get().active,0);
+result=await call();assert.equal(result.status,200,await result.clone().text());assert.equal((await result.json()).importedSections,0);
+assert.equal((await call({...record,employee:{...record.employee,department:'Changed'}})).status,409);
+env.MIGRATION_PENDING='false';assert.equal((await call()).status,403);
+assert.equal(sqlite.prepare('PRAGMA foreign_key_check').all().length,0);
+assert.equal(sqlite.prepare("SELECT COUNT(*) n FROM profile_audit WHERE action='authorised_sheet_import'").get().n,2);
+sqlite.close();console.log('Migration authorization, validation, idempotency, inactive access, conflict and audit checks passed.');

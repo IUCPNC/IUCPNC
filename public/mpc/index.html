@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#341143" />
+  <title>IUC Monthly Performance Check-In</title>
+  <meta name="description" content="IUC Monthly Performance Check-In workspace for KPI, CATALYST values, CPD, social media engagement, actions and acknowledgment." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <img src="assets/iuc-logo.png" alt="Innovative University College" />
+      <div><strong>Monthly Performance Check-In</strong><span>My private employee workspace</span></div>
+    </div>
+    <div class="privacy">▣ <span>Performance information is handled confidentially</span></div>
+  <a href="/employee/profile" style="color:inherit;margin-left:16px">My Employee Profile →</a></header>
+
+  <main class="shell">
+    <aside class="rail">
+      <div class="rail-intro">
+        <span class="step-pill" id="stepPill">Dashboard</span>
+        <h1>One clear record of each month.</h1>
+        <p>Complete the four scorecard components, agree next steps and confirm the discussion.</p>
+      </div>
+      <nav id="stepNav" aria-label="MPC sections"></nav>
+      <div class="rail-footer">
+        <button class="text-button" id="guideButton" type="button">Rating guide & settings</button>
+        <span>Secure monthly drafts and history</span>
+      </div>
+    </aside>
+
+    <section class="workspace" aria-live="polite">
+      <div class="workspace-head">
+        <div>
+          <p class="eyebrow" id="eyebrow">ANNUAL OVERVIEW</p>
+          <h2 id="viewTitle">Your MPC at a glance</h2>
+        </div>
+        <div class="head-actions">
+          <label class="month-picker"><span>Review month</span><select id="monthSelect"></select></label>
+          <button class="secondary" id="saveButton" type="button">Save draft</button>
+        </div>
+      </div>
+      <div class="progress-wrap"><div class="progress"><span id="progressBar"></span></div><b id="progressLabel">0% complete</b></div>
+      <div id="view"></div>
+      <footer class="workspace-footer">
+        <span id="saveState">No unsaved changes</span>
+        <div>
+          <button class="secondary" id="backButton" type="button">Back</button>
+          <button class="primary" id="nextButton" type="button">Begin check-in</button>
+        </div>
+      </footer>
+    </section>
+  </main>
+
+  <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
+  <aside class="drawer" id="guideDrawer" aria-hidden="true" aria-label="Rating guide and settings">
+    <div class="drawer-head"><div><p class="eyebrow">REFERENCE</p><h2>Rating guide & settings</h2></div><button class="icon-button" id="closeGuide" type="button" aria-label="Close guide">×</button></div>
+    <div id="guideContent"></div>
+  </aside>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>

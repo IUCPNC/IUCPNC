@@ -1,0 +1,17 @@
+import fs from 'node:fs/promises';
+import {generateSQLiteDrizzleJson,generateSQLiteMigration} from 'drizzle-kit/api';
+import * as core from '../db/schema.ts';
+import * as profiles from '../db/profile-schema.ts';
+import * as management from '../db/management-schema.ts';
+import * as hub from '../db/people-hub-schema.ts';
+const previous=JSON.parse(await fs.readFile('drizzle/meta/0004_snapshot.json','utf8'));
+const current=await generateSQLiteDrizzleJson({...core,...profiles,...management,...hub},previous.id);
+const sql=await generateSQLiteMigration(previous,current);
+if(sql.length!==2||sql.some(s=>!/^CREATE TABLE `(organisation_state|employee_import_records)`/.test(s)))throw new Error('Unexpected migration');
+await fs.writeFile('drizzle/0005_people_hub.sql',sql.join('\n--> statement-breakpoint\n')+'\n');
+await fs.writeFile('drizzle/meta/0005_snapshot.json',JSON.stringify(current,null,2)+'\n');
+const journal=JSON.parse(await fs.readFile('drizzle/meta/_journal.json','utf8'));
+if(journal.entries.length!==5)throw new Error('Migration already generated');
+journal.entries.push({idx:5,version:'6',when:1790812800000,tag:'0005_people_hub',breakpoints:true});
+await fs.writeFile('drizzle/meta/_journal.json',JSON.stringify(journal,null,2)+'\n');
+console.log('Generated two additive people hub tables.');

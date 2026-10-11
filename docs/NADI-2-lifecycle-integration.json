@@ -1,0 +1,61 @@
+{
+  "order": 3,
+  "increment": 1,
+  "date": "2026-10-11",
+  "baselineVersion": 73,
+  "baselineCommit": "2c4870f9ab3286e3765cc19cacaee641966312e5",
+  "scope": "Guarded approved exit-to-Employee-Master lifecycle integration",
+  "changes": [
+    "Reused existing P&C opt-in date transitions and Employee Master; no new database or recruitment source.",
+    "Atomic snapshots cover raw profile sections, canonical employee identity/account/link and employment record before overview, directory, employment, revision, audit and integration event writes.",
+    "Concurrent exit revocation/postponement or source changes return HTTP 409 and retain all prior lifecycle records; refresh uses current instructions without duplicate history.",
+    "A mismatched canonical employment/person link blocks the transition for P&C reconciliation.",
+    "Successful profile responses immediately reflect the saved active state."
+  ],
+  "validation": {
+    "allPassed": true,
+    "suiteCount": 5,
+    "checks": 391,
+    "tests": [
+      {
+        "suite": "lifecycle-integration",
+        "checks": 77
+      },
+      {
+        "suite": "profiles",
+        "checks": 49
+      },
+      {
+        "suite": "employee-eligibility",
+        "checks": 114
+      },
+      {
+        "suite": "core-integration",
+        "checks": 55
+      },
+      {
+        "suite": "hr-service",
+        "checks": 96
+      }
+    ],
+    "workerBuild": "node scripts/build-worker.mjs passed",
+    "diffCheck": "passed",
+    "productionDataUsed": false,
+    "browserQA": "Not performed; server-only change with focused route and packaged Worker regression."
+  },
+  "readiness": {
+    "scope": "Safe code increment, not full Order 3 completion or production-user UAT.",
+    "migration": "None; existing D1/R2 bindings and audience retained.",
+    "runtime": "No statutory calculation, payment activation, permission grants, institutional decision or monitoring expansion.",
+    "publication": "Use the matching pushed SHA and archive through Sites; connector deployment result is separate evidence."
+  },
+  "blockers": [
+    "Recruitment: original Talent source/access and approved requisition/offer/handoff authority unverified; no accepted-candidate import inferred.",
+    "Institutional onboarding/probation/renewal/clearance checklists and decision authorities not evidenced.",
+    "Six active Employee Master link inconsistencies were historical handover evidence; not reread or auto-corrected. P&C must reconcile authoritative sources.",
+    "Academic approved employee/scope/approver IDs and SIS/LMS source remain missing.",
+    "Payroll acceptance, statutory rule verification, provider restoration and representative production UAT remain outstanding."
+  ],
+  "next": "Continue Order 3 onboarding/probation/contract review against existing records and approved institutional workflow; retain recruitment and coordinated clearance/final-payroll blockers until evidenced.",
+  "frameworkSheet": "Not changed; source module register only."
+}

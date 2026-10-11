@@ -1,0 +1,313 @@
+{
+  "reviewDate": "2026-10-10",
+  "baselineVersion": 71,
+  "scope": "P0 payroll access and core employee eligibility; payroll activation evidence",
+  "changes": [
+    "Shared read-only active employee eligibility: approved Malaysia-time exit dates and account binding.",
+    "Payroll rejects linked inactive/exited accounts before processing reads, writes or idempotent replay.",
+    "HR Service Desk and Payroll reject ambiguous active identities; Payroll also refuses conflicting case-insensitive directory identities.",
+    "Payroll readiness identifies accepted parallel months and each outstanding rule-version verification using the existing activation conditions."
+  ],
+  "validation": {
+    "suiteCount": 13,
+    "tests": [
+      {
+        "suite": "employee-eligibility",
+        "passed": true,
+        "results": [
+          {
+            "passed": true,
+            "checks": 114,
+            "coverage": "Cross-service exit eligibility, Malaysia dates, immediate payroll read/write denial, retained grants/history, identity binding and duplicate-email denial"
+          }
+        ]
+      },
+      {
+        "suite": "payroll-readiness",
+        "passed": true,
+        "results": [
+          {
+            "passed": true,
+            "checks": 25,
+            "coverage": "Actual activation evidence, distinct months/approvers, revision invalidation, additional cycles, entity scope, rule verification and read-only confidentiality"
+          }
+        ]
+      },
+      {
+        "suite": "payroll-foundation",
+        "passed": true,
+        "results": [
+          {
+            "stage": 1,
+            "checks": 25,
+            "passed": true,
+            "existingTablesChanged": 0
+          }
+        ]
+      },
+      {
+        "suite": "payroll-processing",
+        "passed": true,
+        "results": [
+          {
+            "stage": 4,
+            "checks": 16,
+            "passed": true,
+            "scenarios": [
+              "five-step pipeline",
+              "HR prepares and Finance approves",
+              "stale inputs",
+              "final snapshot immutable",
+              "supplementary month caps",
+              "parallel payment block",
+              "activation gate"
+            ]
+          }
+        ]
+      },
+      {
+        "suite": "payroll-governance",
+        "passed": true,
+        "results": [
+          {
+            "stage": 6,
+            "checks": 72,
+            "passed": true,
+            "scenarios": [
+              "two synthetic comparison months",
+              "separate HR and Finance acceptance",
+              "revision-bound append-only decisions",
+              "dated rule gate",
+              "default Finance approval",
+              "production activation gate",
+              "failed bank retry",
+              "paid bank retry denied",
+              "13 report exports",
+              "CSV formula safety",
+              "Excel numeric output",
+              "distinct employee suppression",
+              "salary and tax adjustments",
+              "bonus supplementary PCB",
+              "annual coverage exceptions",
+              "password step-up",
+              "same-origin",
+              "payload bounds",
+              "grant revocation"
+            ]
+          }
+        ]
+      },
+      {
+        "suite": "payroll-selfservice",
+        "passed": true,
+        "results": [
+          {
+            "stage": 5,
+            "checks": 15,
+            "passed": true,
+            "scenarios": [
+              "private payslip publication",
+              "own identity",
+              "foreign document denial",
+              "encrypted PDF archive",
+              "AES record binding",
+              "no-store download",
+              "credential-free notification",
+              "sample PDF generated"
+            ]
+          }
+        ]
+      },
+      {
+        "suite": "payroll-race",
+        "passed": true,
+        "results": [
+          {
+            "stage": 6,
+            "checks": 20,
+            "passed": true,
+            "syntheticBatchEmployees": 100,
+            "localCalculationMs": 71,
+            "scenarios": [
+              "new master section during calculation",
+              "atomic rollback",
+              "supplementary finalisation race",
+              "rejected bank restoration",
+              "Finance remuneration review",
+              "grant revoked during mutation",
+              "named regular batch",
+              "duplicate regular payroll denied",
+              "100-person bounded batch",
+              "foreign key integrity",
+              "concurrent revised claim rejected atomically"
+            ]
+          }
+        ]
+      },
+      {
+        "suite": "hr-service",
+        "passed": true,
+        "results": [
+          {
+            "passed": true,
+            "checks": 96,
+            "areas": [
+              "employee ownership",
+              "P&C-only review",
+              "draft confidentiality",
+              "approval before release",
+              "approval reset on changes",
+              "private downloads",
+              "version conflicts",
+              "idempotent submissions",
+              "inactive access removal",
+              "packaged page routes"
+            ]
+          }
+        ]
+      },
+      {
+        "suite": "connect",
+        "passed": true,
+        "results": [
+          {
+            "passed": true,
+            "checks": 311,
+            "areas": [
+              "account binding and immediate revocation",
+              "post audiences and private images",
+              "team scope",
+              "recognition caps and duplicates",
+              "human approval and publication",
+              "anonymous response separation and receipts",
+              "distinct daily mood thresholds",
+              "survey threshold and free-text suppression",
+              "voice follow-up",
+              "consent withdrawal",
+              "in-app preferences",
+              "no MPC changes",
+              "retention",
+              "foreign key integrity"
+            ]
+          }
+        ]
+      },
+      {
+        "suite": "academic-governance",
+        "passed": true,
+        "results": [
+          {
+            "passed": true,
+            "checks": 63,
+            "coverage": [
+              "multiple canonical roles",
+              "appointment expiry race",
+              "atomic calendar import",
+              "leave half-day conflicts",
+              "resource-specific exceptions",
+              "staff-category policies",
+              "private retention metadata",
+              "deduplicated document evidence",
+              "academic-to-Payroll staged approval",
+              "source correction after staging and calculation"
+            ],
+            "productionDataUsed": false
+          }
+        ]
+      },
+      {
+        "suite": "home-priorities",
+        "passed": true,
+        "results": [
+          {
+            "passed": true,
+            "checks": 72,
+            "coverage": "Current identity, role and assigned-report scope, immediate revocation, read-only behavior, readiness freshness, private-error suppression and partial failure"
+          }
+        ]
+      },
+      {
+        "suite": "navigation",
+        "passed": true,
+        "results": [
+          {
+            "passed": true,
+            "checks": 382,
+            "roles": [
+              "Employee",
+              "Manager",
+              "Leadership",
+              "P&C"
+            ],
+            "coverage": "Every visible menu destination, all homepage anchors, role boundaries, mobile controls, selected pages and legacy links"
+          }
+        ]
+      },
+      {
+        "suite": "nadi-auth",
+        "passed": true,
+        "results": [
+          {
+            "checks": 150,
+            "passed": true,
+            "areas": [
+              "institutional emails",
+              "stable employee identity and MPC history",
+              "mandatory first-password change",
+              "durable hashed sessions",
+              "role boundaries",
+              "inactive and Exited access",
+              "reset and sign-out revocation",
+              "CSRF and redirect validation",
+              "rate limiting",
+              "all-module anonymous gate",
+              "service-bridge authentication",
+              "protected stored calendar",
+              "unchanged HR data and grants"
+            ]
+          }
+        ]
+      }
+    ],
+    "newFocusedChecks": 139
+  },
+  "findings": [
+    {
+      "area": "Employee identity and exit",
+      "status": "Implemented and locally verified",
+      "evidence": "worker/employee-eligibility.js; worker/payroll-core.js; scripts/test-employee-eligibility.mjs",
+      "remaining": "Representative employee, P&C and Finance production acceptance remains required; no employment data was edited."
+    },
+    {
+      "area": "Payroll governance",
+      "status": "Controls retained; evidence display added",
+      "evidence": "worker/payroll-processing.js activationEvidence/activationReady; scripts/test-payroll-readiness.mjs",
+      "remaining": "Finance must provide organisation-approved rule evidence, independent parallel comparisons and acceptance before activation. Financial actions are separate approval gates."
+    },
+    {
+      "area": "Historical records and private files",
+      "status": "Selected local regression passed",
+      "evidence": "payroll-selfservice, payroll-processing and payroll-race suites",
+      "remaining": "No production payroll publication or remittance; no provider backup/restoration exercise."
+    },
+    {
+      "area": "Monitoring privacy",
+      "status": "Institutional review outstanding",
+      "evidence": "worker/attendance-core.js DEFAULT_RULES and monitoringSummary; worker/attendance.js clock/camera flows",
+      "remaining": "Source exposes configurable camera/photo/location and page-activity features. Defaults do not prove the current production configuration. Approved purpose, notice, retention and institutional authority have not been established. No monitoring feature was expanded."
+    },
+    {
+      "area": "Recovery",
+      "status": "Unverified external operational dependency",
+      "evidence": "docs/IUC_PEOPLE_MASTER_DATABASE.md readiness checklist; docs/ACADEMIC_HUB.md deployment gates",
+      "remaining": "Current provider export/backup ownership, R2 coverage, recovery objectives and a restoration exercise are not evidenced. A saved source version is code rollback only."
+    }
+  ],
+  "nextIndependentWork": "Continue dated appointment and employee-master integration validation, then implement the remaining lifecycle and request workflows against existing source records. Pending institutional gates do not suspend independent safe work.",
+  "limitations": [
+    "This is a focused enhancement pass, not complete P0 certification or full NADI 2.0 completion.",
+    "No production record edits, database migrations, payroll rule changes, payments, role assignments or permission expansion.",
+    "No paid services, dependency installation, subagents or new employee database.",
+    "Real-role UAT, load/security assessment and provider restoration remain outstanding."
+  ]
+}

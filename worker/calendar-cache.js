@@ -1,0 +1,4 @@
+// Retain the existing durable table and copied event dates. There is no remote
+// refresh, expiry, or Google Calendar connection in this module.
+export async function saveCalendarMonth(db,source,month,events){const stamp=new Date().toISOString();await db.prepare('INSERT INTO nadi_calendar_cache (source,month,events_json,updated_at) VALUES (?,?,?,?) ON CONFLICT(source,month) DO UPDATE SET events_json=excluded.events_json,updated_at=excluded.updated_at').bind(source,month,JSON.stringify(events),stamp).run();return stamp;}
+export async function cachedCalendar(db,source,month){const row=await db.prepare('SELECT events_json,updated_at FROM nadi_calendar_cache WHERE source=? AND month=?').bind(source,month).first();return row?{status:'success',source,month,events:JSON.parse(row.events_json),updatedAt:row.updated_at,storedInNadi:true}:null;}

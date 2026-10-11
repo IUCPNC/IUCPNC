@@ -1,0 +1,7 @@
+import {DatabaseSync} from 'node:sqlite';
+import fs from 'node:fs';
+export function fixture(){const sqlite=new DatabaseSync(':memory:');sqlite.exec('PRAGMA foreign_keys=ON');for(const file of fs.readdirSync('drizzle').filter(x=>x.endsWith('.sql')).sort())sqlite.exec(fs.readFileSync('drizzle/'+file,'utf8'));
+ const db={prepare(sql){return {bind(...p){return {async first(){return sqlite.prepare(sql).get(...p)||null},async all(){return {results:sqlite.prepare(sql).all(...p)}},async run(){const r=sqlite.prepare(sql).run(...p);return {meta:{changes:r.changes}}},sql,p}},async first(){return sqlite.prepare(sql).get()||null},async all(){return {results:sqlite.prepare(sql).all()}},async run(){const r=sqlite.prepare(sql).run();return {meta:{changes:r.changes}}},sql,p:[]}},async batch(ss){sqlite.exec('BEGIN');try{const out=[];for(const s of ss){const r=sqlite.prepare(s.sql).run(...s.p);out.push({meta:{changes:r.changes}})}sqlite.exec('COMMIT');return out}catch(e){sqlite.exec('ROLLBACK');throw e}}};
+ sqlite.prepare('INSERT INTO employees(employee_id,email,employee_name,account_user_id,position,department,active) VALUES (?,?,?,?,?,?,1)').run('TEST-001','employee@example.test','Test Employee','employee-1','Lecturer','Academic');
+ const user={userId:'employee-1',email:'employee@example.test',authMethod:'password'},hr={userId:'hr-1',email:'hr@example.test',authMethod:'password'};
+ return {sqlite,env:{DB:db,PC_EMAILS:hr.email,NADI_AUTH_SECRET:'TEST-ONLY-SECRET-FOR-LOCAL-PAYROLL-CHECKS-DO-NOT-DEPLOY-2026'},user,hr};}

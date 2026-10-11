@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import {fixture} from './payroll-fixture.mjs';
+import {sen,ratio,prorate,encryptBank,decryptBank,payrollAccess,requireRole,commit,guard,q,requestToken} from '../worker/payroll-core.js';
+let checks=0;const same=(a,b)=>{assert.deepEqual(a,b);checks++};const f=fixture();
+same(sen('0.01'),1);same(sen('123456.78'),12345678);same(ratio(100,1,3),33);same(ratio(100,1,3,'ceil'),34);same(ratio(100,1,3,'floor'),33);
+for(const bad of ['-1','1.001','Infinity','NaN','1e5']){assert.throws(()=>sen(bad));checks++}
+same(prorate(310000,'2026-10-01','2026-10-31','2026-10-16',null),{amount:160000,days:16,denominator:31});
+const bank={name:'TEST BANK',account:'12345678'},enc=await encryptBank(f.env,'TEST-001',bank);assert(!enc.includes(bank.account));checks++;same(await decryptBank(f.env,'TEST-001',enc),bank);await assert.rejects(()=>decryptBank(f.env,'TEST-002',enc));checks++;
+const a=await payrollAccess(f.env,f.hr);same(a.roleAdmin,true);same(a.grants,[]);assert.throws(()=>requireRole(a,'prepare','IUC'));checks++;
+await assert.rejects(()=>payrollAccess(f.env,{...f.user,userId:'spoof'}));checks++;
+same((await payrollAccess(f.env,f.user)).employeeId,'TEST-001');
+f.sqlite.prepare('INSERT INTO payroll_config(id,data_json,updated_by,updated_at) VALUES (?,?,?,?)').run('main','{}','test','2026-10-09');
+const req=new Request('https://nadi.test/api/payroll/config',{headers:{'idempotency-key':'test-reference-00001'}}),t=await requestToken(req,'{}',f.hr,f.env.DB);
+same((await commit(f.env.DB,t,[guard(f.env.DB,'payroll_config','main',1,{data_json:'{"x":1}'})],{ok:true})).status,200);
+same((await requestToken(req,'{}',f.hr,f.env.DB)).replay,{ok:true});
+await assert.rejects(()=>requestToken(req,'{"x":2}',f.hr,f.env.DB));checks++;
+await assert.rejects(()=>commit(f.env.DB,{module:'test',key:'new-reference-00001',hash:'different'},[guard(f.env.DB,'payroll_config','main',1,{data_json:'bad'})],{}),e=>e.status===409);checks++;
+same(f.sqlite.prepare('SELECT data_json FROM payroll_config WHERE id=?').get('main').data_json,'{"x":1}');
+same(f.sqlite.prepare('SELECT COUNT(*) AS n FROM idempotency_keys WHERE module_code=?').get('test').n,0);
+console.log(JSON.stringify({stage:1,checks,passed:true,existingTablesChanged:0}));

@@ -1,0 +1,27 @@
+IUC Nadi — Position, Role, Job Description and Business Card Management
+Architecture decision, 7 October 2026
+
+1. Scope: one native module in the protected MPC/HR Site; extend the existing anonymous business-card Site.
+2. Master records: Employee remains the identity source. Position Library stores shared roles once. Assignments store employee-specific dates and publication rules.
+3. Relationships: employee -> many assignments -> position -> document versions -> immutable employee acknowledgements. A position has many employees.
+4. Role types: configurable list with primary, additional, acting, interim, committee, project, taskforce and other institutional appointments.
+5. Position fields: code, title, type, department, faculty/division, reporting position, category, grade, status, dates, review, owner, authority and downstream visibility flags.
+6. Assignments: primary flag, effective start/end, entity, reporting employee, renewable, visibility and card/directory publication; renewals create new dated records.
+7. Controlled documents: immutable content and sequential versions per position; JD, TOR, role description, appointment responsibilities, committee TOR, project scope, delegation and functional responsibilities.
+8. Structured content: purpose, responsibilities, accountabilities, authority, working relationships, performance/KPIs, qualifications, experience, competencies, skills and working conditions.
+9. Sources: 68 Academic and 43 Operations & Growth source descriptions; source URLs, document codes and July 2026 source month retained. Import as Draft; no unprovided approval or exact effective day inferred.
+10. Approval: P&C reviews each draft, selects an effective date and publishes. Published content cannot be edited. A revision creates a new version.
+11. Acknowledgement: employee reads the assigned current version, confirms understanding, then acknowledges. Receipt includes employee/account identity, server time, document hash and browser agent; never client-supplied dates.
+12. Version changes: latest effective approved version of each document kind becomes applicable. Prior receipts remain; status becomes Reacknowledgement Required.
+13. Statuses: Pending, Acknowledged, Reacknowledgement Required, Overdue, Not Required, Superseded and Assignment Ended; appointment dates determine current/future/historical display.
+14. Notifications: persistent in-app reminders; acknowledgement days 1/3/7 and appointment expiry 60/30/14/7, configurable. Evaluate on module reads and the existing authorised Sheets runner.
+15. Qualifications: reuse existing academic/professional profile collections. Add verification, expiry, visibility and card publication fields; preserve record IDs and evidence links.
+16. Publication: only active eligible employees, active approved role assignments and verified, non-expired, explicitly public qualifications. Personal/pay/bank/identification/evidence fields are excluded.
+17. Public surface: existing separate anonymous card Site, protected service bridge, opaque HMAC card IDs, work-safe allowlist on both sides, revoked automatically when employee becomes inactive.
+18. Employee profile: prominent Positions & Appointments link; central effective primary role supplies work title/department/reporting manager. Existing employee fields remain fallback until roles are assigned.
+19. Organisation: derives from Employee Master plus effective primary role and reporting position. Ambiguous reporting positions are marked unresolved; they do not grant management access.
+20. Management: explicit P&C access grants and assigned direct reports remain the only scope authority. Employees see own assignments; managers assigned team; leadership permitted internal workforce records; HR governs changes.
+21. Governance: live counts, searchable library, assignments, documents, pending/overdue acknowledgements, expiry, missing JDs, qualification verification and publication; printable views and CSV exports.
+22. Audit and storage: D1 relational records; R2 private document attachments. All material actions retain before/after audit records. No delete APIs for historical records. Schema-only Drizzle migration.
+23. Integration: same role/assignment IDs are reusable by future KPI, establishment, succession and performance modules. Existing MPC/CPD records and the 192-hour target remain authoritative; no fabricated KPIs.
+24. Delivery/validation: test identity isolation, manager scope, public field allowlists, duplicate primary overlap, date validity, stale saves, version/reack history, expiry, renewal, file restrictions and source counts. Preserve Site audience; publish exact tested source and verify hosted readback.

@@ -1,0 +1,96 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+import {fixture,employee,hr} from './test-profiles.mjs';
+import {attendanceRoute,recordNadiWork} from '../worker/attendance-api.js';
+import {DEFAULT_RULES,monitoringRequirement,monitoringSummary,validateConfig,rulesFor} from '../worker/attendance-core.js';
+const {env,sqlite}=fixture();env.PC_EMAILS=hr.email;let checks=0;
+const assertEqual=(a,b)=>{assert.deepEqual(a,b);checks++};
+function req(path,user=employee,body){return attendanceRoute(new Request('https://attendance.test/api/attendance'+path,{method:body?'POST':'GET',headers:body?{origin:'https://attendance.test','content-type':'application/json','idempotency-key':crypto.randomUUID()}:{},...(body?{body:JSON.stringify(body)}:{})}),env,{user,isPc:(_,email)=>email===hr.email})}
+async function check(result,status=200){const response=await result;assert.equal(response.status,status,await response.clone().text());checks++;return response.json()}
+const c=await check(req('/config',hr));await check(req('/config',hr,{version:c.version,data:{...c.data,requiredPresence:true,focusedCameraRequired:true,traceLevel:2,heartbeatGraceMinutes:5}}));
+assert.throws(()=>validateConfig({...DEFAULT_RULES,requiredPresence:'Yes'}));checks++;
+assert.throws(()=>validateConfig({...DEFAULT_RULES,heartbeatGraceMinutes:1}));checks++;
+await check(req('/clock',employee,{action:'clockIn',context:'Office',deviceId:'test-device-presence',location:{status:'denied'}}));
+let me=await check(req('/me'));const sessionId=me.session.id;
+assertEqual(me.monitoring.state,'Waiting for page check-in');
+await check(req('/trace',employee,{status:'Available'}),422);
+await check(req('/trace',employee,{status:'Focused Work',monitor:{pageVisible:true,cameraState:'off'}}),422);
+await check(req('/trace',employee,{status:'Focused Work',interval:true,monitor:{pageVisible:true,cameraState:'off'}}),422);
+await check(req('/trace',employee,{status:'Focused Work',monitor:{pageVisible:false,cameraState:'live'}}),422);
+await check(req('/trace',employee,{status:'Focused Work',monitor:{pageVisible:true,cameraState:'live'},task:'Working on a finance report'}));
+me=await check(req('/me'));assertEqual(me.monitoring.state,'Page connected');assertEqual(me.monitoring.status,'Focused Work');assertEqual(me.monitoring.cameraRequired,true);
+await recordNadiWork(env,employee,'MPC submission saved');
+me=await check(req('/me'));assertEqual(me.monitoring.status,'Focused Work');assertEqual(me.monitoring.cameraRequired,true);
+await check(req('/heartbeat',employee,{sessionId:'another-session',monitor:{pageVisible:true,cameraState:'live'}}),409);
+await check(req('/heartbeat',hr,{sessionId,monitor:{pageVisible:true,cameraState:'live'}}),403);
+await check(req('/heartbeat',employee,{sessionId,status:'Meeting',monitor:{pageVisible:true,cameraState:'off'}}));
+me=await check(req('/me'));assertEqual(me.monitoring.status,'Focused Work');assertEqual(me.monitoring.state,'Camera unavailable');
+await check(req('/heartbeat',employee,{sessionId,monitor:{pageVisible:false,cameraState:'off'}}));
+me=await check(req('/me'));assertEqual(me.monitoring.state,'Camera unavailable');
+sqlite.prepare("UPDATE attendance_trace SET recorded_at=? WHERE session_id=? AND json_extract(monitor_json,'$.kind') IN ('status','heartbeat')").run(new Date(Date.now()-6*60000).toISOString(),sessionId);
+me=await check(req('/me'));assertEqual(me.monitoring.state,'Page connection unverified');assertEqual(me.flags.includes('Page connection unverified'),true);
+sqlite.prepare('UPDATE attendance_sessions SET clock_in=? WHERE id=?').run(new Date(Date.now()-10*60000).toISOString(),sessionId);
+await check(req('/heartbeat',employee,{sessionId,interval:true,activeSeconds:120,idleSeconds:60,monitor:{pageVisible:true,cameraState:'live'}}));
+me=await check(req('/me'));assertEqual(me.monitoring.activeSeconds,0);assertEqual(me.monitoring.idleSeconds,0);assertEqual(me.monitoring.legacyActiveSeconds,120);assertEqual(me.monitoring.legacyIdleSeconds,60);
+sqlite.prepare("UPDATE attendance_trace SET recorded_at=? WHERE session_id=? AND json_extract(monitor_json,'$.kind')='heartbeat'").run(new Date(Date.now()-180000).toISOString(),sessionId);
+await check(req('/heartbeat',employee,{sessionId,interval:true,activeSeconds:999999,idleSeconds:0,monitor:{pageVisible:true,cameraState:'live'}}),400);
+const mouseMonitor={activitySource:'nadi-mouse',pageOpen:true,pageVisible:true,pageFocused:true,cameraState:'live'};
+await check(req('/heartbeat',employee,{sessionId,interval:true,activeSeconds:30,idleSeconds:15,unmeasuredSeconds:135,monitor:{...mouseMonitor,pageVisible:false,pageFocused:false}}));
+me=await check(req('/me'));assertEqual(me.monitoring.state,'Outside Nadi — not measured');assertEqual(me.monitoring.status,'Focused Work');assertEqual(me.monitoring.activeSeconds,30);assertEqual(me.monitoring.idleSeconds,15);assertEqual(me.monitoring.unmeasuredSeconds,135);assertEqual(me.flags.includes('Outside Nadi — not measured'),false);assertEqual(me.state,'Clocked In');
+sqlite.prepare("UPDATE attendance_trace SET recorded_at=? WHERE session_id=? AND json_extract(monitor_json,'$.kind')='heartbeat'").run(new Date(Date.now()-180000).toISOString(),sessionId);
+await check(req('/heartbeat',employee,{sessionId,interval:true,activeSeconds:0,idleSeconds:0,unmeasuredSeconds:180,monitor:{...mouseMonitor,pageFocused:false}}));
+me=await check(req('/me'));assertEqual(me.monitoring.state,'Outside Nadi — not measured');assertEqual(me.monitoring.idleSeconds,15);assertEqual(me.monitoring.unmeasuredSeconds,315); // Visible browser behind Excel is also unmeasured.
+await check(req('/heartbeat',employee,{sessionId,monitor:{...mouseMonitor,pageOpen:false,pageVisible:false,pageFocused:false}}));
+me=await check(req('/me'));assertEqual(me.monitoring.state,'Nadi page closed');assertEqual(me.flags.includes('Nadi page closed'),true);
+await check(req('/heartbeat',employee,{sessionId,monitor:{...mouseMonitor,pageOpen:false}}),400);
+await check(req('/heartbeat',employee,{sessionId,monitor:{...mouseMonitor,activitySource:'windows-mouse'}}),400); // No unimplemented system-wide source is accepted.
+await check(req('/heartbeat',employee,{sessionId,monitor:{...mouseMonitor,pageFocused:'Yes'}}),400);
+await check(req('/trace',employee,{status:'Focused Work',monitor:{...mouseMonitor,pageFocused:false}}),422);
+sqlite.prepare("UPDATE attendance_trace SET recorded_at=? WHERE session_id=? AND json_extract(monitor_json,'$.kind')='heartbeat'").run(new Date(Date.now()-180000).toISOString(),sessionId);
+await check(req('/heartbeat',employee,{sessionId,interval:true,activeSeconds:0,idleSeconds:0,unmeasuredSeconds:500,monitor:mouseMonitor}),400);
+await check(req('/heartbeat',employee,{sessionId,interval:true,activeSeconds:10,idleSeconds:5,unmeasuredSeconds:165,monitor:{...mouseMonitor,cameraState:'off'}}));
+me=await check(req('/me'));assertEqual(me.monitoring.state,'Camera unavailable');assertEqual(me.monitoring.activeSeconds,30);assertEqual(me.monitoring.idleSeconds,15);assertEqual(me.monitoring.unmeasuredSeconds,495);
+for(const status of ['Meeting','Teaching','Training','Travel','Client Meeting','Break','Offline']){
+ await check(req('/trace',employee,{status,monitor:{pageVisible:false,cameraState:'off'}}));me=await check(req('/me'));assertEqual(me.monitoring.exempt,true);assertEqual(me.monitoring.required,false);assertEqual(me.monitoring.cameraRequired,false);
+}
+await check(req('/trace',employee,{status:'Available',monitor:{pageVisible:true,cameraState:'off'}}));me=await check(req('/me'));assertEqual(me.monitoring.required,true);assertEqual(me.monitoring.cameraRequired,false);
+let cfg=await check(req('/config',hr));await check(req('/config',hr,{version:cfg.version,data:{...cfg.data,exemptEmployees:['TEST-001']}}));
+await check(req('/trace',employee,{status:'Focused Work',monitor:{pageVisible:false,cameraState:'off'}}));me=await check(req('/me'));assertEqual(me.monitoring.required,false);
+assertEqual(rulesFor({...DEFAULT_RULES,requiredPresence:true,focusedCameraRequired:true,exemptEmployees:['TEST-001']},{employee_id:'TEST-001'},'Office','2026-10-06').focusedCameraRequired,false);
+for(const context of ['Teaching','Training','Travel'])assertEqual(monitoringRequirement({...DEFAULT_RULES,requiredPresence:true,focusedCameraRequired:true},'Focused Work',context).required,false);
+const report=await check(req('/dashboard',hr));assertEqual(report.employees.find(e=>e.employee.employee_id==='TEST-001').monitoring.status,'Focused Work');
+assertEqual(sqlite.prepare('SELECT COUNT(*) n FROM mpc_submissions').get().n,0);assertEqual(sqlite.prepare('SELECT COUNT(*) n FROM attendance_sessions').get().n,1);
+const privacy=await check(req('/privacy'));assertEqual(privacy.rules.requiredPresence,true);assertEqual(privacy.rules.focusedCameraRequired,true);
+assertEqual(env.PROFILE_FILES?true:false,true);
+// Browser controller tests use a local camera stub; they never activate a real webcam.
+const listeners={},timers=[],sent=[],video={hidden:true,srcObject:null},statusInput={value:'Focused Work'},liveText={textContent:''},message={innerHTML:''};
+const trackListeners={};let stopped=0,cameraOptions,denyCamera=false;
+const track={readyState:'live',enabled:true,muted:false,stop(){stopped++;this.readyState='ended'},addEventListener(k,fn){trackListeners[k]=fn}};
+const browser={document:{visibilityState:'visible',focused:true,hasFocus(){return this.focused},querySelector(q){return q==='#focus-camera-preview'?video:q==='#monitor-live'?liveText:q==='#work-update [name=status]'?statusInput:q==='#message'?message:q==='#dialog-form'?{}:q==='#attendance-dialog'?{addEventListener(){}}:q==='#close-dialog'||q==='#cancel-dialog'?{}:null},addEventListener(k,fn){listeners[k]=fn}},window:{addEventListener(k,fn){listeners[k]=fn}},location:{pathname:'/attendance',origin:'https://attendance.test'},navigator:{onLine:true,mediaDevices:{async getUserMedia(opts){cameraOptions=opts;if(denyCamera)throw Error('Denied');track.readyState='live';return {getTracks:()=>[track],getVideoTracks:()=>[track]}}}},localStorage:{getItem(){return 'test-device-presence'}},crypto,URL,Date,setInterval(fn,ms){timers.push({fn,ms})},fetch:async(url,init)=>{sent.push({url:String(url),...JSON.parse(init.body)});return {ok:true,json:async()=>({serverTime:new Date().toISOString()})}}};
+vm.createContext(browser);const ui=fs.readFileSync('worker/attendance.js','utf8').replace(/\nload\(\);\s*$/,'');vm.runInContext(ui,browser);
+vm.runInContext('data={session:{id:"ui-session",clock_out:null,break_start:null},context:"Office",rule:{traceLevel:2,requiredPresence:true,focusedCameraRequired:true},monitoring:{required:true,cameraRequired:true,exempt:false,state:"Camera unavailable"}};selfStatus="Focused Work";',browser);
+assertEqual(vm.runInContext('focusedCameraApplies({...data,monitoring:{exempt:true}})',browser),true); // Selecting Focused Work after Meeting still opens the camera.
+await vm.runInContext('openFocusCamera()',browser);assertEqual(cameraOptions.audio,false);assertEqual(video.hidden,false);assertEqual(vm.runInContext('focusCameraLive()',browser),true);
+assertEqual(listeners.keydown,undefined);assertEqual(listeners.pointerdown,undefined);
+listeners.pointermove({isTrusted:false,pointerType:'mouse',screenX:10,screenY:10});assertEqual(vm.runInContext('lastMouseMove',browser),0);
+listeners.pointermove({isTrusted:true,pointerType:'touch',screenX:10,screenY:10});assertEqual(vm.runInContext('lastMouseMove',browser),0);
+listeners.pointermove({isTrusted:true,pointerType:'mouse',screenX:10,screenY:10});assertEqual(vm.runInContext('lastMouseMove>0',browser),true);
+vm.runInContext('sampleFocused=true;lastSample=Date.now()-5000;',browser);timers.find(t=>t.ms===5000).fn();assertEqual(vm.runInContext('traceActive',browser),5);
+await vm.runInContext('sendHeartbeat(true)',browser);assertEqual(sent.at(-1).activeSeconds,5);assertEqual(sent.at(-1).monitor.cameraState,'live');assertEqual(Object.keys(sent.at(-1)).some(k=>/image|video|audio|photo/i.test(k)),false);
+vm.runInContext('lastMouseMove=Date.now()-61000;lastSample=Date.now()-5000;',browser);timers.find(t=>t.ms===5000).fn();assertEqual(vm.runInContext('traceIdle',browser),5);
+browser.document.focused=false;listeners.blur();await new Promise(resolve=>setImmediate(resolve));assertEqual(stopped,0);assertEqual(sent.at(-1).monitor.pageFocused,false);assertEqual(sent.at(-1).monitor.pageOpen,true);
+vm.runInContext('lastSample=Date.now()-5000;',browser);timers.find(t=>t.ms===5000).fn();assertEqual(vm.runInContext('traceUnmeasured',browser),5);assertEqual(vm.runInContext('traceIdle',browser),0);assertEqual(vm.runInContext('traceActive',browser),0);
+browser.document.visibilityState='hidden';listeners.visibilitychange();await new Promise(resolve=>setImmediate(resolve));assertEqual(stopped,0);assertEqual(sent.at(-1).monitor.pageVisible,false);assertEqual(sent.at(-1).monitor.cameraState,'live');
+vm.runInContext('lastSample=Date.now()-180000;',browser);timers.find(t=>t.ms===5000).fn();await vm.runInContext('sendHeartbeat(true)',browser);assertEqual(sent.at(-1).interval,true);assertEqual(sent.at(-1).activeSeconds,0);assertEqual(sent.at(-1).idleSeconds,0);assertEqual(sent.at(-1).unmeasuredSeconds,180);assertEqual(vm.runInContext('traceUnmeasured',browser),0);
+browser.document.visibilityState='visible';browser.document.focused=true;listeners.focus();await new Promise(resolve=>setImmediate(resolve));
+vm.runInContext('selfStatus="Meeting";data.monitoring.exempt=true;lastSample=Date.now()-5000',browser);timers.find(t=>t.ms===5000).fn();assertEqual(vm.runInContext('traceActive',browser),0);
+vm.runInContext('selfStatus="Focused Work";data.monitoring.exempt=false;',browser);listeners.pagehide();await Promise.resolve();assertEqual(stopped,1);assertEqual(video.hidden,true);
+assertEqual(sent.at(-1).monitor.pageOpen,false);assertEqual(sent.at(-1).monitor.pageFocused,false);
+denyCamera=true;await assert.rejects(vm.runInContext('openFocusCamera()',browser),/permission or a working webcam/);checks++;
+denyCamera=false;await vm.runInContext('openFocusCamera()',browser);
+let releaseFirst;const queuedSent=[];browser.fetch=async(url,init)=>{queuedSent.push(JSON.parse(init.body));if(queuedSent.length===1)await new Promise(resolve=>{releaseFirst=resolve});return {ok:true,json:async()=>({serverTime:new Date().toISOString()})}};
+const pendingHeartbeat=vm.runInContext('sendHeartbeat(true)',browser);listeners.pagehide();assertEqual(queuedSent.length,1);releaseFirst();await pendingHeartbeat;
+assertEqual(queuedSent.length,2);assertEqual(queuedSent.at(-1).monitor.pageOpen,false);assertEqual(queuedSent.at(-1).interval,false);assertEqual(vm.runInContext('heartbeatBusy',browser),false);
+assertEqual(sqlite.prepare('PRAGMA foreign_key_check').all().length,0);
+console.log(JSON.stringify({passed:true,checks,areas:['required page and camera gates','status exemptions','stale page and camera flags','measured interval limits','identity scope','MPC status preservation','camera permission denial','local preview with no media upload','camera shutdown','mouse-only activity','background time excluded from idle','background camera continuity','closing event during in-flight heartbeat']}));

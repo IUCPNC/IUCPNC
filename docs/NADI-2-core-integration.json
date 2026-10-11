@@ -1,0 +1,478 @@
+{
+  "order": 2,
+  "date": "2026-10-11",
+  "baselineVersion": 72,
+  "scope": "Employee Master and approved dated appointment integration",
+  "changes": [
+    "Academic and Payroll now consume approved assignment, role and institutional-entity state from the existing Position & Role Library.",
+    "Academic reads and transactional grant assertions enforce effective assignment/role/entity dates and active institutional entities; no title-based or automatic permission grants.",
+    "Payroll uses effective appointment dates for the relevant payroll month and includes role/entity revisions in calculation fingerprints. Archived/invalid appointments require review instead of entering a calculation as current.",
+    "Employee projection batches reject stale employee identities, directory fields, profile sections, appointment/role/entity sources and prior sync state. Canonical links, history, audit and integration events remain atomic per employee.",
+    "Repeated synchronisation remains idempotent; a refresh retries from current sources without duplicate events or history.",
+    "P&C homepage adds a read-only aggregate check of active employee/person/employment links and case-insensitive email collisions."
+  ],
+  "matrix": [
+    [
+      "Profile and employee directory",
+      "Existing primary projection and effective appointment model retained; race guards added.",
+      "profiles, position-sync, position-consistency, people-hub"
+    ],
+    [
+      "MPC",
+      "Shared employee identity and work projection retained; historical submissions and 50/20/15/15 scoring untouched.",
+      "position-consistency, navigation"
+    ],
+    [
+      "CPD",
+      "Existing single credit ledger and employee identity reused; no new balances or duplicate credits.",
+      "cpd-worker, employee-eligibility"
+    ],
+    [
+      "Leave and attendance",
+      "Existing reporting/employee identity and leave reconciliation retained. Midnight-sensitive fixture corrected.",
+      "leave-integration, employee-eligibility"
+    ],
+    [
+      "Payroll",
+      "Approved role/entity dates constrain appointment-linked remuneration; fingerprints detect source changes; existing financial approvals and rules retained.",
+      "core-integration, payroll-processing, payroll-integration, payroll-governance, payroll-remuneration, payroll-race"
+    ],
+    [
+      "Academic",
+      "Shared current appointment reader and atomic explicit-grant eligibility; staff appointment snapshots reuse canonical sources.",
+      "core-integration, academic, academic-governance"
+    ],
+    [
+      "Google Sheets",
+      "Existing two-way collision and source-ownership policies retained; integration regression passed.",
+      "automatic-sync, sync-worker, sheets-sync"
+    ]
+  ],
+  "validation": {
+    "suiteCount": 21,
+    "allPassed": true,
+    "newFocusedChecks": 67,
+    "tests": [
+      {
+        "suite": "core-integration",
+        "passed": true,
+        "results": [
+          {
+            "passed": true,
+            "checks": 55,
+            "coverage": "Shared approved appointment state, role/entity dates, explicit academic grant enforcement, payroll fingerprints, atomic source/identity/profile/insert races and idempotent retry"
+          }
+        ]
+      },
+      {
+        "suite": "position-sync",
+        "passed": true,
+        "results": [
+          {
+            "checks": 22,
+            "passed": true,
+            "areas": [
+              "canonical register",
+              "assigned primary propagation",
+              "field ownership",
+              "additional roles",
+              "future and ended appointments",
+              "generic departments",
+              "inactive access preservation",
+              "Sheet register readback and idempotence"
+            ]
+          }
+        ]
+      },
+      {
+        "suite": "position-consistency",
+        "passed": true,
+        "results": [
+          {
+            "checks": 48,
+            "passed": true,
+            "areas": [
+              "primary card alignment",
+              "normalised duplicate guards",
+              "profile, directory, management and workforce",
+              "MPC identity",
+              "letter source",
+              "Employee Master and Sheet registers",
+              "entity renaming, expiry and inactivity",
+              "document version history"
+            ]
+          }
+        ]
+      },
+      {
+        "suite": "positions",
+        "passed": true,
+        "results": [
+          {
+            "checks": 66,
+            "status": "passed",
+            "sourceDrafts": 111
+          }
+        ]
+      },
+      {
+        "suite": "profiles",
+        "passed": true,
+        "results": [
+          {
+            "checks": 49,
+            "passed": true,
+            "foreignKeyIssues": 0,
+            "areas": [
+              "identity isolation",
+              "P&C writes",
+              "identifier masking",
+              "restricted sections",
+              "origin checks",
+              "concurrent edits",
+              "revision audit",
+              "MPC threshold",
+              "uploads/downloads",
+              "document visibility",
+              "lifecycle access removal"
+            ]
+          }
+        ]
+      },
+      {
+        "suite": "people-hub",
+        "passed": true,
+        "results": [
+          {
+            "passed": true,
+            "checks": 62
+          }
+        ]
+      },
+      {
+        "suite": "automatic-sync",
+        "passed": true,
+        "results": [
+          {
+            "checks": 46,
+            "passed": true,
+            "areas": [
+              "automatic two-way edits",
+              "fieldwise collisions",
+              "initial blank preservation",
+              "cell clears and zeros",
+              "identity changes",
+              "canonical person preservation",
+              "status and access",
+              "owned-field restoration",
+              "validation retry",
+              "deletion and archival",
+              "new employee creation",
+              "unmatched source correction",
+              "idempotence"
+            ]
+          }
+        ]
+      },
+      {
+        "suite": "sync-worker",
+        "passed": true,
+        "results": [
+          {
+            "passed": true,
+            "checks": 14
+          }
+        ]
+      },
+      {
+        "suite": "sheets-sync",
+        "passed": true,
+        "results": [
+          {
+            "checks": 52,
+            "passed": true,
+            "areas": [
+              "two-way changes",
+              "three-way conflict handling",
+              "initial reconciliation",
+              "idempotent retries",
+              "validation and audits",
+              "P&C authorisation",
+              "CSRF",
+              "runner lease",
+              "stable row IDs",
+              "formula injection",
+              "Google date encoding"
+            ]
+          }
+        ]
+      },
+      {
+        "suite": "cpd-worker",
+        "passed": true,
+        "results": [
+          {
+            "passed": true,
+            "checks": 105
+          }
+        ]
+      },
+      {
+        "suite": "leave-integration",
+        "passed": true,
+        "results": [
+          {
+            "checks": 135,
+            "status": "passed",
+            "realEmployeeWrites": 0,
+            "emailsSent": 0,
+            "areas": [
+              "staged imports and reconciliation",
+              "formal cutover controls",
+              "attendance full/half/cancellation",
+              "private evidence and revoked delegation",
+              "multi-level approvals",
+              "policy recalculation",
+              "carry expiry",
+              "repeatable per-event leave",
+              "proration and accrual"
+            ]
+          }
+        ]
+      },
+      {
+        "suite": "academic",
+        "passed": true,
+        "results": [
+          {
+            "passed": true,
+            "checks": 152,
+            "scenarios": [
+              "A lecturer timetable",
+              "B leave impact and replacement",
+              "C independently verified teaching",
+              "D canonical role references",
+              "E approved KPI evidence and finalised correction",
+              "F Payroll evidence",
+              "G published timetable revision"
+            ],
+            "security": [
+              "identity binding",
+              "least privilege",
+              "origin validation",
+              "independent approval",
+              "stale versions",
+              "atomic permission revocation",
+              "private documents",
+              "student isolation"
+            ],
+            "mpcScoringChanged": false,
+            "foreignKeyIssues": 0
+          }
+        ]
+      },
+      {
+        "suite": "academic-governance",
+        "passed": true,
+        "results": [
+          {
+            "passed": true,
+            "checks": 63,
+            "coverage": [
+              "multiple canonical roles",
+              "appointment expiry race",
+              "atomic calendar import",
+              "leave half-day conflicts",
+              "resource-specific exceptions",
+              "staff-category policies",
+              "private retention metadata",
+              "deduplicated document evidence",
+              "academic-to-Payroll staged approval",
+              "source correction after staging and calculation"
+            ],
+            "productionDataUsed": false
+          }
+        ]
+      },
+      {
+        "suite": "payroll-processing",
+        "passed": true,
+        "results": [
+          {
+            "stage": 4,
+            "checks": 16,
+            "passed": true,
+            "scenarios": [
+              "five-step pipeline",
+              "HR prepares and Finance approves",
+              "stale inputs",
+              "final snapshot immutable",
+              "supplementary month caps",
+              "parallel payment block",
+              "activation gate"
+            ]
+          }
+        ]
+      },
+      {
+        "suite": "payroll-governance",
+        "passed": true,
+        "results": [
+          {
+            "stage": 6,
+            "checks": 72,
+            "passed": true,
+            "scenarios": [
+              "two synthetic comparison months",
+              "separate HR and Finance acceptance",
+              "revision-bound append-only decisions",
+              "dated rule gate",
+              "default Finance approval",
+              "production activation gate",
+              "failed bank retry",
+              "paid bank retry denied",
+              "13 report exports",
+              "CSV formula safety",
+              "Excel numeric output",
+              "distinct employee suppression",
+              "salary and tax adjustments",
+              "bonus supplementary PCB",
+              "annual coverage exceptions",
+              "password step-up",
+              "same-origin",
+              "payload bounds",
+              "grant revocation"
+            ]
+          }
+        ]
+      },
+      {
+        "suite": "payroll-remuneration",
+        "passed": true,
+        "results": [
+          {
+            "stage": 1,
+            "area": "remuneration approvals",
+            "checks": 12,
+            "passed": true
+          }
+        ]
+      },
+      {
+        "suite": "payroll-integration",
+        "passed": true,
+        "results": [
+          {
+            "stage": 3,
+            "checks": 52,
+            "passed": true,
+            "scenarios": [
+              "approved unpaid leave",
+              "half day",
+              "paid leave",
+              "pending leave",
+              "cancelled leave",
+              "validation exclusion",
+              "spanning periods",
+              "revision detection",
+              "processed correction",
+              "cutoff KL timezone",
+              "new joiner",
+              "termination",
+              "temporary allowance",
+              "allowance expiry",
+              "missing bank",
+              "invalid statutory details",
+              "duplicate basic",
+              "mid-month salary increase",
+              "concurrent appointment allowances with one basic",
+              "approved normal-day overtime",
+              "approved reimbursement",
+              "claim after cut-off",
+              "duplicate pending approved and processed claim revisions blocked",
+              "rejected claim replacement",
+              "backdated salary adjustment",
+              "approved arrears",
+              "correction original required",
+              "resident foreign employee",
+              "unverified service fee withholding blocked"
+            ]
+          }
+        ]
+      },
+      {
+        "suite": "payroll-race",
+        "passed": true,
+        "results": [
+          {
+            "stage": 6,
+            "checks": 20,
+            "passed": true,
+            "syntheticBatchEmployees": 100,
+            "localCalculationMs": 68,
+            "scenarios": [
+              "new master section during calculation",
+              "atomic rollback",
+              "supplementary finalisation race",
+              "rejected bank restoration",
+              "Finance remuneration review",
+              "grant revoked during mutation",
+              "named regular batch",
+              "duplicate regular payroll denied",
+              "100-person bounded batch",
+              "foreign key integrity",
+              "concurrent revised claim rejected atomically"
+            ]
+          }
+        ]
+      },
+      {
+        "suite": "home-priorities",
+        "passed": true,
+        "results": [
+          {
+            "passed": true,
+            "checks": 84,
+            "coverage": "Current identity, role and assigned-report scope, immediate revocation, read-only behavior, readiness freshness, private-error suppression and partial failure"
+          }
+        ]
+      },
+      {
+        "suite": "navigation",
+        "passed": true,
+        "results": [
+          {
+            "passed": true,
+            "checks": 382,
+            "roles": [
+              "Employee",
+              "Manager",
+              "Leadership",
+              "P&C"
+            ],
+            "coverage": "Every visible menu destination, all homepage anchors, role boundaries, mobile controls, selected pages and legacy links"
+          }
+        ]
+      },
+      {
+        "suite": "employee-eligibility",
+        "passed": true,
+        "results": [
+          {
+            "passed": true,
+            "checks": 114,
+            "coverage": "Cross-service exit eligibility, Malaysia dates, immediate payroll read/write denial, retained grants/history, identity binding and duplicate-email denial"
+          }
+        ]
+      }
+    ]
+  },
+  "limitations": [
+    "This establishes focused code and regression evidence; it does not certify every integration with representative production users.",
+    "No manual production employee edits, database migration, new institutional grants, payroll-rule changes or payments.",
+    "Real-role UAT, approved academic setup/student source, Finance acceptance and provider restoration remain outstanding.",
+    "P&C consistency counts cover shared identity links and email collisions; they are not full statutory or workflow certification.",
+    "Transactions are atomic per employee; a source change between employee batches can require a subsequent refresh to complete the reconciliation."
+  ],
+  "next": "Order 3: Recruitment, onboarding, probation, contract renewal and exit workflows, reusing canonical records and existing approvals. Recruitment handoff requires the existing Talent source; independent lifecycle implementation can continue while that source is established."
+}

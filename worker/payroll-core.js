@@ -1,0 +1,48 @@
+import {currentEmployee} from './employee-eligibility.js';
+export const ROLES=['prepare','hr_approve','finance_review','finance_approve','payment','configure','audit','summary'];
+export const CATEGORIES=['Permanent','Fixed-term','Probationary','Part-time','Temporary','Foreign employee','Consultant','Independent contractor','Visiting lecturer','External assessor','Other'];
+export const SOURCE_LINKS={epf:'https://www.kwsp.gov.my/en/epf-act-1991-third-schedule',socso:'https://www.perkeso.gov.my/en/rate-of-contribution.html',pcb:'https://www.hasil.gov.my/majikan/jadual-pcb-dan-spesifikasi-data/',lindung:'https://perkeso.gov.my/perkhidmatan-kami/perlindungan/lindung-24-jam.html'};
+export const fail=(message,status=400)=>Object.assign(new Error(message),{status});
+export const parse=v=>v?JSON.parse(v):{};
+export const regularCycle=cycle=>cycle==='regular'||cycle.startsWith('regular-');
+export const now=()=>new Date().toISOString();
+export const today=()=>new Date(Date.now()+28800000).toISOString().slice(0,10);
+export const clean=(v,max=500)=>{if(typeof v!=='string'||v.length>max||/[\x00-\x08\x0b\x0c\x0e-\x1f]/.test(v))throw fail('Enter valid text within '+max+' characters.');return v.trim();};
+export function date(v){if(!/^\d{4}-\d{2}-\d{2}$/.test(v||'')||!Number.isFinite(Date.parse(v))||new Date(v).toISOString().slice(0,10)!==v)throw fail('Enter a valid date.');return v;}
+export function period(v){if(!/^20\d{2}-(0[1-9]|1[0-2])$/.test(v||''))throw fail('Choose a valid payroll month.');return v;}
+export const bounds=p=>{period(p);return {from:p+'-01',to:new Date(Date.UTC(Number(p.slice(0,4)),Number(p.slice(5,7)),0)).toISOString().slice(0,10)};};
+export const nextPeriod=p=>{period(p);return new Date(Date.UTC(Number(p.slice(0,4)),Number(p.slice(5,7)),1)).toISOString().slice(0,7);};
+// All financial values are integer sen. Rational operations use BigInt with explicit rounding.
+export function sen(v){const s=String(v);if(!/^\d{1,9}(\.\d{1,2})?$/.test(s))throw fail('Enter a non-negative amount with at most two decimals.');const [a,b='']=s.split('.');const n=Number(a)*100+Number(b.padEnd(2,'0'));if(!Number.isSafeInteger(n)||n>100000000000)throw fail('Amount exceeds the supported limit.');return n;}
+export function ratio(n,a,b,round='nearest'){if(![n,a,b].every(Number.isSafeInteger)||b<=0||n<0||a<0)throw fail('Invalid financial calculation basis.');const x=BigInt(n)*BigInt(a),d=BigInt(b),v=round==='ceil'?(x+d-1n)/d:round==='floor'?x/d:(x+d/2n)/d;const r=Number(v);if(!Number.isSafeInteger(r))throw fail('Financial calculation overflow.');return r;}
+export function prorate(amount,from,to,start,end){date(from);date(to);date(start);if(end)date(end);const first=[from,start].sort().at(-1),last=[to,end||to].sort()[0];const days=first>last?0:Math.round((Date.parse(last)-Date.parse(first))/86400000)+1;return {amount:ratio(amount,days,Number(to.slice(8,10))),days,denominator:Number(to.slice(8,10))};}
+export const defaults=()=>({mode:'parallel',entity:'IUC',currency:'MYR',frequency:'Monthly',approvalSteps:['finance_approve'],variancePercent:10,retentionYears:7,parallelCycles:[],statutorySources:SOURCE_LINKS,components:[],costCentres:[],employer:{name:'Innovative University College'},verifiedRuleVersions:[],bankFormats:[]});
+export const q=(db,sql,...args)=>db.prepare(sql).bind(...args);
+export const rows=async(db,sql,...args)=>(await q(db,sql,...args).all()).results;
+export async function configuration(db){const r=await q(db,"SELECT * FROM payroll_config WHERE id='main'").first();return {data:{...defaults(),...parse(r?.data_json)},version:r?.version||0};}
+export async function payrollAccess(env,user){
+ if(!user)throw fail('Sign in to NADI.',401);
+ const matches=await rows(env.DB,'SELECT employee_id,account_user_id,active FROM employees WHERE lower(email)=lower(?) LIMIT 2',user.email);
+ if(matches.length>1)throw fail('P&C must resolve conflicting employee identities before payroll access.',403);
+ const employee=matches[0];
+ if(employee?.account_user_id&&employee.account_user_id!==user.userId)throw fail('Employee identity does not match this account.',403);
+ if(employee&&!await currentEmployee(env,user))throw fail('An active employee account is required for Payroll.',403);
+ const grants=await rows(env.DB,'SELECT role,entity,expires FROM payroll_grants WHERE email=?',user.email.toLowerCase());
+ return {employeeId:employee?.employee_id||null,active:!!employee,grants:grants.filter(g=>!g.expires||g.expires>=today()),roleAdmin:(env.PC_EMAILS||'').split(',').some(x=>x.trim().toLowerCase()===user.email.toLowerCase())};
+}
+export function requireRole(a,role,entity){if(!a.grants.some(g=>g.role===role&&(!entity||g.entity===entity)))throw fail('An explicit Payroll '+role.replaceAll('_',' ')+' grant is required.',403);}
+export function reviewRole(a,entity){const role=a.grants.some(g=>g.role==='finance_approve'&&g.entity===entity)?'finance_approve':'hr_approve';requireRole(a,role,entity);return role;}
+export function requireRead(a,entity){if(!a.grants.some(g=>['prepare','hr_approve','finance_review','finance_approve','payment','audit'].includes(g.role)&&(!entity||g.entity===entity)))throw fail('Authorised payroll access is required.',403);}
+export const digest=async v=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v))),b=>b.toString(16).padStart(2,'0')).join('');
+const b64=b=>btoa(String.fromCharCode(...b)),unb64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function bankKey(env){if(!env.NADI_AUTH_SECRET)throw fail('Secure payroll storage is not configured.',503);return crypto.subtle.importKey('raw',await crypto.subtle.digest('SHA-256',new TextEncoder().encode('nadi-payroll-bank-v1\0'+env.NADI_AUTH_SECRET)),{name:'AES-GCM'},false,['encrypt','decrypt']);}
+export async function encryptBank(env,id,data){const iv=crypto.getRandomValues(new Uint8Array(12)),bytes=new TextEncoder().encode(JSON.stringify(data));const cipher=await crypto.subtle.encrypt({name:'AES-GCM',iv,additionalData:new TextEncoder().encode(id)},await bankKey(env),bytes);return 'v1.'+b64(iv)+'.'+b64(new Uint8Array(cipher));}
+export async function decryptBank(env,id,value){if(!value)return null;const [v,i,c]=value.split('.');if(v!=='v1')throw fail('Unsupported bank record version.',409);return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:unb64(i),additionalData:new TextEncoder().encode(id)},await bankKey(env),unb64(c))));}
+export function check(db,ok){return q(db,'INSERT INTO payroll_checks (id,ok) VALUES (?,?)',crypto.randomUUID(),ok?1:0);}
+export function guard(db,table,id,version,data,key='id'){const allowed=['payroll_profiles','payroll_config','payroll_periods','payroll_remuneration','payroll_transactions','payroll_runs','payroll_payments','payroll_enquiries','payroll_annual_statements','payroll_remittances'];if(!allowed.includes(table))throw Error('Invalid payroll guard');const ks=Object.keys(data);return q(db,`UPDATE ${table} SET ${ks.map(k=>k+'=?').join(',')},version=CASE WHEN version=? THEN version+1 ELSE NULL END WHERE ${key}=?`,...Object.values(data),version,id);}
+export const assertRow=(db,sql,...args)=>q(db,'INSERT INTO payroll_checks (id,ok) SELECT ?,CASE WHEN EXISTS ('+sql+') THEN 1 ELSE 0 END',crypto.randomUUID(),...args);
+export function audit(db,user,action,id,detail={}){return q(db,'INSERT INTO audit_events (audit_id,occurred_at,actor_email,module_code,action,resource_type,resource_id,purpose,after_json) VALUES (?,?,?,?,?,?,?,?,?)',crypto.randomUUID(),now(),user.email,'payroll',action,'payroll',id,'payroll_administration',JSON.stringify({authMethod:user.authMethod||'unknown',...detail}));}
+export function notice(db,e,key,message,link='/employee/salary'){return q(db,'INSERT OR IGNORE INTO nadi_notifications (id,source_key,employee_id,email,kind,message,link,created_at) VALUES (?,?,COALESCE(?,(SELECT employee_id FROM employees WHERE lower(email)=?)),?,?,?,?,?)','notice:'+crypto.randomUUID(),'payroll:'+key,e.employee_id||null,e.email.toLowerCase(),e.email.toLowerCase(),'Payroll',message,link,now());}
+export async function requestToken(request,raw,user,db){const key=request.headers.get('idempotency-key');if(!/^[a-zA-Z0-9_-]{16,100}$/.test(key||''))throw fail('A unique request reference is required.');const module='payroll:'+user.userId,hash=await digest(new URL(request.url).pathname+' '+raw),old=await q(db,'SELECT * FROM idempotency_keys WHERE module_code=? AND idempotency_key=?',module,key).first();if(old){if(old.request_hash!==hash)throw fail('Request reference already used for another action.',409);return {replay:parse(old.response_json),status:old.response_status};}return {module,key,hash};}
+export const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'private, no-store','x-content-type-options':'nosniff'}});
+export async function commit(db,t,statements,result,status=200){try{await db.batch([q(db,'INSERT INTO idempotency_keys (module_code,idempotency_key,request_hash,response_status,response_json,created_at,expires_at) VALUES (?,?,?,?,?,?,?)',t.module,t.key,t.hash,status,JSON.stringify(result),now(),today()+'T23:59:59Z'),...statements,q(db,'DELETE FROM payroll_checks')]);}catch(e){const old=await q(db,'SELECT * FROM idempotency_keys WHERE module_code=? AND idempotency_key=?',t.module,t.key).first();if(old?.request_hash===t.hash)return json(parse(old.response_json),old.response_status);console.error('Payroll atomic conflict',e.name);throw fail('The record changed or conflicts with an existing transaction. Refresh and retry. No partial change was saved.',409);}return json(result,status);}

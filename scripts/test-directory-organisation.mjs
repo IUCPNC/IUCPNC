@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {directoryOrganisation} from '../worker/directory-organisation.js';
+const e=(id,name,position,appraiser='',active=1)=>({employee_id:id,employee_name:name,email:id+'@example.test',position,department:'IUC',appraiser,active});
+let rows=[e('A','Director Name','Director'),e('B','Staff Name','Executive','Director Name'),e('C','Other Name','Officer','B')];
+let result=directoryOrganisation(rows);assert.equal(result.positions[1].parentId,'employee:A');assert.equal(result.positions[2].parentId,'employee:B');
+rows[1].appraiser='Director';assert.equal(directoryOrganisation(rows).positions[1].parentId,'employee:A');
+rows.push(e('D','Second Director','Director'));assert.equal(directoryOrganisation(rows).positions[1].parentId,'');assert.equal(directoryOrganisation(rows).issues.length,1);
+rows=[e('A','A','Director','B'),e('B','B','Officer','A')];result=directoryOrganisation(rows);assert.equal(result.issues.length,1);assert.ok(result.positions.some(p=>!p.parentId));
+assert.equal(directoryOrganisation([e('A','A','Director','A')]).issues.length,1);
+assert.equal(directoryOrganisation([e('A','A','Director','',0)]).positions.length,0);
+console.log('Directory reporting line tests passed: IDs, names, explicit titles, ambiguity, cycles and inactive staff.');

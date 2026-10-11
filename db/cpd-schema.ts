@@ -1,0 +1,28 @@
+import {sqliteTable,text,integer,real,index,uniqueIndex} from 'drizzle-orm/sqlite-core';
+import {sql} from 'drizzle-orm';
+import {employees,documentAssets} from './schema.ts';
+
+export const cpdActivities=sqliteTable('cpd_activities',{
+ id:text('id').primaryKey(),title:text('title').notNull(),activityType:text('activity_type').notNull(),category:text('category').notNull(),scope:text('scope').notNull(),provider:text('provider').notNull(),venue:text('venue').notNull(),deliveryMode:text('delivery_mode').notNull(),startsAt:text('starts_at').notNull(),endsAt:text('ends_at').notNull(),durationHours:real('duration_hours').notNull(),cpdHours:real('cpd_hours').notNull(),department:text('department').notNull(),targetGroup:text('target_group').notNull(),maxParticipants:integer('max_participants'),mandatory:integer('mandatory').notNull().default(0),certificateProvided:integer('certificate_provided').notNull().default(0),description:text('description').notNull(),status:text('status').notNull().default('Draft'),qrToken:text('qr_token'),qrActive:integer('qr_active').notNull().default(0),createdBy:text('created_by').notNull(),createdEmail:text('created_email').notNull(),createdAt:text('created_at').notNull(),updatedAt:text('updated_at').notNull(),
+},t=>[index('cpd_activity_status_start').on(t.status,t.startsAt),uniqueIndex('cpd_activity_qr_token_unique').on(t.qrToken)]);
+
+export const cpdAttendance=sqliteTable('cpd_attendance',{
+ id:text('id').primaryKey(),activityId:text('activity_id').notNull().references(()=>cpdActivities.id),employeeId:text('employee_id').notNull().references(()=>employees.employeeId),attendedAt:text('attended_at').notNull(),creditedHours:real('credited_hours').notNull(),source:text('source').notNull(),createdBy:text('created_by').notNull(),createdEmail:text('created_email').notNull(),voidedAt:text('voided_at'),voidedBy:text('voided_by'),
+},t=>[uniqueIndex('cpd_attendance_activity_employee_unique').on(t.activityId,t.employeeId),index('cpd_attendance_employee_date').on(t.employeeId,t.attendedAt)]);
+
+export const cpdRequests=sqliteTable('cpd_requests',{
+ id:text('id').primaryKey(),employeeId:text('employee_id').notNull().references(()=>employees.employeeId),activityId:text('activity_id').references(()=>cpdActivities.id),title:text('title').notNull(),activityType:text('activity_type').notNull(),category:text('category').notNull(),scope:text('scope').notNull(),provider:text('provider').notNull(),venue:text('venue').notNull(),deliveryMode:text('delivery_mode').notNull(),startsAt:text('starts_at').notNull(),endsAt:text('ends_at').notNull(),estimatedHours:real('estimated_hours').notNull(),fee:real('fee').notNull().default(0),otherCosts:real('other_costs').notNull().default(0),fundingSource:text('funding_source').notNull(),purpose:text('purpose').notNull(),relevance:text('relevance').notNull(),justification:text('justification').notNull(),attachmentId:text('attachment_id'),status:text('status').notNull(),supervisorId:text('supervisor_id').references(()=>employees.employeeId),decisionNote:text('decision_note').notNull().default(''),completedAt:text('completed_at'),createdAt:text('created_at').notNull(),updatedAt:text('updated_at').notNull(),
+},t=>[index('cpd_request_employee_status').on(t.employeeId,t.status),index('cpd_request_status_time').on(t.status,t.createdAt)]);
+
+export const cpdCredits=sqliteTable('cpd_credits',{
+ id:text('id').primaryKey(),employeeId:text('employee_id').notNull().references(()=>employees.employeeId),sourceType:text('source_type').notNull(),sourceId:text('source_id').notNull(),title:text('title').notNull(),provider:text('provider').notNull(),attendedAt:text('attended_at').notNull(),hours:real('hours').notNull(),category:text('category').notNull(),createdBy:text('created_by').notNull(),createdEmail:text('created_email').notNull(),createdAt:text('created_at').notNull(),voidedAt:text('voided_at'),voidedBy:text('voided_by'),
+},t=>[uniqueIndex('cpd_credit_source_unique').on(t.employeeId,t.sourceType,t.sourceId),index('cpd_credit_employee_date').on(t.employeeId,t.attendedAt)]);
+
+export const cpdAudit=sqliteTable('cpd_audit',{
+ id:text('id').primaryKey(),actorId:text('actor_id').notNull(),actorEmail:text('actor_email').notNull(),action:text('action').notNull(),activityId:text('activity_id'),requestId:text('request_id'),employeeId:text('employee_id'),detailJson:text('detail_json').notNull(),createdAt:text('created_at').notNull(),
+},t=>[index('cpd_audit_created').on(t.createdAt),index('cpd_audit_activity').on(t.activityId),index('cpd_audit_request').on(t.requestId)]);
+
+// These two existing tables are included so Drizzle snapshots remain in sync with
+// the SQL-only migrations already deployed before CPD was added.
+export const nadiAnnouncements=sqliteTable('nadi_announcements',{id:text('id').primaryKey(),title:text('title').notNull(),body:text('body').notNull(),category:text('category').notNull().default('University update'),publishedAt:text('published_at').notNull(),publishedBy:text('published_by').notNull(),archivedAt:text('archived_at'),archivedBy:text('archived_by')},t=>[index('nadi_announcements_recent').on(sql`published_at DESC`).where(sql`archived_at IS NULL`)]);
+export const documentScreenings=sqliteTable('document_screenings',{id:text('id').primaryKey(),documentId:text('document_id').notNull().references(()=>documentAssets.documentId),bytes:integer('bytes').notNull(),status:text('status').notNull().default('uploaded'),employeeId:text('employee_id'),resultJson:text('result_json'),appliedJson:text('applied_json').notNull().default('[]'),errorCode:text('error_code'),createdBy:text('created_by').notNull(),createdAt:text('created_at').notNull(),updatedAt:text('updated_at').notNull(),lockUntil:text('lock_until')});

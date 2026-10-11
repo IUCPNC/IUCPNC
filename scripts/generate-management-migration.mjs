@@ -1,0 +1,16 @@
+import fs from 'node:fs/promises';
+import {generateSQLiteDrizzleJson,generateSQLiteMigration} from 'drizzle-kit/api';
+import * as core from '../db/schema.ts';
+import * as profiles from '../db/profile-schema.ts';
+import * as management from '../db/management-schema.ts';
+const previous=JSON.parse(await fs.readFile('drizzle/meta/0003_snapshot.json','utf8'));
+const current=await generateSQLiteDrizzleJson({...core,...profiles,...management},previous.id);
+const sql=await generateSQLiteMigration(previous,current);
+if(sql.length!==3||sql.some(s=>!s.startsWith('CREATE TABLE `management_')))throw new Error('Unexpected schema change; inspect before saving.');
+await fs.writeFile('drizzle/0004_management_access.sql',sql.join('\n--> statement-breakpoint\n')+'\n');
+await fs.writeFile('drizzle/meta/0004_snapshot.json',JSON.stringify(current,null,2)+'\n');
+const journal=JSON.parse(await fs.readFile('drizzle/meta/_journal.json','utf8'));
+if(journal.entries.length!==4)throw new Error('Migration already generated.');
+journal.entries.push({idx:4,version:'6',when:1790755200000,tag:'0004_management_access',breakpoints:true});
+await fs.writeFile('drizzle/meta/_journal.json',JSON.stringify(journal,null,2)+'\n');
+console.log('Generated three additive management tables; existing migrations unchanged.');

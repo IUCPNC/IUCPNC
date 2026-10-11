@@ -1,0 +1,34 @@
+import assert from 'node:assert/strict';
+import {fixture,hr,employee} from './test-profiles.mjs';
+import {positionRoute} from '../worker/position-api.js';
+import {positionData,positionMaintenance} from '../worker/position-core.js';
+import {reconcilePositions} from '../worker/position-sync.js';
+import {siteRecords,mergeAutomatic} from '../worker/sheets-model.js';
+import {positionSheetRegisters,exportPositionRegisters} from '../worker/position-sheets.js';
+const {sqlite,env}=fixture();let checks=0;
+const check=(a,b)=>{assert.deepEqual(a,b);checks++};
+const req=async(path,method='GET',body)=>{const r=await positionRoute(new Request('https://nadi.test/api/positions'+path,{method,headers:{origin:'https://nadi.test','content-type':'application/json'},...(body?{body:JSON.stringify(body)}:{})}),env,{user:hr,isPc:(_,email)=>email===hr.email});assert.ok(r.ok,await r.clone().text());return r.json()};
+const raw=id=>sqlite.prepare('SELECT * FROM employees WHERE employee_id=?').get(id);
+const before=raw('TEST-001');
+const role=await req('/roles','POST',{code:'SYNC-01',title:'Head of Finance',type:'Primary Position',department:'Finance',status:'Active',data:{acknowledgementRequired:false,faculty:'Operations',grade:'M3',category:'Management'}});
+check(raw('TEST-001').position,'Executive');
+const assignment=await req('/assignments','POST',{roleId:role.id,employeeId:'TEST-001',primary:true,startDate:'2026-01-01',visibility:'Internal',reportingEmployeeId:'TEST-002'});
+check([raw('TEST-001').position,raw('TEST-001').appraiser],['Head of Finance','Second Example']);
+check(sqlite.prepare('SELECT p.position_title FROM employment_records e JOIN positions p ON p.position_id=e.position_id WHERE employee_id=?').get('TEST-001').position_title,'Head of Finance');
+let context=await siteRecords(env.DB);check(context.byEmployee.get('TEST-001').sections.employment.grade,'M3');check(context.byEmployee.get('TEST-001').sections.overview.businessUnit,'Operations');
+const baseline=sqlite.prepare('SELECT COUNT(*) n FROM integration_events').get().n;await positionMaintenance(env);check(sqlite.prepare('SELECT COUNT(*) n FROM integration_events').get().n,baseline);
+let r=(await positionData(env.DB)).roles.find(r=>r.id===role.id);await req('/roles/'+r.id,'PUT',{...r,title:'Finance Director',data:{...r.data,displayTitle:'Finance Director'},department:'Corporate Services',version:r.version});check([raw('TEST-001').position,raw('TEST-001').department],['Finance Director','Corporate Services']);
+context=await siteRecords(env.DB);const record=[...context.records.values()].find(r=>r.ds.id==='directory'&&r.employeeId==='TEST-001'),edited={...record.value,position:'Old Sheet title',department:'Old Sheet department',email:'new@example.test'};
+const result=mergeAutomatic(null,record.value,edited,{lockedKeys:context.byEmployee.get('TEST-001').positionManagedFields.directory});check([result.value.position,result.value.department,result.value.email],['Finance Director','Corporate Services','new@example.test']);
+const extra=await req('/roles','POST',{code:'COM-01',title:'Committee Chair',type:'Committee Chair',department:'Quality',status:'Active',data:{acknowledgementRequired:false}});await req('/assignments','POST',{roleId:extra.id,employeeId:'TEST-001',startDate:'2026-01-01',visibility:'Internal'});check(raw('TEST-001').position,'Finance Director');
+const rows=positionSheetRegisters(await positionData(env.DB),[raw('TEST-001'),raw('TEST-002')]);check(rows[0].rows.length,2);check(rows[1].rows.map(r=>[r[2],r[6]]),[['Example Employee','Yes'],['Example Employee','No']]);check(rows[2].rows,[]);
+await req('/assignments/'+assignment.id+'/end','POST',{version:1,endDate:'2026-10-07'});check([raw('TEST-001').position,raw('TEST-001').department,raw('TEST-001').appraiser],[before.position,before.department,before.appraiser]);
+const future=await req('/assignments','POST',{roleId:role.id,employeeId:'TEST-001',primary:true,startDate:'2027-01-01',endDate:'2027-12-31',visibility:'Internal'});check(raw('TEST-001').position,'Executive');await reconcilePositions(env,null,hr,'2027-01-01');check(raw('TEST-001').position,'Finance Director');await reconcilePositions(env,null,hr,'2028-01-01');check(raw('TEST-001').position,'Executive');
+// A shared academic JD keeps the actual faculty rather than assigning a generic source placeholder.
+r=(await positionData(env.DB)).roles.find(r=>r.id===role.id);await req('/roles/'+r.id,'PUT',{...r,department:'Relevant Faculty / Academic Department',version:r.version});await reconcilePositions(env,null,hr,'2027-01-01');check(raw('TEST-001').department,'Finance');
+sqlite.prepare('UPDATE employees SET active=0 WHERE employee_id=?').run('TEST-001');await reconcilePositions(env,null,hr,'2027-01-02');check(raw('TEST-001').active,0);
+// Owned Sheet table write/readback, no destructive adjacent-grid writes, no needless repeat writes.
+const source={name:'NadiPositions',label:'Positions',headers:['ID','Title'],rows:[['role-1','Finance Director']]};let table,values,mutations=0;
+const client={async api(path='',body){if(path.startsWith('?'))return {sheets:[{properties:{sheetId:7,title:'Admin',gridProperties:{rowCount:2000}},}] ,namedRanges:table?[table]:[]};if(path.startsWith('/values/'))return {values:values||[]};for(const request of body.requests){mutations++;if(request.addNamedRange){table={...request.addNamedRange.namedRange};values=[source.headers];}if(request.updateCells&&request.updateCells.range.startRowIndex===table?.range.startRowIndex)values=request.updateCells.rows.map(r=>r.values.map(c=>c.userEnteredValue?.stringValue??c.userEnteredValue?.numberValue??''));}return {};}};
+check(await exportPositionRegisters(client,[source]),1);const done=mutations;check(await exportPositionRegisters(client,[source]),0);check(mutations,done);check(values,[source.headers,...source.rows]);
+console.log(JSON.stringify({checks,passed:true,areas:['canonical register','assigned primary propagation','field ownership','additional roles','future and ended appointments','generic departments','inactive access preservation','Sheet register readback and idempotence']}));

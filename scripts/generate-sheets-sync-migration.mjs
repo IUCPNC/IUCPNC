@@ -1,0 +1,18 @@
+import fs from 'node:fs/promises';
+import {generateSQLiteDrizzleJson,generateSQLiteMigration} from 'drizzle-kit/api';
+import * as core from '../db/schema.ts';
+import * as profiles from '../db/profile-schema.ts';
+import * as management from '../db/management-schema.ts';
+import * as hub from '../db/people-hub-schema.ts';
+import * as sync from '../db/sheets-sync-schema.ts';
+const previous=JSON.parse(await fs.readFile('drizzle/meta/0005_snapshot.json','utf8'));
+const current=await generateSQLiteDrizzleJson({...core,...profiles,...management,...hub,...sync},previous.id);
+const sql=await generateSQLiteMigration(previous,current);
+if(sql.length!==3||sql.some(s=>!/^CREATE TABLE `sheet_sync_/.test(s)))throw new Error('Unexpected migration');
+await fs.writeFile('drizzle/0006_sheets_sync.sql',sql.join('\n--> statement-breakpoint\n')+'\n');
+await fs.writeFile('drizzle/meta/0006_snapshot.json',JSON.stringify(current,null,2)+'\n');
+const journal=JSON.parse(await fs.readFile('drizzle/meta/_journal.json','utf8'));
+if(journal.entries.length!==6)throw new Error('Migration already generated');
+journal.entries.push({idx:6,version:'6',when:Date.now(),tag:'0006_sheets_sync',breakpoints:true});
+await fs.writeFile('drizzle/meta/_journal.json',JSON.stringify(journal,null,2)+'\n');
+console.log('Generated three additive sync tables.');

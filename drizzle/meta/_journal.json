@@ -1,0 +1,181 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1790145000000,
+      "tag": "0000_initial_mpc",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1790148600000,
+      "tag": "0001_employee_directory_audit",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1790326800000,
+      "tag": "0002_iuc_people_master",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1790676000000,
+      "tag": "0003_employee_profiles",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1790755200000,
+      "tag": "0004_management_access",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1790812800000,
+      "tag": "0005_people_hub",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1790773390465,
+      "tag": "0006_sheets_sync",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1790860069437,
+      "tag": "0007_nadi_announcements",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1790899200000,
+      "tag": "0008_document_screenings",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1791098501186,
+      "tag": "0009_cpd_training",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "6",
+      "when": 1791253018001,
+      "tag": "0010_attendance_work_trace",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "6",
+      "when": 1791255317282,
+      "tag": "0011_attendance_required_presence",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "6",
+      "when": 1791271120479,
+      "tag": "0012_hr_service_desk",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "6",
+      "when": 1791272041059,
+      "tag": "0013_hr_service_letters",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "6",
+      "when": 1791278137469,
+      "tag": "0014_nadi_connect",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "6",
+      "when": 1791337856331,
+      "tag": "0015_position_management",
+      "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "6",
+      "when": 1791346151180,
+      "tag": "0016_position_employee_sync",
+      "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "6",
+      "when": 1791362929350,
+      "tag": "0017_nadi_password_signin",
+      "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "6",
+      "when": 1791367783091,
+      "tag": "0018_nadi_invitation_email",
+      "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "6",
+      "when": 1791379320841,
+      "tag": "0019_nadi_notifications",
+      "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "6",
+      "when": 1791441382085,
+      "tag": "0020_smart_leave",
+      "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "6",
+      "when": 1791450895794,
+      "tag": "0021_secure_account_mail",
+      "breakpoints": true
+    },
+    {
+      "idx": 22,
+      "version": "6",
+      "when": 1791511274138,
+      "tag": "0022_payroll",
+      "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "6",
+      "when": 1791519318752,
+      "tag": "0023_payroll_selfservice",
+      "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "6",
+      "when": 1791532462210,
+      "tag": "0024_academic_hub",
+      "breakpoints": true
+    }
+  ]
+}

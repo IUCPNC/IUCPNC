@@ -1,0 +1,16 @@
+import fs from 'node:fs/promises';
+import {generateSQLiteDrizzleJson,generateSQLiteMigration} from 'drizzle-kit/api';
+import * as core from '../db/schema.ts';
+import * as profiles from '../db/profile-schema.ts';
+import * as management from '../db/management-schema.ts';
+import * as hub from '../db/people-hub-schema.ts';
+import * as sync from '../db/sheets-sync-schema.ts';
+import * as cpd from '../db/cpd-schema.ts';
+import * as attendance from '../db/attendance-schema.ts';
+const previous=JSON.parse(await fs.readFile('drizzle/meta/0009_snapshot.json','utf8'));
+const current=await generateSQLiteDrizzleJson({...core,...profiles,...management,...hub,...sync,...cpd,...attendance},previous.id);
+const sql=await generateSQLiteMigration(previous,current);
+if(sql.length<9||sql.some(s=>!/^(CREATE TABLE `attendance_|CREATE INDEX `attendance_|CREATE UNIQUE INDEX `attendance_)/.test(s)))throw new Error('Unexpected schema changes.');
+await fs.writeFile('drizzle/0010_attendance_work_trace.sql',sql.join('\n--> statement-breakpoint\n')+'\n');
+await fs.writeFile('drizzle/meta/0010_snapshot.json',JSON.stringify(current,null,2)+'\n');
+const journal=JSON.parse(await fs.readFile('drizzle/meta/_journal.json','utf8'));if(journal.entries.length!==10)throw new Error('Journal is unexpected.');journal.entries.push({idx:10,version:'6',when:Date.now(),tag:'0010_attendance_work_trace',breakpoints:true});await fs.writeFile('drizzle/meta/_journal.json',JSON.stringify(journal,null,2)+'\n');console.log(JSON.stringify({migration:'0010_attendance_work_trace',statements:sql.length}));

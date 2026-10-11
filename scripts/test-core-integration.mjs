@@ -1,0 +1,58 @@
+import assert from 'node:assert/strict';
+import {fixture,hr,employee} from './test-profiles.mjs';
+import {positionData} from '../worker/position-core.js';
+import {appointmentState} from '../worker/position-model.js';
+import {reconcilePositions} from '../worker/position-sync.js';
+import {approvedAppointments} from '../worker/appointment-source.js';
+import {academicAccess,appointments,grantAssert,academicStaffProfiles} from '../worker/academic-core.js';
+import {employeeMaster} from '../worker/payroll-foundation.js';
+import {pipelineFixture} from './test-payroll-processing.mjs';
+import {calculationInput,calculateEmployee} from '../worker/payroll-calculation.js';
+import {businessDate} from '../worker/profile-schema.js';
+const {env,sqlite}=fixture();let checks=0;const eq=(a,b)=>{assert.deepEqual(a,b);checks++};
+const day=businessDate(),shift=n=>new Date(Date.parse(day)+n*86400000).toISOString().slice(0,10),past=shift(-10),future=shift(10),recent=shift(-1);
+function insert(table,values,connection=sqlite){const row={};for(const c of connection.prepare('PRAGMA table_info('+table+')').all())if(c.notnull&&c.dflt_value===null)row[c.name]=/INT|REAL/.test(c.type)?0:'';Object.assign(row,values);connection.prepare('INSERT INTO '+table+'('+Object.keys(row).join(',')+') VALUES('+Object.keys(row).map(()=>'?').join(',')+')').run(...Object.values(row));}
+function role(id,data={},status='Active'){insert('position_library',{id,code:id,title:id,type:'Academic Appointment',department:'Academic',status,version:1,data_json:JSON.stringify(data)});}
+function assignment(id,roleId,status='Assigned',start=past,end=null,data={}){insert('position_assignments',{id,role_id:roleId,employee_id:'TEST-001',status,start_date:start,end_date:end,version:1,data_json:JSON.stringify(data)});}
+role('live',{displayTitle:'Current Lecturer',effectiveDate:past,expiryDate:future});assignment('live','live');
+role('future',{effectiveDate:future});assignment('future','future');role('expired',{expiryDate:recent});assignment('expired','expired');role('archived',{},'Archived');assignment('archived','archived');role('draft');assignment('draft','draft','Draft');role('unknown');assignment('unknown','unknown','Unapproved');role('last-day',{expiryDate:day});assignment('last-day','last-day');
+insert('position_entities',{id:'committee',code:'committee',name:'Approved committee',kind:'Committee',status:'Active',version:1,data_json:JSON.stringify({effectiveDate:past,expiryDate:future})});role('committee',{entityAssignment:true,entityId:'committee',capacity:'Chair'},'Draft');assignment('committee','committee');
+insert('position_entities',{id:'inactive',code:'inactive',name:'Inactive project',kind:'Project',status:'Inactive',version:1,data_json:'{}'});role('entity-inactive',{projectId:'inactive'});assignment('entity-inactive','entity-inactive');role('entity-missing',{committeeId:'missing'});assignment('entity-missing','entity-missing');
+const source=await positionData(env.DB),canonical=source.assignments.filter(a=>appointmentState(a,source,day).current).map(a=>a.id).sort(),actual=await approvedAppointments(env.DB,['TEST-001']);eq(actual.map(a=>a.id).sort(),canonical);eq(canonical,['committee','last-day','live']);eq(Object.keys(source).includes('sourceRows'),false);
+for(const a of actual){const expected=appointmentState(source.assignments.find(x=>x.id===a.id),source,day);eq([a.start_date,a.end_date],[expected.startDate,expected.endDate]);}
+eq((await appointments(env.DB,'TEST-001')).map(a=>a.id).sort(),canonical);eq((await employeeMaster(env,'TEST-001')).appointments.map(a=>a.id).sort(),canonical);eq((await academicStaffProfiles(env.DB,['TEST-001'])).get('TEST-001').appointments.map(a=>a.id).sort(),canonical);
+eq((await approvedAppointments(env.DB,['TEST-001'],{from:past,to:recent})).some(a=>a.id==='expired'),true);eq((await approvedAppointments(env.DB,['TEST-001'],{from:future,to:future})).some(a=>a.id==='future'),true);
+for(const id of ['live','expired','future','unknown','entity-inactive','committee'])insert('academic_grants',{id,employee_id:'TEST-001',role:'approver',scope:id+'-only',effective_from:past,appointment_id:id});
+sqlite.prepare("UPDATE academic_grants SET scope='committee-only' WHERE id='committee'").run();let access=await academicAccess(env,employee);eq(access.grants.map(g=>g.id).sort(),['committee','live']);eq((await env.DB.batch(grantAssert(env.DB,access,employee,'approver','live-only'))).length,2);
+// A source change between authorisation and commit must revoke the atomic guard.
+sqlite.prepare("UPDATE position_library SET data_json=?,version=version+1 WHERE id='live'").run(JSON.stringify({expiryDate:recent}));
+await assert.rejects(()=>env.DB.batch(grantAssert(env.DB,access,employee,'approver','live-only')));checks++;
+// The other independent committee grant remains valid; test a narrowly scoped grant.
+sqlite.prepare("UPDATE academic_grants SET scope='live-only' WHERE id='live'").run();access=await academicAccess(env,employee);eq(access.grants.map(g=>g.id),['committee']);eq((await env.DB.batch(grantAssert(env.DB,access,employee,'approver','committee-only'))).length,2);
+sqlite.prepare("UPDATE position_entities SET status='Inactive',version=version+1 WHERE id='committee'").run();await assert.rejects(()=>env.DB.batch(grantAssert(env.DB,access,employee,'approver','programme')));checks++;
+// Payroll fingerprints include effective dates and role/entity revisions.
+sqlite.prepare("UPDATE position_library SET data_json=?,version=version+1 WHERE id='live'").run(JSON.stringify({effectiveDate:past,expiryDate:future}));
+const calendar={period:day.slice(0,7),cutoffAt:day+'T23:59:59+08:00',paymentDate:day};const before=await calculationInput(env,'TEST-001',calendar,'parallel');sqlite.prepare("UPDATE position_library SET title='Updated appointment',version=version+1 WHERE id='live'").run();const after=await calculationInput(env,'TEST-001',calendar,'parallel');eq(before.fingerprint===after.fingerprint,false);
+// Exercise the actual synchroniser with concurrent edits and safe retry.
+sqlite.prepare("UPDATE position_assignments SET is_primary=1 WHERE id='live'").run();sqlite.prepare("UPDATE position_library SET data_json='{}' WHERE id='live'").run();insert('employee_profile_sections',{employee_id:'TEST-001',section:'personal',data_json:'{"emergencyContact":"retained"}',updated_by:hr.userId,version:1});
+const raw=()=>sqlite.prepare("SELECT * FROM employees WHERE employee_id='TEST-001'").get(),count=table=>sqlite.prepare('SELECT count(*) n FROM '+table).get().n;
+await reconcilePositions(env);eq(raw().position,'Updated appointment');let events=count('integration_events'),audit=count('position_audit');await reconcilePositions(env);eq(count('integration_events'),events);eq(count('position_audit'),audit);
+const originalBatch=env.DB.batch.bind(env.DB);
+async function conflict(mutate){const initial=raw(),initialEvents=count('integration_events'),initialAudit=count('position_audit');let fired=false;env.DB.batch=async statements=>{if(!fired){fired=true;mutate();}return originalBatch(statements)};try{await assert.rejects(()=>reconcilePositions(env),e=>e.status===409);checks++;}finally{env.DB.batch=originalBatch}eq(raw().position,initial.position);eq(count('integration_events'),initialEvents);eq(count('position_audit'),initialAudit);}
+sqlite.prepare("UPDATE position_library SET title='Next title',version=version+1 WHERE id='live'").run();await conflict(()=>sqlite.prepare("UPDATE position_library SET title='Latest title',version=version+1 WHERE id='live'").run());await reconcilePositions(env);eq(raw().position,'Latest title');events=count('integration_events');await reconcilePositions(env);eq(count('integration_events'),events);
+sqlite.prepare("UPDATE position_library SET title='After profile race',version=version+1 WHERE id='live'").run();await conflict(()=>sqlite.prepare("UPDATE employee_profile_sections SET data_json=?,version=version+1 WHERE employee_id='TEST-001' AND section='personal'").run(JSON.stringify({emergencyContact:'new retained contact'})));await reconcilePositions(env);eq(raw().position,'After profile race');eq(JSON.parse(sqlite.prepare("SELECT data_json FROM employee_profile_sections WHERE employee_id='TEST-001' AND section='personal'").get().data_json).emergencyContact,'new retained contact');
+sqlite.prepare("UPDATE position_library SET title='After identity race',version=version+1 WHERE id='live'").run();await conflict(()=>sqlite.prepare("UPDATE employees SET employee_name='Current authoritative name',email='current@example.test' WHERE employee_id='TEST-001'").run());await reconcilePositions(env);eq(raw().employee_name,'Current authoritative name');eq({...sqlite.prepare("SELECT legal_name,primary_email FROM people WHERE person_id=?").get(raw().person_id)},{legal_name:'Current authoritative name',primary_email:'current@example.test'});
+sqlite.prepare("UPDATE position_library SET title='After insert race',version=version+1 WHERE id='live'").run();await conflict(()=>assignment('concurrent-additional','live'));await reconcilePositions(env);eq(raw().position,'After insert race');
+events=count('integration_events');audit=count('position_audit');await reconcilePositions(env);eq(count('integration_events'),events);eq(count('position_audit'),audit);eq(count('management_grants'),0);eq(count('cpd_credits'),0);eq(count('mpc_submissions'),0);
+sqlite.close();
+const payroll=await pipelineFixture(),payDb=payroll.sqlite;
+insert('position_library',{id:'dated',code:'DATED',title:'Dated role',type:'Additional Appointment',department:'Academic',status:'Active',version:1,data_json:JSON.stringify({effectiveDate:'2026-10-01',expiryDate:'2026-10-15'})},payDb);
+insert('position_assignments',{id:'dated',employee_id:'TEST-001',role_id:'dated',status:'Assigned',start_date:'2026-10-01',end_date:'2026-10-31',data_json:'{}',version:1},payDb);
+payDb.prepare("INSERT INTO payroll_remuneration(id,employee_id,code,kind,amount_sen,effective_from,status,data_json,appointment_id,initiator,approver,approved_at,created_at) VALUES('allowance','TEST-001','DATED_ALLOWANCE','allowance',31000,'2026-10-01','approved',?,'dated','prepare','approve',?,?)").run(JSON.stringify({prorate:true,classification:{epf:true,socso:true,eis:true,tax:'normal',eaField:'B1c'}}),day,day);
+const cal={period:'2026-10',cutoffAt:'2026-10-24T23:59:59+08:00',paymentDate:'2026-10-30'},income=await calculationInput(payroll.env,'TEST-001',cal,'parallel'),calculated=calculateEmployee(income,{employer:{name:'IUC'},variancePercent:10});eq(income.master.appointments[0].end_date,'2026-10-15');eq(calculated.components.find(c=>c.code==='DATED_ALLOWANCE').amountSen,15000);
+payDb.prepare("UPDATE position_library SET data_json=?,version=version+1 WHERE id='dated'").run(JSON.stringify({effectiveDate:'2026-10-16',expiryDate:'2026-10-31'}));const upcoming=await calculationInput(payroll.env,'TEST-001',cal,'parallel');eq(calculateEmployee(upcoming,{employer:{name:'IUC'},variancePercent:10}).components.find(c=>c.code==='DATED_ALLOWANCE').amountSen,16000);eq(income.fingerprint===upcoming.fingerprint,false);
+payDb.prepare("UPDATE position_library SET status='Archived',version=version+1 WHERE id='dated'").run();const ended=calculateEmployee(await calculationInput(payroll.env,'TEST-001',cal,'parallel'),{employer:{name:'IUC'},variancePercent:10});eq(ended.components.some(c=>c.code==='DATED_ALLOWANCE'),false);eq(ended.exceptions.some(e=>e.code==='appointment_inactive'),true);payDb.close();
+console.log(JSON.stringify({passed:true,checks,coverage:'Shared approved appointment state, role/entity dates, explicit academic grant enforcement, payroll fingerprints, atomic source/identity/profile/insert races and idempotent retry'}));
+
+
+
