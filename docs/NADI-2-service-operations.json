@@ -1,0 +1,81 @@
+{
+  "order": 4,
+  "increment": 1,
+  "date": "2026-10-11",
+  "baselineVersion": 74,
+  "baselineCommit": "ed2bed22be4c38d9f1b78fed5ce5c65629103a4c",
+  "scope": "Requested-date triage, audited employee follow-ups and P&C acknowledgement using existing HR Service Desk records; integrated policy guidance and privacy regression.",
+  "changes": [
+    "Existing needed-by dates are labelled requested dates, not institutional SLA commitments. Open requests past the requested date and requests due today are counted in Malaysia time.",
+    "An active requesting employee can follow up after their requested date. One pending follow-up is allowed until P&C acknowledges it. Both actions retain request status, existing approvals, drafts and files.",
+    "Follow-up and acknowledgement signals are ordered by request version in existing append-only events, independently of timestamp ties or UUID order. No database migration or duplicate employee/request store.",
+    "New employee writes recheck active lifecycle eligibility, identity/account linkage and unique active email within the atomic request mutation. Conflicts retain existing records and emit no false follow-up.",
+    "The P&C queue prioritises pending follow-ups and past requested dates before its 500-row display limit; summary totals cover all scoped requests.",
+    "Homepage adds employee requests needing information and P&C-only aggregate follow-up/requested-date counts. Confidential case details and request content are excluded.",
+    "Policy library links to the existing authenticated HR query form; the service desk links back to policies and guides claim enquiries to the existing Benefits / payroll query type.",
+    "Acknowledgement UI requires saving unsaved draft changes first. Existing private draft/file release and payroll/payment approvals are preserved."
+  ],
+  "validation": {
+    "allPassed": true,
+    "suiteCount": 7,
+    "checks": 644,
+    "tests": [
+      {
+        "suite": "service-operations",
+        "checks": 131
+      },
+      {
+        "suite": "hr-service",
+        "checks": 96
+      },
+      {
+        "suite": "hr-letters",
+        "checks": 118
+      },
+      {
+        "suite": "home-priorities",
+        "checks": 84
+      },
+      {
+        "suite": "employee-eligibility",
+        "checks": 114
+      },
+      {
+        "suite": "profiles",
+        "checks": 49
+      },
+      {
+        "suite": "payroll-integration",
+        "checks": 52
+      }
+    ],
+    "workerBuild": "node scripts/build-worker.mjs passed in Cloud Codex",
+    "diffCheck": "passed",
+    "productionDataUsed": false,
+    "browserQA": "Not performed; no control-browser skill or supported preview infrastructure was available. Packaged Worker route, policy/file access and page markup checked with synthetic fixtures.",
+    "policySourcePDFValidation": "Original Windows PDF files were not transferred. Full test-policies.mjs original-file/hash acceptance not rerun; synthetic private-policy route and stored-hash metadata checked only."
+  },
+  "publication": {
+    "state": "blocked",
+    "reason": "Sites skill requires site-workflow.mjs for opening/packaging/source synchronization. Helper was absent from the cloud filesystem and its script resources could not be read. No replacement publishing helper was invented.",
+    "sourcePushed": false,
+    "savedVersionCreated": false,
+    "deploymentStarted": false,
+    "currentSiteVersion": 74
+  },
+  "readiness": {
+    "scope": "Validated cloud implementation increment; not full Order 4 completion or representative production UAT.",
+    "migration": "None; existing D1/R2 bindings and site audience retained in source.",
+    "institutionalChanges": "No institutional deadlines, claim eligibility/limits, Finance authorities, permissions, statutory rules, payments, surveillance, case retention or policy wording changed."
+  },
+  "blockers": [
+    "Supported Sites workflow helper is unavailable in this cloud environment; package/source push and publication remain pending.",
+    "Formal service targets, business calendar, service owners, assignment authority and escalation recipients require institutional approval. Requested-date triage does not establish an SLA.",
+    "Structured claim types, eligibility, receipt requirements, authoritative claim approval source and Finance handoff/payment state remain unverified; claim enquiries and existing independent payroll claim approvals are retained.",
+    "Confidential case-specific assignments, access/retention rules and decision authorities remain unevidenced. Existing P&C-only profile records and restricted documents are preserved; no new grants or autonomous decisions.",
+    "Policy version/effective-date acknowledgement routes and production-role acceptance remain outstanding.",
+    "Historical Employee Master inconsistencies, payroll acceptance and provider recovery were not re-audited."
+  ],
+  "next": "Restore supported Sites helper and publish the validated increment. Continue structured claims/service ownership/case workflow only against approved sources and institutional rules. Academic configuration/UAT and end-to-end recovery validation remain following orders.",
+  "frameworkSheet": "Not changed; source module register updated locally only."
+}

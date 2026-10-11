@@ -23,12 +23,13 @@ for(const a of actual){const expected=appointmentState(source.assignments.find(x
 eq((await appointments(env.DB,'TEST-001')).map(a=>a.id).sort(),canonical);eq((await employeeMaster(env,'TEST-001')).appointments.map(a=>a.id).sort(),canonical);eq((await academicStaffProfiles(env.DB,['TEST-001'])).get('TEST-001').appointments.map(a=>a.id).sort(),canonical);
 eq((await approvedAppointments(env.DB,['TEST-001'],{from:past,to:recent})).some(a=>a.id==='expired'),true);eq((await approvedAppointments(env.DB,['TEST-001'],{from:future,to:future})).some(a=>a.id==='future'),true);
 for(const id of ['live','expired','future','unknown','entity-inactive','committee'])insert('academic_grants',{id,employee_id:'TEST-001',role:'approver',scope:id+'-only',effective_from:past,appointment_id:id});
-sqlite.prepare("UPDATE academic_grants SET scope='committee-only' WHERE id='committee'").run();let access=await academicAccess(env,employee);eq(access.grants.map(g=>g.id).sort(),['committee','live']);eq((await env.DB.batch(grantAssert(env.DB,access,employee,'approver','live-only'))).length,2);
+insert('academic_grants',{id:'teaching',employee_id:'TEST-001',role:'lecturer',scope:'*',effective_from:past});
+sqlite.prepare("UPDATE academic_grants SET scope='committee-only' WHERE id='committee'").run();let access=await academicAccess(env,employee);eq(access.grants.filter(g=>g.role==='approver').map(g=>g.id).sort(),['committee','live']);eq((await env.DB.batch(grantAssert(env.DB,access,employee,'approver','live-only'))).length,2);
 // A source change between authorisation and commit must revoke the atomic guard.
 sqlite.prepare("UPDATE position_library SET data_json=?,version=version+1 WHERE id='live'").run(JSON.stringify({expiryDate:recent}));
 await assert.rejects(()=>env.DB.batch(grantAssert(env.DB,access,employee,'approver','live-only')));checks++;
 // The other independent committee grant remains valid; test a narrowly scoped grant.
-sqlite.prepare("UPDATE academic_grants SET scope='live-only' WHERE id='live'").run();access=await academicAccess(env,employee);eq(access.grants.map(g=>g.id),['committee']);eq((await env.DB.batch(grantAssert(env.DB,access,employee,'approver','committee-only'))).length,2);
+sqlite.prepare("UPDATE academic_grants SET scope='live-only' WHERE id='live'").run();access=await academicAccess(env,employee);eq(access.grants.filter(g=>g.role==='approver').map(g=>g.id),['committee']);eq((await env.DB.batch(grantAssert(env.DB,access,employee,'approver','committee-only'))).length,2);
 sqlite.prepare("UPDATE position_entities SET status='Inactive',version=version+1 WHERE id='committee'").run();await assert.rejects(()=>env.DB.batch(grantAssert(env.DB,access,employee,'approver','programme')));checks++;
 // Payroll fingerprints include effective dates and role/entity revisions.
 sqlite.prepare("UPDATE position_library SET data_json=?,version=version+1 WHERE id='live'").run(JSON.stringify({effectiveDate:past,expiryDate:future}));

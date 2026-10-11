@@ -31,6 +31,7 @@ insert('academic_records',{id:'offering',kind:'offering',code:'O',status:'Publis
 insert('academic_allocations',{id:'allocation',offering_id:'offering',employee_id:'TEST-002',data_json:'{}'});
 insert('academic_sessions',{id:'session',allocation_id:'allocation',programme_id:'programme',period_id:'period',employee_id:'TEST-002',publication:'Published',status:'Pending Verification',date:soon,data_json:'{}'});
 d=await payload(employee);eq(d.items.some(x=>x.id==='academic-review'),false);
+insert('academic_grants',{id:'teaching',employee_id:'TEST-001',role:'lecturer',scope:'programme',effective_from:day});
 insert('academic_grants',{id:'grant',employee_id:'TEST-001',role:'approver',scope:'programme',effective_from:day});d=await payload(employee);eq(d.items.find(x=>x.id==='academic-review').count,1);
 sqlite.prepare("UPDATE academic_grants SET scope='other-programme'").run();d=await payload(employee);eq(d.items.find(x=>x.id==='academic-review').count,0);
 sqlite.prepare("UPDATE academic_grants SET effective_to='2020-01-01'").run();d=await payload(employee);eq(d.items.some(x=>x.id==='academic-review'),false);
@@ -44,6 +45,6 @@ d=await payload(hr);eq(d.unavailable,[]);eq(d.items.find(x=>x.id==='contractExpi
 sqlite.prepare("INSERT INTO sheet_sync_state(id,enabled,last_success) VALUES('main',1,?)").run(new Date().toISOString());d=await payload(hr);eq(d.readiness.find(x=>x.id==='sync').status,'Recently reconciled');
 sqlite.prepare("UPDATE sheet_sync_state SET last_success='2020-01-01T00:00:00Z'").run();d=await payload(hr);eq(d.readiness.find(x=>x.id==='sync').status,'Published but Unverified');
 sqlite.prepare("UPDATE sheet_sync_state SET last_error='PRIVATE EXTERNAL ERROR'").run();d=await payload(hr);eq(d.readiness.find(x=>x.id==='sync').status,'Enhancement Required');eq(JSON.stringify(d).includes('PRIVATE EXTERNAL ERROR'),false);
-sqlite.exec("DROP TABLE academic_sessions");d=await payload(employee);eq(d.unavailable.includes('My teaching'),true);eq(d.items.some(x=>x.id==='teaching'),false);
+sqlite.prepare("UPDATE academic_grants SET effective_to=NULL WHERE id='teaching'").run();sqlite.exec("DROP TABLE academic_sessions");d=await payload(employee);eq(d.unavailable.includes('My teaching'),true);eq(d.items.some(x=>x.id==='teaching'),false);
 sqlite.prepare("INSERT INTO employee_profile_sections(employee_id,section,data_json,version,updated_by,updated_at) VALUES('TEST-001','overview','{\"employmentStatus\":\"Exited\"}',1,?,?)").run(hr.userId,day);eq((await call(employee)).status,403);
 sqlite.close();console.log(JSON.stringify({passed:true,checks,coverage:'Current identity, role and assigned-report scope, immediate revocation, read-only behavior, readiness freshness, private-error suppression and partial failure'}));

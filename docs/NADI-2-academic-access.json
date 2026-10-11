@@ -1,0 +1,43 @@
+{
+  "order": 5,
+  "date": "2026-10-11",
+  "baselineVersion": 74,
+  "baselineCommit": "ed2bed22be4c38d9f1b78fed5ce5c65629103a4c",
+  "scope": "Teaching appointment admission, approved scoped academic contributors, canonical directory/profiles and explicit full-time/part-time employee distinctions",
+  "userClarification": "Lecturers plus narrowly scoped access for approved supervisors, examiners and advisors",
+  "categories": [
+    "Full-time lecturer",
+    "Part-time lecturer",
+    "Student supervisor",
+    "Part-time supervisor (IUC employee)",
+    "External academic examiner",
+    "External industry advisor",
+    "External academic advisor"
+  ],
+  "access": "Current explicit teaching grants open lecturer workspaces, including teaching-appointed management. Other approved current contributor appointments open only assigned work and own confidential reports. No automatic P&C or employee admission.",
+  "directory": "Existing employee IDs/profiles retained; working time is a separate employment field. External academic identities use Person Master and approved appointment profiles, visibly labelled not IUC employees, without employment records or employee headcounts.",
+  "configuration": "P&C records independently approved teaching grants in employee profile administration without Academic Hub admission; self-granting is denied. Contributor appointments require independent approval and publication.",
+  "validation": {
+    "build": "passed",
+    "targetedSuites": 11,
+    "checks": 1313,
+    "newAccessChecks": 139,
+    "productionDataUsed": false,
+    "browserVisualQa": "not available",
+    "realAccountUat": "pending"
+  },
+  "migration": "None",
+  "publication": {
+    "status": "blocked",
+    "currentSiteVersion": 74,
+    "reason": "Required Sites scripts/site-workflow.mjs source preparation/publication helper is not installed or readable in this managed cloud environment."
+  },
+  "institutionalChanges": "No real account, programme, appointment or permission changes; no external login policy, employment classification, statutory rule, MPC scoring, CPD target or payment changes in production.",
+  "blockers": [
+    "Restore supported Sites helper and publish the verified source.",
+    "Provide independently approved teaching appointments, category/working-time records, programme scopes, evidence and appointment authorities.",
+    "Confirm external authenticated account IDs and available invitation/sign-in path; conduct representative staff and external contributor acceptance.",
+    "Registrar/Academic leadership must confirm applicable programme-level MQA standards, supervision policies, conflicts and MOHE appointment/teaching permit requirements. Software evidence is not a regulatory compliance certification."
+  ],
+  "guide": "docs/ACADEMIC_HUB.md"
+}

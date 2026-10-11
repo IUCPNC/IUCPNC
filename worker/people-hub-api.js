@@ -1,3 +1,4 @@
+import {directoryAcademicProfiles} from './academic-directory.js';
 import {directoryOrganisation} from './directory-organisation.js';
 import {primaryProjection} from './position-core.js';
 import {managementAccess} from './management-api.js';
@@ -53,7 +54,8 @@ export async function hubRoute(request,env,ctx){
    const vacancies=structure.positions.filter(p=>!p.employeeId).map(p=>({...p,parentId:oldToNew.get(p.parentId)||p.parentId,directoryManaged:false}));
    const validIds=new Set([...positions,...vacancies].map(p=>p.id));for(const p of vacancies)if(!validIds.has(p.parentId))p.parentId='';positions.push(...vacancies);
    structure.source='Employee Master: job title, department and reporting manager';structure.directoryManaged=true;structure.issues=hr?derived.issues:[];
-   return json({role:access.role,employees:employees.map(e=>({...e,profileUrl:hr?'/admin/profiles?employeeId='+encodeURIComponent(e.employee_id):e.employee_id===access.employeeId?'/employee/profile':reports.includes(e.employee_id)?'/manager?employeeId='+encodeURIComponent(e.employee_id):access.role==='leadership'?'/top-management?employeeId='+encodeURIComponent(e.employee_id):null,photoUrl:'/api/people-hub/photos/'+encodeURIComponent(e.employee_id)})),organisation:{...structure,source:hr?structure.source:'',positions,version:org?.version||0,updatedAt:org?.updated_at||null}});
+   const academicDirectory=await directoryAcademicProfiles(db,employees);
+   return json({role:access.role,academicContributors:academicDirectory.academicContributors,employees:academicDirectory.employees.map(e=>({...e,profileUrl:hr?'/admin/profiles?employeeId='+encodeURIComponent(e.employee_id):e.employee_id===access.employeeId?'/employee/profile':reports.includes(e.employee_id)?'/manager?employeeId='+encodeURIComponent(e.employee_id):access.role==='leadership'?'/top-management?employeeId='+encodeURIComponent(e.employee_id):null,photoUrl:'/api/people-hub/photos/'+encodeURIComponent(e.employee_id)})),organisation:{...structure,source:hr?structure.source:'',positions,version:org?.version||0,updatedAt:org?.updated_at||null}});
   }
   const photo=path.match(/^\/api\/people-hub\/photos\/([^/]+)$/);
   if(photo&&request.method==='GET'){

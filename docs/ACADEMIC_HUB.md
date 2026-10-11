@@ -2,6 +2,63 @@
 
 Reviewed: 9 October 2026. Baseline: published Nadi version 67, source commit `367e5ab9bcf7ac413489092738cb8e21a9029774`.
 
+## Order 5 update — 11 October 2026
+
+Implemented and tested in Cloud Codex against live source version 74. This increment is **not published**: the installed Sites package does not expose its required `scripts/site-workflow.mjs` source/publishing helper. No real accounts, appointments, programme data or access grants were changed.
+
+The complete NADI portal remains the project scope; Academic Hub is one module.
+
+### Access and employment distinctions
+
+| Category | Directory / profile relationship | Academic access |
+| --- | --- | --- |
+| Full-time lecturer | IUC employee · Full-time | Lecturer workspace with current explicit teaching permission |
+| Part-time lecturer | IUC employee · Part-time | Same teaching workflow, under approved teaching scope and employment terms |
+| Management / administrative staff appointed to teach | IUC employee; primary role retained; teaching role recorded separately | Lecturer workspace only while explicit teaching permission is current |
+| Student supervisor | IUC employee with recorded working time, or clearly labelled external academic contributor where applicable | Own approved, dated supervision work and reports; lecturer workspace only with a separate teaching permission |
+| Part-time supervisor | IUC employee · Part-time | Own approved supervision appointment; existing employee services retain their independent rules |
+| External academic examiner | External · not an IUC employee | Own approved assessment scope and confidential report submissions |
+| External industry advisor | External · not an IUC employee | Own approved industry advisory scope and reports |
+| External academic advisor | External · not an IUC employee | Own approved academic advisory scope and reports |
+
+Job titles, P&C status, leadership, QA or ordinary employment do not grant entry to Academic Hub. All lecturer administration/approval/QA roles additionally require current teaching eligibility. Expired or withdrawn teaching permissions end lecturer access; separately approved supervision/advisory appointments can still admit the person to their contributor workspace.
+
+P&C records independently approved teaching appointments from **Employee Profiles → Employment details → Approved teaching appointments**. This narrow employee-administration route permits only teaching grants for the selected employee, with effective dates, approved source, authority and independent approver. It does not open the Academic workspace to non-teaching P&C staff. Self-granting lecturer access is denied. Existing P&C academic configurators also need a current teaching permission before entering Hub configuration.
+
+Employment details now record **Full-time / Part-time** separately from Permanent / Contract / Consultant employment type, and record the academic function. Legacy `Part-Time` employment type remains a fallback only when working time is unrecorded. Other unrecorded working time displays **Unconfirmed**; permanent status does not automatically imply full-time.
+
+### Contributor appointment and reporting workflow
+
+1. Use the canonical Person Master identity. Authorised programme administrators can register a verified external identity, with an identity source, in Academic contributors. This creates no employment record or employee role. The existing Person Master `prospect` lifecycle value is retained for a non-employee identity; the approved academic appointment determines its contributor category.
+2. Create a programme-specific appointment with category, verified account ID, effective/end dates, affiliation, appointment/approval authority references, qualification and expertise evidence, applicable MQA/MOHE sources, eligibility review, duties, assigned work scope, conflict declaration and reviewed conflict status. Internal supervisors must link their existing employee and bound account. Part-time supervisors require canonical part-time employment.
+3. Submit → independent academic approval → publish. Draft, submitted or merely approved appointments do not grant access. External examiners require reviewed independence and cleared conflicts. Managed advisor conflicts require the approved management plan. Supervision records require applicable qualification, capacity, training and ethics policy review. The software does not invent programme-level qualifications or ratios.
+4. Contributors see only their current appointments, minimal programme references, and their own reports. They can submit findings and recommendations against an assigned source reference. They cannot open teaching sessions, student rosters, other contributors' reports, MPC, payroll evidence, academic exports or general administration through contributor access. Employee services remain available to internal supervisors through their existing independent employee permissions.
+5. Appropriately scoped teaching-eligible administrators, approvers and QA reviewers read confidential reports and record independent acceptance or follow-up, with comments. Submitted reports are retained; generic academic record editing cannot alter them. Appointment and report actions use the existing audit trail.
+6. Appointment expiry, withdrawal, person archive, canonical email change, account mismatch, employee exit or loss of required part-time classification stops contributor access. Mutation assertions recheck current appointment, person/account binding and programme publication in the database transaction.
+
+Directory cards and P&C profile lists include current approved external contributors, clearly separated from employees. External profiles show affiliation, category, programme and appointment dates. Qualification evidence, conflict declarations, account IDs and confidential reports stay in scoped academic review. External people are excluded from employee headcounts, employee organisation positions, employment records and employee self-service. This is a limited professional academic profile, not a private HR profile.
+
+No new database migration is required: identities use `people`, staff use Employee Master/profile sections, teaching access uses `academic_grants`, appointments and report outputs use `academic_records`, and audit uses `audit_events`.
+
+Finance receives the existing approved teaching-evidence handoff through `/api/payroll/academic-evidence`, governed by Payroll permissions. It no longer needs admission to Academic Hub. Existing remuneration, MPC scoring (50/20/15/15), CPD target (192), employee attendance and SIS/LMS source authority are retained.
+
+### Regulatory evidence and rollout
+
+Official references checked on 11 October 2026:
+
+- [MQA external examiner / advisor terminology, Notification 2/2015](https://www2.mqa.gov.my/qad/v2/garispanduan/2015/LampiranSM22015%20-%20Panduan%20Penggunaan%20Istilah.pdf): distinguishes independent academic assessment from advisory programme development; relevant expertise, appointment authority and conflicts must be reviewed. Advisory conflicts are not equated with examiner independence.
+- [MQA Master's and Doctoral Degree Standards, second edition 2021](https://www2.mqa.gov.my/qad/v2/2021/June/Final%20MDD%202021%20-%20upload%20v3.pdf): applicable supervision qualifications and capacity, research expertise, monitoring, training and ethics. These postgraduate requirements are not applied as universal numeric rules for all programmes.
+- [MQA current standards](https://www2.mqa.gov.my/qad/v2/stdnew.cfm) and [current good-practice guidance](https://www2.mqa.gov.my/qad/v2/ggpnew.cfm): choose the applicable programme, mode and current institutional requirements; guidance includes academic staffing and external academic terminology.
+- [MOHE/JPT private HEI legislation and documents](https://jpt.mohe.gov.my/index.php/en/hei/private-hei/24-private-hei-document): institutional review must confirm applicable legal appointment and teaching-permit requirements. Existing employee personal profiles retain teaching permit and expiry fields; their existence is not a compliance finding.
+
+This implementation supports evidence-backed institutional review; it does **not** certify MQA or MOHE compliance. Registrar/Academic leadership must supply approved programmes, qualification and appointment evidence, authority, supervision limits/training policy, conflict reviews and applicable MOHE permit decisions. No institutional records were invented or seeded.
+
+External access requires an approved authenticated account with the exact verified user ID and email. Trusted Sites identity is accepted by the existing authentication layer. The institutional employee-password signup policy was not broadened; external sign-in/invitation availability and representative real-account acceptance remain rollout gates. Directory visibility itself grants no login or employment status.
+
+Validation: 11 targeted synthetic suites, 1,313 checks across the latest passing runs; dependency-free Worker build passed. The new access suite contributes 139 checks for employment/role distinctions, all contributor categories, independent approvals, confidential report isolation, narrow P&C appointment maintenance, expiry/withdrawal/identity changes, atomic revocation and Payroll separation. No browser-based visual QA or representative institutional UAT was available. Publish only the verified committed source using the supported Sites helper, then perform real-account acceptance with approved institutional appointments. Review existing lecturer grants before rollout: only independently approved teaching appointments should be current.
+
+The following sections describe the original implementation and historical rollout assessment; this Order 5 update governs access where they differ.
+
 ## Existing-system assessment
 
 The source assessment was completed before implementation. Nadi is an authenticated Cloudflare Worker with D1, private R2 documents, canonical employee/account binding and shared audit, integration and notification services. The Site's existing public audience is preserved; protected application pages and APIs still require authentication and module permissions.

@@ -2,7 +2,7 @@
   "baselineVersion": 70,
   "baselineCommit": "ef3f41ff862e8bb1d5307c6fce9d016fce5b780e",
   "framework": null,
-  "reviewDate": "2026-10-10",
+  "reviewDate": "2026-10-11",
   "register": [
     {
       "reference": "Recruitment",
@@ -193,8 +193,8 @@
       "source": "worker/profile-api.js",
       "tests": "profiles",
       "owner": "P&C",
-      "lastReviewed": "2026-10-10",
-      "outstanding": "Real-account acceptance, operational data and applicable institutional policy must be verified; published does not mean fully operational."
+      "lastReviewed": "2026-10-11",
+      "outstanding": "Existing P&C-only case records and restricted documents passed profile/privacy regression alongside new service operations. Case-specific assignment authority and retention rules remain unevidenced; no expanded grants or autonomous decisions."
     },
     {
       "reference": 12,
@@ -385,8 +385,8 @@
       "source": "worker/policy-library.js",
       "tests": "policies",
       "owner": "P&C",
-      "lastReviewed": "2026-10-10",
-      "outstanding": "Real-account acceptance, operational data and applicable institutional policy must be verified; published does not mean fully operational."
+      "lastReviewed": "2026-10-11",
+      "outstanding": "Cloud implementation links the authenticated policy library to the existing HR query form; publication pending. Original source PDF acceptance, approved effective-dated acknowledgement routes and real-account UAT remain outstanding. Policy wording and approval labels unchanged."
     },
     {
       "reference": 24,
@@ -543,10 +543,10 @@
       "status": "Published but Unverified",
       "priority": "P2",
       "source": "worker/hr-service-api.js",
-      "tests": "hr-service",
+      "tests": "hr-service/service-operations/home-priorities/hr-letters",
       "owner": "P&C",
-      "lastReviewed": "2026-10-10",
-      "outstanding": "Real-account acceptance, operational data and applicable institutional policy must be verified; published does not mean fully operational."
+      "lastReviewed": "2026-10-11",
+      "outstanding": "Cloud implementation of requested-date triage, audited follow-ups and P&C acknowledgement passed focused checks; publication is pending the supported Sites helper. Approved institutional SLAs, service owners/assignments/escalation route and real-account acceptance remain outstanding."
     },
     {
       "reference": 34,
@@ -607,10 +607,10 @@
       "status": "Configuration Required",
       "priority": "P1",
       "source": "worker/academic-api.js",
-      "tests": "academic/academic-governance",
+      "tests": "academic/academic-governance/academic-access; cloud source validated, publication and real-account UAT pending",
       "owner": "Academic/Registrar",
-      "lastReviewed": "2026-10-10",
-      "outstanding": "Existing Academic code and integration tests are present. Approved programme data, dated grants, workload rules, student source and institutional UAT remain rollout gates."
+      "lastReviewed": "2026-10-11",
+      "outstanding": "Order 5 source adds lecturer admission, independently approved scoped contributors and canonical directory/full-time/part-time distinctions. Not published: supported Sites helper unavailable. Approved programmes, teaching grants, account IDs, academic evidence/policies, external sign-in and institutional UAT remain required. See docs/NADI-2-academic-access.json."
     },
     {
       "reference": 38,
@@ -623,10 +623,10 @@
       "status": "Configuration Required",
       "priority": "P1",
       "source": "worker/academic-api.js",
-      "tests": "academic/academic-governance",
+      "tests": "academic/academic-governance/academic-access; cloud source validated, publication and real-account UAT pending",
       "owner": "Academic/Registrar",
-      "lastReviewed": "2026-10-10",
-      "outstanding": "Existing Academic code and integration tests are present. Approved programme data, dated grants, workload rules, student source and institutional UAT remain rollout gates."
+      "lastReviewed": "2026-10-11",
+      "outstanding": "Order 5 source adds lecturer admission, independently approved scoped contributors and canonical directory/full-time/part-time distinctions. Not published: supported Sites helper unavailable. Approved programmes, teaching grants, account IDs, academic evidence/policies, external sign-in and institutional UAT remain required. See docs/NADI-2-academic-access.json."
     },
     {
       "reference": 39,
@@ -639,10 +639,10 @@
       "status": "Configuration Required",
       "priority": "P1",
       "source": "worker/academic-api.js",
-      "tests": "academic/academic-governance",
+      "tests": "academic/academic-governance/academic-access; cloud source validated, publication and real-account UAT pending",
       "owner": "Academic/Registrar",
-      "lastReviewed": "2026-10-10",
-      "outstanding": "Existing Academic code and integration tests are present. Approved programme data, dated grants, workload rules, student source and institutional UAT remain rollout gates."
+      "lastReviewed": "2026-10-11",
+      "outstanding": "Order 5 source adds lecturer admission, independently approved scoped contributors and canonical directory/full-time/part-time distinctions. Not published: supported Sites helper unavailable. Approved programmes, teaching grants, account IDs, academic evidence/policies, external sign-in and institutional UAT remain required. See docs/NADI-2-academic-access.json."
     },
     {
       "reference": 40,
@@ -655,10 +655,10 @@
       "status": "Configuration Required",
       "priority": "P1",
       "source": "worker/academic-api.js",
-      "tests": "academic/academic-governance",
+      "tests": "academic/academic-governance/academic-access; cloud source validated, publication and real-account UAT pending",
       "owner": "Academic/Registrar",
-      "lastReviewed": "2026-10-10",
-      "outstanding": "Existing Academic code and integration tests are present. Approved programme data, dated grants, workload rules, student source and institutional UAT remain rollout gates."
+      "lastReviewed": "2026-10-11",
+      "outstanding": "Order 5 source adds lecturer admission, independently approved scoped contributors and canonical directory/full-time/part-time distinctions. Not published: supported Sites helper unavailable. Approved programmes, teaching grants, account IDs, academic evidence/policies, external sign-in and institutional UAT remain required. See docs/NADI-2-academic-access.json."
     },
     {
       "reference": 41,
@@ -671,10 +671,10 @@
       "status": "Configuration Required",
       "priority": "P1",
       "source": "worker/academic-api.js",
-      "tests": "academic/academic-governance",
+      "tests": "academic/academic-governance/academic-access; cloud source validated, publication and real-account UAT pending",
       "owner": "Academic/Registrar",
-      "lastReviewed": "2026-10-10",
-      "outstanding": "Existing Academic code and integration tests are present. Approved programme data, dated grants, workload rules, student source and institutional UAT remain rollout gates."
+      "lastReviewed": "2026-10-11",
+      "outstanding": "Order 5 source adds lecturer admission, independently approved scoped contributors and canonical directory/full-time/part-time distinctions. Not published: supported Sites helper unavailable. Approved programmes, teaching grants, account IDs, academic evidence/policies, external sign-in and institutional UAT remain required. See docs/NADI-2-academic-access.json."
     },
     {
       "reference": 42,
@@ -687,10 +687,10 @@
       "status": "Configuration Required",
       "priority": "P1",
       "source": "worker/academic-api.js",
-      "tests": "academic/academic-governance",
+      "tests": "academic/academic-governance/academic-access; cloud source validated, publication and real-account UAT pending",
       "owner": "Academic/Registrar",
-      "lastReviewed": "2026-10-10",
-      "outstanding": "Existing Academic code and integration tests are present. Approved programme data, dated grants, workload rules, student source and institutional UAT remain rollout gates."
+      "lastReviewed": "2026-10-11",
+      "outstanding": "Order 5 source adds lecturer admission, independently approved scoped contributors and canonical directory/full-time/part-time distinctions. Not published: supported Sites helper unavailable. Approved programmes, teaching grants, account IDs, academic evidence/policies, external sign-in and institutional UAT remain required. See docs/NADI-2-academic-access.json."
     },
     {
       "reference": 43,
@@ -703,14 +703,14 @@
       "status": "Configuration Required",
       "priority": "P1",
       "source": "worker/academic-api.js",
-      "tests": "academic/academic-governance",
+      "tests": "academic/academic-governance/academic-access; cloud source validated, publication and real-account UAT pending",
       "owner": "Academic/Registrar",
-      "lastReviewed": "2026-10-10",
-      "outstanding": "Existing Academic code and integration tests are present. Approved programme data, dated grants, workload rules, student source and institutional UAT remain rollout gates."
+      "lastReviewed": "2026-10-11",
+      "outstanding": "Order 5 source adds lecturer admission, independently approved scoped contributors and canonical directory/full-time/part-time distinctions. Not published: supported Sites helper unavailable. Approved programmes, teaching grants, account IDs, academic evidence/policies, external sign-in and institutional UAT remain required. See docs/NADI-2-academic-access.json."
     },
     {
       "reference": 44,
-      "module": "Academic Evidence \u2192 MPC / CPD",
+      "module": "Academic Evidence → MPC / CPD",
       "existingFunction": "Verified evidence mapped to existing appraiser-confirmed KPIs; reads verified non-void CPD credits.",
       "frameworkEmployeeAccess": "Setup required",
       "frameworkPcAccess": "Restricted",
@@ -719,14 +719,14 @@
       "status": "Configuration Required",
       "priority": "P1",
       "source": "worker/academic-api.js",
-      "tests": "academic/academic-governance",
+      "tests": "academic/academic-governance/academic-access; cloud source validated, publication and real-account UAT pending",
       "owner": "Academic/Registrar",
-      "lastReviewed": "2026-10-10",
-      "outstanding": "Existing Academic code and integration tests are present. Approved programme data, dated grants, workload rules, student source and institutional UAT remain rollout gates."
+      "lastReviewed": "2026-10-11",
+      "outstanding": "Order 5 source adds lecturer admission, independently approved scoped contributors and canonical directory/full-time/part-time distinctions. Not published: supported Sites helper unavailable. Approved programmes, teaching grants, account IDs, academic evidence/policies, external sign-in and institutional UAT remain required. See docs/NADI-2-academic-access.json."
     },
     {
       "reference": 45,
-      "module": "Academic Teaching \u2192 Payroll",
+      "module": "Academic Teaching → Payroll",
       "existingFunction": "Verified hours and contract/source references; independent Academic approval; existing Payroll staging.",
       "frameworkEmployeeAccess": "Setup required",
       "frameworkPcAccess": "Role-based",
@@ -735,10 +735,10 @@
       "status": "Configuration Required",
       "priority": "P1",
       "source": "worker/academic-api.js",
-      "tests": "academic/academic-governance",
+      "tests": "academic/academic-governance/academic-access; cloud source validated, publication and real-account UAT pending",
       "owner": "Academic/Registrar",
-      "lastReviewed": "2026-10-10",
-      "outstanding": "Existing Academic code and integration tests are present. Approved programme data, dated grants, workload rules, student source and institutional UAT remain rollout gates."
+      "lastReviewed": "2026-10-11",
+      "outstanding": "Order 5 source adds lecturer admission, independently approved scoped contributors and canonical directory/full-time/part-time distinctions. Not published: supported Sites helper unavailable. Approved programmes, teaching grants, account IDs, academic evidence/policies, external sign-in and institutional UAT remain required. See docs/NADI-2-academic-access.json."
     },
     {
       "reference": 46,
@@ -751,10 +751,10 @@
       "status": "Configuration Required",
       "priority": "P1",
       "source": "worker/academic-api.js",
-      "tests": "academic/academic-governance",
+      "tests": "academic/academic-governance/academic-access; cloud source validated, publication and real-account UAT pending",
       "owner": "Academic/Registrar",
-      "lastReviewed": "2026-10-10",
-      "outstanding": "Existing Academic code and integration tests are present. Approved programme data, dated grants, workload rules, student source and institutional UAT remain rollout gates."
+      "lastReviewed": "2026-10-11",
+      "outstanding": "Order 5 source adds lecturer admission, independently approved scoped contributors and canonical directory/full-time/part-time distinctions. Not published: supported Sites helper unavailable. Approved programmes, teaching grants, account IDs, academic evidence/policies, external sign-in and institutional UAT remain required. See docs/NADI-2-academic-access.json."
     },
     {
       "reference": 47,
@@ -767,10 +767,10 @@
       "status": "Configuration Required",
       "priority": "P1",
       "source": "worker/academic-api.js",
-      "tests": "academic/academic-governance",
+      "tests": "academic/academic-governance/academic-access; cloud source validated, publication and real-account UAT pending",
       "owner": "Academic/Registrar",
-      "lastReviewed": "2026-10-10",
-      "outstanding": "Existing Academic code and integration tests are present. Approved programme data, dated grants, workload rules, student source and institutional UAT remain rollout gates."
+      "lastReviewed": "2026-10-11",
+      "outstanding": "Order 5 source adds lecturer admission, independently approved scoped contributors and canonical directory/full-time/part-time distinctions. Not published: supported Sites helper unavailable. Approved programmes, teaching grants, account IDs, academic evidence/policies, external sign-in and institutional UAT remain required. See docs/NADI-2-academic-access.json."
     },
     {
       "reference": 48,
@@ -783,10 +783,10 @@
       "status": "Configuration Required",
       "priority": "P1",
       "source": "worker/academic-api.js",
-      "tests": "academic/academic-governance",
+      "tests": "academic/academic-governance/academic-access; cloud source validated, publication and real-account UAT pending",
       "owner": "Academic/Registrar",
-      "lastReviewed": "2026-10-10",
-      "outstanding": "Existing Academic code and integration tests are present. Approved programme data, dated grants, workload rules, student source and institutional UAT remain rollout gates."
+      "lastReviewed": "2026-10-11",
+      "outstanding": "Order 5 source adds lecturer admission, independently approved scoped contributors and canonical directory/full-time/part-time distinctions. Not published: supported Sites helper unavailable. Approved programmes, teaching grants, account IDs, academic evidence/policies, external sign-in and institutional UAT remain required. See docs/NADI-2-academic-access.json."
     },
     {
       "reference": 49,
@@ -799,10 +799,10 @@
       "status": "Configuration Required",
       "priority": "P1",
       "source": "worker/academic-api.js",
-      "tests": "academic/academic-governance",
+      "tests": "academic/academic-governance/academic-access; cloud source validated, publication and real-account UAT pending",
       "owner": "Academic/Registrar",
-      "lastReviewed": "2026-10-10",
-      "outstanding": "Existing Academic code and integration tests are present. Approved programme data, dated grants, workload rules, student source and institutional UAT remain rollout gates."
+      "lastReviewed": "2026-10-11",
+      "outstanding": "Order 5 source adds lecturer admission, independently approved scoped contributors and canonical directory/full-time/part-time distinctions. Not published: supported Sites helper unavailable. Approved programmes, teaching grants, account IDs, academic evidence/policies, external sign-in and institutional UAT remain required. See docs/NADI-2-academic-access.json."
     },
     {
       "reference": 50,
@@ -860,7 +860,7 @@
     {
       "priority": "P2",
       "item": "Policy acknowledgement and service operations",
-      "dependency": "Approved current policy versions, acknowledgement routes, SLA ownership, request assignments/escalation and template approval."
+      "dependency": "Requested-date triage and version-ordered employee follow-ups/P&C acknowledgement are cloud-validated locally, pending publication. Formal SLAs, service ownership/assignments/escalation recipients and effective-dated policy acknowledgement routes require approval."
     },
     {
       "priority": "P2",
@@ -1024,6 +1024,22 @@
       "scope": "Guarded approved exit-to-Employee-Master lifecycle integration",
       "localChecks": 391,
       "frameworkSheetUpdated": false
+    },
+    {
+      "order": 4,
+      "increment": 1,
+      "date": "2026-10-11",
+      "report": "docs/NADI-2-service-operations.json",
+      "scope": "Requested-date triage, audited employee follow-ups and P&C acknowledgement using existing HR Service Desk records; integrated policy guidance and privacy regression.",
+      "localChecks": 644,
+      "publication": "Blocked: supported Sites workflow helper unavailable; no source push or deployment.",
+      "frameworkSheetUpdated": false
+    },
+    {
+      "order": 5,
+      "record": "docs/NADI-2-academic-access.json",
+      "date": "2026-10-11",
+      "status": "Cloud source tested; publication and institutional configuration pending"
     }
   ]
 }

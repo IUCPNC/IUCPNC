@@ -17,7 +17,7 @@ const leaveFiles=await Promise.all(['leave.html','leave.css','leave.js','leave-f
 for(let i=1;i<4;i++)leaveFiles[0]=leaveFiles[0].replace('/'+['leave.html','leave.css','leave.js','leave-files.js'][i],'/'+['leave.html','leave.css','leave.js','leave-files.js'][i]+'?v='+createHash('sha256').update(leaveFiles[i]).digest('hex').slice(0,12));
 await fs.writeFile(path.join(dist,'server','leave-assets.js'),['HTML','CSS','JS','FILES'].map((n,i)=>'export const LEAVE_'+n+'='+JSON.stringify(leaveFiles[i])+';').join('\n'));
 const read = (file, encoding = "utf8") => fs.readFile(path.join(root, file), encoding);
-for(const file of ['academic-api.js','academic-core.js','academic-foundation.js','academic-sessions.js','academic-evidence.js','academic-payroll-adapter.js','academic-notifications.js'])await fs.copyFile(path.join(root,'worker',file),path.join(dist,'server',file));
+for(const file of ['academic-directory.js','academic-contributors.js','academic-participant-policy.js','academic-api.js','academic-core.js','academic-foundation.js','academic-sessions.js','academic-evidence.js','academic-payroll-adapter.js','academic-notifications.js'])await fs.copyFile(path.join(root,'worker',file),path.join(dist,'server',file));
 const academicAssets=await Promise.all(['academic.html','academic.css','academic.js','academic-bridge.js'].map(f=>read('worker/'+f)));
 for(const [i,extension] of [[1,'css'],[2,'js']])academicAssets[0]=academicAssets[0].replace('/academic.'+extension,'/academic.'+extension+'?v='+createHash('sha256').update(academicAssets[i]).digest('hex').slice(0,12));
 await fs.writeFile(path.join(dist,'server','academic-assets.js'),['HTML','CSS','JS','BRIDGE_JS'].map((name,i)=>'export const ACADEMIC_'+name+'='+JSON.stringify(academicAssets[i])+';').join('\n'));
@@ -37,6 +37,7 @@ await fs.writeFile(path.join(dist,'server','position-assets.js'),['HTML','CSS','
 for(const file of ['connect-api.js','connect-core.js','connect-admin.js','connect-feeling.js'])await fs.copyFile(path.join(root,'worker',file),path.join(dist,'server',file));
 await fs.writeFile(path.join(dist,'server','connect-assets.js'),'export const CONNECT_HTML='+JSON.stringify(await read('worker/connect.html'))+';\nexport const CONNECT_CSS='+JSON.stringify(await read('worker/connect.css'))+';\nexport const CONNECT_JS='+JSON.stringify(await read('worker/connect.js'))+';\n');
 await fs.copyFile(path.join(root,'worker','hr-service-api.js'),path.join(dist,'server','hr-service-api.js'));
+await fs.copyFile(path.join(root,'worker','hr-service-operations.js'),path.join(dist,'server','hr-service-operations.js'));
 for(const file of ['hr-letter.js','hr-letterhead.js'])await fs.copyFile(path.join(root,'worker',file),path.join(dist,'server',file));
 await fs.mkdir(path.join(dist,'server','vendor'),{recursive:true});
 for(const file of ['pdf-lib.mjs','pdf-lib.LICENSE.md'])await fs.copyFile(path.join(root,'worker','vendor',file),path.join(dist,'server','vendor',file));
