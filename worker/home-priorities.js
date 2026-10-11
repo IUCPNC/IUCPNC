@@ -1,6 +1,7 @@
 import {APPOINTMENT_FROM,CURRENT_APPOINTMENT} from './appointment-source.js';
 import {hubAccess} from './people-hub-api.js';
 import {serviceEmployee} from './hr-service-api.js';
+import {FOLLOW_UP_PENDING_SQL,REQUESTED_DATE_SQL} from './hr-service-operations.js';
 import {academicAccess} from './academic-core.js';
 import {ACTIVE} from './connect-core.js';
 
@@ -20,10 +21,11 @@ export async function homePrioritiesRoute(request,env,{user,isPc}){
  const section=async(name,fn)=>{try{await fn()}catch{unavailable.push(name)}};
  if(employee){
   const id=employee.employee_id;
+  await section('My HR requests',async()=>add('hr-information','HR requests needing your information',await count(db,"SELECT COUNT(*) n FROM hr_service_requests WHERE employee_id=? AND status='Needs Information'",id),'/employee/requests','self'));
   await section('My appointments',async()=>add('appointments','Appointments awaiting acknowledgement',await count(db,"SELECT COUNT(*) n FROM "+APPOINTMENT_FROM+" WHERE p.employee_id=? AND "+CURRENT_APPOINTMENT+" AND EXISTS(SELECT 1 FROM position_documents d WHERE d.role_id=p.role_id AND d.status='Published' AND d.effective_date<=? AND (d.expiry_date IS NULL OR d.expiry_date>=?) AND NOT EXISTS(SELECT 1 FROM position_documents newer WHERE newer.role_id=d.role_id AND newer.kind=d.kind AND newer.version>d.version AND newer.status='Published' AND newer.effective_date<=? AND (newer.expiry_date IS NULL OR newer.expiry_date>=?)) AND NOT EXISTS(SELECT 1 FROM position_acknowledgements a WHERE a.assignment_id=p.id AND a.employee_id=p.employee_id AND a.document_id=d.id AND a.document_hash=d.content_hash))",id,day,day,day,day),'/employee/appointments','self'));
   await section('My learning',async()=>add('training','Upcoming approved training',await count(db,"SELECT COUNT(*) n FROM cpd_requests WHERE employee_id=? AND status='Approved' AND substr(starts_at,1,10)>=? AND substr(starts_at,1,10)<=?",id,day,until),'/employee/cpd','self','Next 30 days'));
   await section('My leave',async()=>add('leave','Leave applications in progress',await count(db,"SELECT COUNT(*) n FROM leave_requests WHERE employee_id=? AND status IN ('Pending','Information requested','Cancellation requested')",id),'/employee/leave','self'));
-  await section('My teaching',async()=>add('teaching','Upcoming teaching sessions',await count(db,"SELECT COUNT(*) n FROM academic_sessions WHERE employee_id=? AND publication='Published' AND status NOT IN ('Cancelled','Superseded') AND date>=? AND date<=?",id,day,until),'/academic','self','Next 30 days · published timetable'));
+  await section('My teaching',async()=>{if(!(await academicAccess(env,user,isPc)).lecturer)return;add('teaching','Upcoming teaching sessions',await count(db,"SELECT COUNT(*) n FROM academic_sessions WHERE employee_id=? AND publication='Published' AND status NOT IN ('Cancelled','Superseded') AND date>=? AND date<=?",id,day,until),'/academic','self','Next 30 days · published timetable');});
  }
  if(access.role==='hr'||access.role==='manager'){
   const scope=access.role==='hr'?'institution':'assigned team';
@@ -38,6 +40,10 @@ export async function homePrioritiesRoute(request,env,{user,isPc}){
  if(access.role==='leadership')await section('Workforce summary',async()=>add('workforce','Current workforce',await count(db,`SELECT COUNT(*) n FROM employees e WHERE ${ACTIVE}`),'/top-management','institutional summary','Current active employees; open the dashboard for scoped trends'));
  if(access.role==='hr'){
   await section('HR Service Desk',async()=>add('hr-requests','HR requests awaiting action',await count(db,"SELECT COUNT(*) n FROM hr_service_requests WHERE status IN ('Submitted','In Review','Approved')"),'/admin/requests','P&C'));
+  await section('HR request follow-ups',async()=>{
+   add('hr-follow-ups','Employee follow-ups awaiting acknowledgement',await count(db,'SELECT COUNT(*) n FROM hr_service_requests r WHERE '+FOLLOW_UP_PENDING_SQL),'/admin/requests','P&C');
+   add('hr-past-requested-date','HR requests past the requested date',await count(db,'SELECT COUNT(*) n FROM hr_service_requests r WHERE '+REQUESTED_DATE_SQL+' AND r.needed_by<?',day),'/admin/requests','P&C','Employee-requested dates; delivery commitments remain subject to P&C review');
+  });
   await section('Training review',async()=>add('cpd-review','Training requests awaiting review',await count(db,"SELECT COUNT(*) n FROM cpd_requests WHERE status='Pending HR / Admin Review'"),'/admin/cpd','P&C'));
  }
  await section('Academic approvals',async()=>{
@@ -59,7 +65,7 @@ export async function homePrioritiesRoute(request,env,{user,isPc}){
   });
   await section('Academic readiness',async()=>{
    const programmes=await count(db,"SELECT COUNT(*) n FROM academic_records WHERE kind='programme' AND status='Published'");
-   readiness.push({id:'academic',label:'Academic Hub configuration',status:'Configuration Required',detail:programmes+' published programmes. Institutional grants, approved sources, policies and real-account acceptance must be confirmed in Academic Hub.',href:'/academic'});
+   readiness.push({id:'academic',label:'Academic Hub configuration',status:'Configuration Required',detail:programmes+' published programmes. Institutional grants, approved sources, policies and real-account acceptance must be confirmed in Academic Hub.',...((await academicAccess(env,user,isPc)).hubEligible?{href:'/academic'}:{})});
   });
   readiness.push({id:'screening',label:'Document screening',status:env.OPENAI_API_KEY&&env.PROFILE_FILES?'Published but Unverified':'Configuration Required',detail:env.OPENAI_API_KEY&&env.PROFILE_FILES?'Connection configured; authorised document acceptance testing remains required.':'P&C document screening requires its configured extraction connection and private file storage.',...(env.OPENAI_API_KEY&&env.PROFILE_FILES?{href:'/admin/document-screening'}:{})});
   readiness.push({id:'recruitment',label:'Recruitment integration',status:'Published but Unverified',detail:'Talent Pre-Screening is listed as unverified in the institutional framework; its source, access and accepted-candidate handoff require verification.'});

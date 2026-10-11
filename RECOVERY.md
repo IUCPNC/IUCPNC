@@ -40,30 +40,28 @@ All 425 source-file mappings were verified. The manifest records 419 byte-identi
 
 A local Worker build passed in the isolated export folder. Five existing synthetic suites passed **391 checks**: lifecycle integration (77), profiles (49), employee eligibility (114), core integration (55), and HR service (96). Production data was not used. This is focused source-recovery validation, not full production-user acceptance or validation of withheld private source inputs.
 
-## Orders 4 and 5
+## Orders 4 and 5 — pending source recovered
 
-Historical command outputs in the original **IUC NADI Dev.** chat establish this unpublished sequence:
+The original Cloud Codex workspace is accessible again. The following Git objects and their ancestry back to the exact version 74 commit have now been verified:
 
 1. Order 4: `f3d89389244b6bc02268fffa05ba29dce1dfdcdf` — requested-date triage and audited HR service follow-ups.
-2. `bedd5fc` — NADI terminology recorded in `AGENTS.md`.
+2. `bedd5fcd341fd3ff0c1cd5c4656b42e6d68530e3` — NADI terminology recorded in `AGENTS.md`.
 3. Order 5: `671c8eae22c7e35bf942aac74c253422ec200c13` — approved lecturer and scoped academic contributor access.
 
-The chat records creation of a 363 KB format-patch covering the changes from version 74 through that final commit. These are historical observations, **not recovered or integrity-verified Git objects**. Neither pending commit is present in the recovered official Sites history, and the patch bytes are not accessible in this environment. None of those changes is represented as recovered in this GitHub snapshot.
+The combined format-patch bytes exactly match the output generated from these three commits. Its SHA-256 is `954911d5e3d66705677d13ab2c014f725ba31b13b41899f6bcc7c8b95118c3d2`. Original Git object validation passed. All 427 files in the GitHub recovery baseline were verified against their GitHub blob hashes before applying the pending changes.
 
-Recovery locations from that original chat:
+Changes have been ported onto the sanitized GitHub recovery. The overlapping redactions in `scripts/build-worker.mjs` and `docs/NADI-2-register.json` were retained. Other withheld private interfaces remain unchanged. The HR operations test uses an in-memory synthetic policy catalogue entry instead of depending on a withheld institutional policy. `AGENTS.md` also records the user's Cloud Codex development instruction. No employee directory, private policy catalogue, job-description source records, original private history or runtime credentials were restored into GitHub.
 
-- Chat ID: `01a126c8-20f5-71e5-a480-f13a3ca870a5` (durable host).
-- Original checkout: `/workspace/scratch/nadi-readiness`.
-- Combined patch: `/workspace/outputs/NADI-cloud-pending-changes.patch`.
-- Individual patches: `/workspace/outputs/NADI-order-4.patch` and `/workspace/outputs/NADI-order-5.patch`.
-- Earlier sanitized review ZIP, including Order 4 but predating Order 5: `/workspace/outputs/NADI-review/NADI-complete-source-review.zip`.
+The Worker build and 13 synthetic suites passed **1,540 checks** on the ported sanitized source. These include lecturer/contributor authorization, identity and expiry enforcement, directory employment distinctions, navigation, authentication, payroll isolation and HR service operations. No production data or real accounts were used. Browser QA was unavailable. Approved institutional records and representative real-account acceptance remain pending.
 
-Those paths and the version 74 preparation checkout (`/workspace/scratch/a1390065d583/.sites-checkout`) are absent from the attached environment. Filename searches for those source backups in both connected Drive accounts returned no matches. Chat transcripts are evidence and are not a substitute for the original code or patch bytes.
+[`docs/PENDING-ORDERS-RECOVERY.json`](docs/PENDING-ORDERS-RECOVERY.json) records the verified source commits, patch checksum, changed-file hashes and validation results. The earlier `docs/RECOVERY-MANIFEST.json` continues to describe the version 74 recovery baseline; its export hashes are not claims about files subsequently changed by Orders 4 and 5.
+
+This GitHub source recovery does not publish NADI. The existing live application remains at version 74 until the official Sites workflow packages, saves and successfully deploys the verified pending source. The sanitized repository is still unsuitable for direct production deployment without reconciling its withheld private source inputs through approved institutional processes.
 
 ## Blockers and escalation
 
 - Official publishing helper: the agent plugin-cache check returns `MODULE_NOT_FOUND` for `scripts/site-workflow.mjs`; the prior `/root` cache path returns `[Errno 13] Permission denied`. Skill-resource requests return `failed to read skill resource`. Ask the Cloud Codex/Sites environment maintainer to provision the official plugin scripts and dependencies for the runtime user.
 - Saved deployment archive: Sites retains `file_0000000009b482079c6d280e36d41c1e`, SHA-256 `39cf812a64a146a4e1c30767de071197298d70e5e57dd5044877e05acdd9424c`; materialization returns `file could not be authorized or resolved`. Ask Sites support for an actor-authorized export if needed. Complete source was recovered through Git instead; archive completeness was not inferred from its metadata.
-- Pending work: `git cat-file -t` for either pending commit returns `fatal: git cat-file: could not get object info`. Ask the Cloud Codex workspace maintainer to restore or export the original checkout's Git objects and the combined patch from the identified chat's workspace/snapshot. Preserve the snapshot and files; do not reset the existing Site or database.
+- Pending work: the original Cloud Codex checkout and combined patch have now been recovered and verified as described above. Preserve those original private Git objects separately from the sanitized GitHub repository.
 
-After recovering the pending objects/patch, verify their hashes, ancestry and clean applicability to the exact version 74 commit, inspect their sensitive content, and run appropriate checks. Production deployment remains on hold until the source, publishing environment and pending changes are verified. Use the official Sites workflow when publication is eventually authorized; no publishing helper has been recreated and no alternate publishing flow has been introduced here.
+Source recovery and synthetic validation are complete. Restore the official Sites helper, then use the supported workflow on the preserved original source while retaining Site identity, authentication and production D1/R2 data. Source publication is authorized by the user's request; institutional activation still requires approved appointment records and real-account acceptance. No publishing helper has been recreated and no alternate production publishing flow has been introduced here.

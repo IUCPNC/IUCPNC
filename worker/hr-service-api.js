@@ -1,5 +1,7 @@
 import {isLetter,letterDefinition,letterSource,renderLetter,renderLetterPreview,hashBytes} from './hr-letter.js';
-import {currentEmployee} from './employee-eligibility.js';
+import {currentEmployee,ACTIVE} from './employee-eligibility.js';
+import {businessDate} from './profile-schema.js';
+import {serviceOperations,serviceEventView,OPEN_REQUEST_SQL,FOLLOW_UP_EVENT,FOLLOW_UP_ACK_EVENT,FOLLOW_UP_VERSION_SQL,FOLLOW_UP_ACK_SQL,REQUESTED_DATE_SQL} from './hr-service-operations.js';
 export const REQUEST_TYPES=['Employment confirmation letter','Salary confirmation letter','Employment verification','General letter request','Document / certified copy request','HR query','Benefits / payroll query','Other HR request'];
 export const REQUEST_STATUSES=['Submitted','In Review','Needs Information','Approved','Issued','Rejected','Cancelled'];
 const json=(v,status=200)=>new Response(JSON.stringify(v),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff'}});
@@ -13,9 +15,9 @@ async function body(request){try{return await(await bounded(request,32000)).json
 export async function serviceEmployee(env,user){
  return currentEmployee(env,user);
 }
-const select="SELECT r.*,e.employee_name,e.email AS employee_email,e.department,e.position FROM hr_service_requests r JOIN employees e ON e.employee_id=r.employee_id";
+const select="SELECT r.*,e.employee_name,e.email AS employee_email,e.department,e.position,"+FOLLOW_UP_VERSION_SQL+" AS follow_up_version,"+FOLLOW_UP_ACK_SQL+" AS follow_up_ack_version FROM hr_service_requests r JOIN employees e ON e.employee_id=r.employee_id";
 async function getRequest(db,id){return q(db,select+' WHERE r.id=?',id).first()}
-const view=(r,admin=false)=>({id:r.id,reference:r.reference,employeeId:r.employee_id,employeeName:r.employee_name,department:r.department,type:r.request_type,autoLetter:isLetter(r),subject:r.subject,details:r.details,recipient:r.recipient,neededBy:r.needed_by,status:r.status,version:r.version,createdAt:r.created_at,updatedAt:r.updated_at,approvedAt:r.approved_at,issuedAt:r.issued_at,...(admin?{employeeEmail:r.employee_email,draftReply:r.draft_reply,internalNotes:r.internal_notes,approvedBy:r.approved_by,issuedBy:r.issued_by}:r.status==='Issued'?{reply:r.draft_reply}:{})});
+const view=(r,admin=false)=>({id:r.id,reference:r.reference,employeeId:r.employee_id,employeeName:r.employee_name,department:r.department,type:r.request_type,autoLetter:isLetter(r),subject:r.subject,details:r.details,recipient:r.recipient,neededBy:r.needed_by,status:r.status,version:r.version,createdAt:r.created_at,updatedAt:r.updated_at,approvedAt:r.approved_at,issuedAt:r.issued_at,operations:serviceOperations(r),...(admin?{employeeEmail:r.employee_email,draftReply:r.draft_reply,internalNotes:r.internal_notes,approvedBy:r.approved_by,issuedBy:r.issued_by}:r.status==='Issued'?{reply:r.draft_reply}:{})});
 const fileView=f=>({id:f.id,name:f.original_filename,mimeType:f.mime_type,bytes:f.bytes,createdAt:f.created_at,generated:!!f.generated});
 function event(db,ctx,rid,operation,type,message,time){return q(db,"INSERT INTO hr_service_events (id,request_id,actor_id,actor_email,actor_role,event_type,message,created_at) SELECT ?,id,?,?,?,?,?,? FROM hr_service_requests WHERE id=? AND last_operation=?",crypto.randomUUID(),ctx.user.userId,ctx.user.email,ctx.admin?'admin':'employee',type,message,time,rid,operation)}
 async function change(db,ctx,r,sets,values,type,message,more=[],guard=null){const operation=crypto.randomUUID(),time=stamp();const update=q(db,'UPDATE hr_service_requests SET '+sets+',version=version+1,last_operation=?,updated_at=? WHERE id=? AND version=?'+(guard?.sql||''),...values,operation,time,r.id,r.version,...(guard?.args||[]));const extras=typeof more==='function'?more(operation,time):more;const result=await db.batch([update,...extras,event(db,ctx,r.id,operation,type,message,time)]);if(!result[0].meta?.changes)throw fail('This request or employee record changed while you were reviewing it. Refresh before trying again.',409);return getRequest(db,r.id)}
@@ -38,9 +40,11 @@ export async function serviceDeskRoute(request,env,ctx){
    const adminScope=url.searchParams.get('scope')==='admin';if(adminScope&&!admin)throw fail('P&C admin access is required.',403);if(!adminScope&&!employee)throw fail('An active employee account is required.',403);
    const statuses=REQUEST_STATUSES.map(s=>"SUM(CASE WHEN r.status='"+s+"' THEN 1 ELSE 0 END) AS '"+s+"'").join(',');
    const where=adminScope?'':' WHERE r.employee_id=?',params=adminScope?[]:[employee.employee_id];
-   const list=await rows(db,select+where+' ORDER BY r.created_at DESC LIMIT 500',...params);
+   const day=businessDate(),order=adminScope?"CASE WHEN status IN "+OPEN_REQUEST_SQL+" AND follow_up_version>follow_up_ack_version THEN 0 WHEN status IN "+OPEN_REQUEST_SQL+" AND date(needed_by)=needed_by AND needed_by<? THEN 1 ELSE 2 END,created_at DESC":"created_at DESC";
+   const list=await rows(db,'SELECT * FROM ('+select+where+') queue ORDER BY '+order+' LIMIT 500',...params,...(adminScope?[day]:[]));
    const counts=await q(db,'SELECT COUNT(*) AS total,'+statuses+' FROM hr_service_requests r'+where,...params).first();
-   return json({requests:list.map(r=>view(r,false)),counts,limit:500,refreshedAt:stamp()});
+   const operations=await q(db,'SELECT COALESCE(SUM(CASE WHEN '+REQUESTED_DATE_SQL+' AND r.needed_by<? THEN 1 ELSE 0 END),0) AS pastRequestedDate,COALESCE(SUM(CASE WHEN '+REQUESTED_DATE_SQL+' AND r.needed_by=? THEN 1 ELSE 0 END),0) AS dueToday,COALESCE(SUM(CASE WHEN r.status IN '+OPEN_REQUEST_SQL+' AND r.follow_up_version>r.follow_up_ack_version THEN 1 ELSE 0 END),0) AS followUpPending FROM ('+select+where+') r',day,day,...params).first();
+   return json({requests:list.map(r=>view(r,false)),counts,operations,businessDate:day,limit:500,refreshedAt:stamp()});
   }
   if(path==='/api/hr-service/requests'&&request.method==='POST'){
    if(!employee)throw fail('An active employee profile is required to submit a request.',403);const b=await body(request);
@@ -60,7 +64,7 @@ export async function serviceDeskRoute(request,env,ctx){
   if(!action&&request.method==='GET'){
    const history=await rows(db,'SELECT event_type,message,actor_role,created_at FROM hr_service_events WHERE request_id=? ORDER BY created_at,id',id);
    const files=admin||r.status==='Issued'?await rows(db,'SELECT * FROM hr_service_files WHERE request_id=? AND removed_at IS NULL ORDER BY created_at',id):[];
-   return json({request:view(r,admin),events:history,files:files.map(fileView),...(admin?{letter:await letterState(db,r,!!env.PROFILE_FILES)}:{})});
+   return json({request:view(r,admin),events:history.map(serviceEventView),files:files.map(fileView),...(admin?{letter:await letterState(db,r,!!env.PROFILE_FILES)}:{})});
   }
   if(action==='letter-preview'&&request.method==='GET'&&!fileId){
    if(!admin)throw fail('Letter preview not found.',404);const saved=letterRecord(r);if(!saved)throw fail('Generate this letter before previewing it.',404);
@@ -88,13 +92,23 @@ export async function serviceDeskRoute(request,env,ctx){
   }
   if(action==='actions'&&request.method==='POST'&&!fileId){
    const b=await body(request);validateVersion(b.version,r);editable(r);const note=trim(b.message,5000,'Message');
-   if(!admin||['cancel','information'].includes(b.action)){
+   if(!admin||['cancel','information','followUp'].includes(b.action)){
     if(!employee||r.employee_id!==employee.employee_id)throw fail('Only the requesting employee can perform this action.',403);ctx={...ctx,admin:false};
     if(b.action==='cancel'&&['Submitted','In Review','Needs Information'].includes(r.status)){const updated=await change(db,ctx,r,"status='Cancelled'",[],'Cancelled','Employee cancelled this request.');return json({request:view(updated)})}
     if(b.action==='information'&&r.status==='Needs Information'&&note){const updated=await change(db,ctx,r,"status='Submitted'",[],'Information provided',note);return json({request:view(updated)})}
+    if(b.action==='followUp'){
+     if(!serviceOperations(r).canFollowUp)throw fail('Follow up after your requested date has passed, or wait for P&C to acknowledge the existing follow-up.',409);
+     if(!note)throw fail('Explain what you need P&C to follow up.');
+     const guard={sql:" AND EXISTS (SELECT 1 FROM employees e WHERE e.employee_id=? AND lower(e.email)=lower(?) AND (e.account_user_id IS NULL OR e.account_user_id='' OR e.account_user_id=?) AND "+ACTIVE+") AND (SELECT COUNT(*) FROM employees e WHERE lower(e.email)=lower(?) AND "+ACTIVE+")=1",args:[r.employee_id,ctx.user.email,ctx.user.userId,ctx.user.email]};
+     const updated=await change(db,ctx,r,'status=status',[],FOLLOW_UP_EVENT,JSON.stringify({version:r.version+1,message:note}),[],guard);return json({request:view(updated)});
+    }
     throw fail('This action is unavailable for your request.',403);
    }
    let sets,values=[],type,message;
+   if(b.action==='acknowledgeFollowUp'){
+    if(!serviceOperations(r).followUpPending)throw fail('There is no pending follow-up to acknowledge.',409);
+    const updated=await change(db,ctx,r,'status=status',[],FOLLOW_UP_ACK_EVENT,JSON.stringify({version:r.version+1,message:'P&C acknowledged your follow-up. Your original request remains open.'}));return json({request:view(updated,true)});
+   }
    if(isLetter(r)&&['saveDraft','approve','issue'].includes(b.action))throw fail('Preview the automatically generated letter, then choose Approve & issue letter.',409);
    if(b.action==='generateLetter'){
     if(!isLetter(r))throw fail('This request does not use the standard employment letter.',400);

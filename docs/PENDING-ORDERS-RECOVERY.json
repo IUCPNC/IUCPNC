@@ -1,0 +1,262 @@
+{
+  "recorded_on": "2026-10-11",
+  "timezone": "Asia/Kuala_Lumpur",
+  "site_id": "appgprj_6abe29d9b6bc8191a17de96f35cbcfee",
+  "live_version": 74,
+  "original_base_sha": "ed2bed22be4c38d9f1b78fed5ce5c65629103a4c",
+  "github_recovery_base_sha": "96d731f1902e60585bf2e55131a0308049ce7b3d",
+  "verified_pending_commits": [
+    "f3d89389244b6bc02268fffa05ba29dce1dfdcdf",
+    "bedd5fcd341fd3ff0c1cd5c4656b42e6d68530e3",
+    "671c8eae22c7e35bf942aac74c253422ec200c13"
+  ],
+  "combined_patch_sha256": "954911d5e3d66705677d13ab2c014f725ba31b13b41899f6bcc7c8b95118c3d2",
+  "ancestry_and_patch_bytes_verified": true,
+  "github_baseline_blob_checks": 427,
+  "ported_files": [
+    {
+      "path": "AGENTS.md",
+      "ported_sha256": "f710335f61397022a6a52c39cca93f4c774dad8e9d19cef7b81fc4af7eadd52d",
+      "ported_git_blob": "4d6fd609db0b765fbdc71c01ae0b8cebb302b776"
+    },
+    {
+      "path": "docs/ACADEMIC_HUB.md",
+      "ported_sha256": "a56c6b5b2e54ef7eff9071858bab4242bf7e6f613da7b545e0388b89e818a440",
+      "ported_git_blob": "611436e14630fc02fc49e75593a387ed00891d43"
+    },
+    {
+      "path": "docs/NADI-2-academic-access.json",
+      "ported_sha256": "9a7dd10181ab88db783f9c9754b224bf7d90725ce4856fc4bc6ea7a19b22ad25",
+      "ported_git_blob": "20658466bd6c0fd0a71dcc6f5b182bca8607eb6b"
+    },
+    {
+      "path": "docs/NADI-2-register.json",
+      "ported_sha256": "baeae4bd4d8136d8cd30fe4591b3a81e4c749cdbcbae3fe605ce235be2fa2ef9",
+      "ported_git_blob": "aed5fe8bea1da4381ed959aa9a5e66e9f5ed9181"
+    },
+    {
+      "path": "docs/NADI-2-service-operations.json",
+      "ported_sha256": "61ff22790a7b7b33196ed8c0b18d8f1e653b9110ed1cea4a37e18efc9f4de641",
+      "ported_git_blob": "203a45dc86682b40d529c8f4be0f720ccf6f9f31"
+    },
+    {
+      "path": "scripts/academic-fixture.mjs",
+      "ported_sha256": "3aae5c8b8d965fec5c70ad7ab29265e50673543a405ab8ec4f5622a8abc47f90",
+      "ported_git_blob": "bf16a1dfcc21a50c13515aa007d2d1abadc36569"
+    },
+    {
+      "path": "scripts/build-worker.mjs",
+      "ported_sha256": "a87ab9a05a97d6fbdad0548ff491089ba685d7660f5cd541f7f7e9a082a0ddfb",
+      "ported_git_blob": "bc6fa438520d93858e100ea1f36fc0bae7ae7631"
+    },
+    {
+      "path": "scripts/test-academic-access.mjs",
+      "ported_sha256": "c2ed5bb0fe247cbd63b5f97b41a275d39a3662d3194419a2be97cf10d8ead2fe",
+      "ported_git_blob": "a0d94844d1517f7aa4724c8ae3bf6505b05cb213"
+    },
+    {
+      "path": "scripts/test-academic-governance.mjs",
+      "ported_sha256": "ec62cc0ab6b0db428e05e7074d881da7d8a53c9628eb3d198021e0ba7a948186",
+      "ported_git_blob": "ee6f3f1f387aa3f8fb63cdf7cc5d6a53517fe472"
+    },
+    {
+      "path": "scripts/test-academic.mjs",
+      "ported_sha256": "56ad0cf0f4099963b0accace969ffe73fa2c82a3900d2de2eea25ac7e036ce93",
+      "ported_git_blob": "2379a6ca84b261e9441fe4590c237734cb4c1927"
+    },
+    {
+      "path": "scripts/test-core-integration.mjs",
+      "ported_sha256": "55b80980183ed3c232b3ad4f6031918cbe50b287fbfebaad974cfe2ec11bd710",
+      "ported_git_blob": "4c3739cca2252990dce87f4c3b653bbe774f03b1"
+    },
+    {
+      "path": "scripts/test-home-priorities.mjs",
+      "ported_sha256": "9d35dd041341a219134dd128784d8609fb16c85e938cf9a0b30baaa3cfceb5c0",
+      "ported_git_blob": "500492062af8b02fc64d6d3b1d3ae4bc64159aea"
+    },
+    {
+      "path": "scripts/test-people-hub.mjs",
+      "ported_sha256": "26ba708ecf0994cfad6cdcbd8482554dc908e3f280d967d89986d415f8860234",
+      "ported_git_blob": "dac87f9be2c46a56dfe60dedaaf6747ac7e7105c"
+    },
+    {
+      "path": "scripts/test-service-operations.mjs",
+      "ported_sha256": "a7348aca7415998c39bb9676c7ff4ad332eab2c27bd195c5bef7eb90453ddc42",
+      "ported_git_blob": "750051b477956374428c0ac5151a16c1fc432e1e"
+    },
+    {
+      "path": "worker/academic-api.js",
+      "ported_sha256": "476e04b3fa006c15ba79d5fa2f2cd2626eb10e1d0186744b766505bc43fba6ae",
+      "ported_git_blob": "0ce0d786a6933af13ec0751c1314e7b352515a81"
+    },
+    {
+      "path": "worker/academic-bridge.js",
+      "ported_sha256": "20940ff6972e610b76f01afecad47ec0488f9529005756d38de4d58a22189bb1",
+      "ported_git_blob": "901e139606f566a0ae02a9240a8ad4127621de69"
+    },
+    {
+      "path": "worker/academic-contributors.js",
+      "ported_sha256": "aaf184850f23ba67802b2cec7c64913badf03cca2c0f432b035d02917ff74fac",
+      "ported_git_blob": "ac3e5a30dd5ff4338914ca4f9f9651d71b59ddbd"
+    },
+    {
+      "path": "worker/academic-core.js",
+      "ported_sha256": "e59516bbfea905a12f40e367eef5d343662bf3fb4ecfbc3d290f642fa2697566",
+      "ported_git_blob": "1e30b0ff56e90c8aa90bde30d3377ef0dc419b39"
+    },
+    {
+      "path": "worker/academic-directory.js",
+      "ported_sha256": "aa8b74d72447c8878564033cb5120f2ea23a419c6a5958023ccab7680126fc14",
+      "ported_git_blob": "5f4fedb44875f120c559de2cea73a48e1d30c282"
+    },
+    {
+      "path": "worker/academic-evidence.js",
+      "ported_sha256": "a1caef464957e941f246a43eee846ce19e42b9fb6cbe7d1e7cc88b81ca364548",
+      "ported_git_blob": "83bb2e6f3bc97767223e9d39a53eb2c396c70f42"
+    },
+    {
+      "path": "worker/academic-foundation.js",
+      "ported_sha256": "6200b98eb32c6b35383871ccf782df2be56b1454d7aa59aa9cd99d02f093a649",
+      "ported_git_blob": "1e8159dc3b8d097cf5f998667d5f49188ad5276b"
+    },
+    {
+      "path": "worker/academic-participant-policy.js",
+      "ported_sha256": "eb9b1eb8738779ff2be6c59826481ac1945c27147dd6ef842c1669d65d5194df",
+      "ported_git_blob": "75f8ce75042004b3a574e517b7242540529b6b25"
+    },
+    {
+      "path": "worker/academic-sessions.js",
+      "ported_sha256": "d810b00b07637c0471351d765a21abf931f018a1e149883a36b1418d10de8c02",
+      "ported_git_blob": "725309d0bbcc250386dfe2c0233f104ea0316a4f"
+    },
+    {
+      "path": "worker/academic.html",
+      "ported_sha256": "5f9e83ad36f837eb22236b82341dee2b7672c958a55c74cf87483f20cf9eb262",
+      "ported_git_blob": "8ecf5d79c9b57de33c1b0e62e9ae74c734920414"
+    },
+    {
+      "path": "worker/academic.js",
+      "ported_sha256": "5c40e77d8babe7df202bc036e6278facb5616ca261b0cf5ec756dfee738590e3",
+      "ported_git_blob": "467d53596c36f25adc7774d996287e5cd9e13dd1"
+    },
+    {
+      "path": "worker/home-priorities.js",
+      "ported_sha256": "fed8c0fa7fba2834dc755e3bdda02c458ef01285a061aff0dc9936f97adcc8c0",
+      "ported_git_blob": "3757b9979963f1274dc8269f36b7878de29c6a27"
+    },
+    {
+      "path": "worker/hr-service-api.js",
+      "ported_sha256": "b5274ab870c760abcabc24058641a505c264c02367af84d574cf0774219420af",
+      "ported_git_blob": "b5897faf8ff12977920c00031dcfc2545e3b9e3e"
+    },
+    {
+      "path": "worker/hr-service-operations.js",
+      "ported_sha256": "faf890b20c9450222ed14a6238b29acf3e38cfc140d182d4a81dcb713b390e63",
+      "ported_git_blob": "db17890797b6d2e28a02782e53949367a521b04c"
+    },
+    {
+      "path": "worker/hr-service.css",
+      "ported_sha256": "e802ecca404d54639812eb14a421c9ba574fc1420bb7976d200363b74e79dc3c",
+      "ported_git_blob": "2d1d661a4bfee3d2ed90c328a9f1daf3c2fb63d3"
+    },
+    {
+      "path": "worker/hr-service.html",
+      "ported_sha256": "80a0369df4052fbacde8e2d86640d42da0e17dbe6dd0f7193e08b70b9dee0e9d",
+      "ported_git_blob": "fc5d3ce7befec4f1521c5c09936e3787ab8085ca"
+    },
+    {
+      "path": "worker/hr-service.js",
+      "ported_sha256": "0f784eadf20458e044fa9d945f99052490949cd61d875485fc4943753a5ba1ab",
+      "ported_git_blob": "a91f0fc9d01c2932a442d56e462447a975b12cdc"
+    },
+    {
+      "path": "worker/index.js",
+      "ported_sha256": "61e1cb8b5935965cfb4ee193fb7784fcae07b173242e48e49df0a96cc93850d9",
+      "ported_git_blob": "5eac7acdfb0c1343e3b776f4f4276ee4c4896257"
+    },
+    {
+      "path": "worker/master.js",
+      "ported_sha256": "b5a41f0fe0b4e307baa4b924e4762761c1c136c3d83f91cf15d40844ea9dc5d4",
+      "ported_git_blob": "4ec9da7774008a85483ca7cabd7aed7805b79a6b"
+    },
+    {
+      "path": "worker/payroll-api.js",
+      "ported_sha256": "3533657fc8678549bdba41a3db210963b2fe02fb184b181af5422dbaa4ca0bcc",
+      "ported_git_blob": "4442c8825378de37ce5246801481c76913b8ff73"
+    },
+    {
+      "path": "worker/people-hub-api.js",
+      "ported_sha256": "a930ec26e8888d7ca584a5c5a0a15b4951e253bc5ee9ef1d12e5111c4245fede",
+      "ported_git_blob": "2226e572d110006486b8fbc2c9ece0091ca50529"
+    },
+    {
+      "path": "worker/people-hub.js",
+      "ported_sha256": "8def415ad849bad3f6a7a40119da2ba7c1d57088e372de095b27afe0f3bdd8af",
+      "ported_git_blob": "b5bf66fea967eaef1a4c1966a095b21cb821cb95"
+    },
+    {
+      "path": "worker/policy-library.js",
+      "ported_sha256": "09ba4d0bc2767ff68245c6cfb4794c9a3fce41ded3b33e5028441b2480efc3f5",
+      "ported_git_blob": "c8a3959bfc39996876b3341d5010e11e273135e0"
+    },
+    {
+      "path": "worker/portal-navigation.js",
+      "ported_sha256": "21e244c9574dc2ba999f501ca548b016b26da4c05d8e75e13546e4e62fff579f",
+      "ported_git_blob": "21c0c5c19efe129a86940f3fdcadc02d78661c8c"
+    },
+    {
+      "path": "worker/profile-api.js",
+      "ported_sha256": "37adca0667051f3d730dec623ff02cda5b2a179f8bae1123f0d935874dcec13f",
+      "ported_git_blob": "b284b252b23fce9dc292ef969f0fcefd3635a0f8"
+    },
+    {
+      "path": "worker/profile-schema.js",
+      "ported_sha256": "bc1769fcc2c2896dfbf3bad2b2a07c358ab520b03510b509e9cf605db8af1227",
+      "ported_git_blob": "8af95c05c4759e405a349821d6b1450e5e9793b3"
+    },
+    {
+      "path": "worker/profile.js",
+      "ported_sha256": "234848920fc7fde170ecc67f0f18a30c2ff1f41666bc3bb56bcf26ef7003c377",
+      "ported_git_blob": "dbc0e253cf32929dc470ee22a71163dc8b8bd76d"
+    }
+  ],
+  "supplemental_changes": [
+    "Preserved GitHub recovery redactions in overlapping build script and project register.",
+    "Used an in-memory synthetic policy in the HR operations test.",
+    "Recorded the user's Cloud Codex instruction in AGENTS.md.",
+    "Updated recovery documentation; baseline manifest remains historical."
+  ],
+  "validation": {
+    "worker_build": "passed",
+    "runtime_employee_seed_count": 0,
+    "synthetic_suites": {
+      "academic-access": 139,
+      "academic": 152,
+      "academic-governance": 63,
+      "core-integration": 55,
+      "employee-eligibility": 114,
+      "home-priorities": 84,
+      "people-hub": 62,
+      "profiles": 49,
+      "navigation": 373,
+      "nadi-auth": 150,
+      "payroll-governance": 72,
+      "service-operations": 131,
+      "hr-service": 96
+    },
+    "total_checks": 1540,
+    "production_data_used": false,
+    "browser_qa": "unavailable",
+    "real_account_acceptance": "pending"
+  },
+  "publication": {
+    "status": "blocked",
+    "reason": "Official Sites scripts/site-workflow.mjs helper is unavailable. GitHub synchronization does not publish the existing Site.",
+    "preserve": [
+      "existing Site project ID",
+      "audience and authentication",
+      "production D1 and R2 data"
+    ],
+    "institutional_records": "Approved appointment sources, qualifications, conflicts, scope and verified accounts remain to be supplied."
+  }
+}

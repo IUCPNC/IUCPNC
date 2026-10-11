@@ -67,7 +67,7 @@ async function portalAccess(env,user){
  if(employee&&!hr){const grants=await env.DB.prepare('SELECT role FROM management_grants WHERE employee_id=?').bind(row.employee_id).all();manager=grants.results.some(g=>g.role==='manager');leadership=grants.results.some(g=>g.role==='leadership')}}
  const payroll=env.DB?await payrollAccess(env,user):{grants:[]};
  const academic=env.DB?await academicAccess(env,user,isPc):{grants:[]};
- return {hr,employee,manager,leadership,employeeId,academic:academic.grants.length>0||hr,payroll:payroll.grants.some(g=>g.role!=='summary'),payrollSummary:payroll.grants.some(g=>g.role==='summary'),screeningReady:!!env.OPENAI_API_KEY&&!!env.PROFILE_FILES};
+ return {hr,employee,manager,leadership,employeeId,academic:!!academic.hubEligible,contributorOnly:academic.hubEligible&&!academic.lecturer&&!employee&&!hr,payroll:payroll.grants.some(g=>g.role!=='summary'),payrollSummary:payroll.grants.some(g=>g.role==='summary'),screeningReady:!!env.OPENAI_API_KEY&&!!env.PROFILE_FILES};
 }
 async function appHtml(source,request,env,user){return html(portalShell(source,{...await portalAccess(env,user),authMethod:user.authMethod},new URL(request.url)));
 }
@@ -115,7 +115,7 @@ async function dispatch(request,env,trustedUser=null){
     const gate=authGate(request,auth,!!trustedUser);if(gate)return gate;
     if(user&&!trustedUser&&path.startsWith('/api/')&&!servicePath(path)&&['POST','PUT','PATCH','DELETE'].includes(request.method)&&request.headers.get('origin')!==url.origin)return json({error:'Refresh Nadi before saving this change.'},403);
     if(path==='/academic.css')return text(ACADEMIC_CSS,'text/css');if(path==='/academic.js')return text(ACADEMIC_JS,'application/javascript');if(path==='/academic-bridge.js')return text(ACADEMIC_BRIDGE_JS,'application/javascript');
-    if(path==='/academic'){if(!user)return signIn(request,path);const a=await academicAccess(env,user,isPc);if(!a.employeeId&&!a.pc&&!a.grants.length)return denied('An active employee or authorised academic appointment is required.');return appHtml(ACADEMIC_HTML,request,env,user);}
+    if(path==='/academic'){if(!user)return signIn(request,path);const a=await academicAccess(env,user,isPc);if(!a.hubEligible)return denied('A current approved teaching or contributor appointment is required for Academic Hub.');return appHtml(ACADEMIC_HTML,request,env,user);}
     const priorityResponse=await homePrioritiesRoute(request,env,{user,isPc});if(priorityResponse)return priorityResponse;
     const academicResponse=await academicRoute(request,env,{user,isPc});if(academicResponse)return academicResponse;
     if(path==='/payroll.css')return text(PAYROLL_CSS,'text/css');if(path==='/payroll.js')return text(PAYROLL_JS,'application/javascript');

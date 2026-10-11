@@ -8,7 +8,7 @@ const req=(path='',user=hr,method='GET',data,origin='https://test.local')=>hubRo
 const status=async(p,s)=>{const r=await p;assert.equal(r.status,s,await r.clone().text());checks++;return r};
 const eq=(a,b)=>{assert.deepEqual(a,b);checks++};
 await status(req('',null),401);await status(req('',{userId:'stranger',email:'stranger@test.local'}),403);await status(req('',{...employee,userId:'wrong'}),403);
-let d=await(await status(req('',employee),200)).json();eq(d.employees.length,2);eq(d.employees[1].profileUrl,null);eq(d.employees[0].profileUrl,'/employee/profile');eq(Object.keys(d.employees[1]).sort(),['active','department','email','employee_id','employee_name','photoUrl','position','profileUrl']);
+let d=await(await status(req('',employee),200)).json();eq(d.employees.length,2);eq(d.employees[1].profileUrl,null);eq(d.employees[0].profileUrl,'/employee/profile');eq(Object.keys(d.employees[1]).sort(),['academicAppointments','academicFunction','active','department','email','employee_id','employee_name','photoUrl','position','profileUrl','relationship','workingTime']);
 const data={positions:[{id:'a',title:'Director',employeeId:'TEST-001'},{id:'b',title:'Executive',parentId:'a',employeeId:'TEST-002'}],asOf:'2026-09-30',source:'Official structure'};
 await status(req('/organisation',employee,'PUT',{version:0,data}),403);await status(req('/organisation',hr,'PUT',{version:0,data},'https://evil.local'),403);
 await status(req('/organisation',hr,'PUT',{version:0,data}),200);await status(req('/organisation',hr,'PUT',{version:0,data}),409);

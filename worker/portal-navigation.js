@@ -1,10 +1,10 @@
 const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 // One catalogue drives the header, homepage services and role-specific destinations.
-export function navigationGroups(a){return [
+export function navigationGroups(a){if(a.contributorOnly)return [{label:'Academic Hub',items:[['My academic appointments','/academic']]}];return [
  ...(a.employee?[{label:'My workspace',navLabel:'My Workspace',items:[['My profile','/employee/profile'],['My Salary','/employee/salary'],['My attendance','/employee/attendance'],['My leave','/employee/leave'],['My appointments','/employee/appointments'],['My requests','/employee/requests'],['My business card','/business-cards?employeeId='+encodeURIComponent(a.employeeId)]]}]:[]),
  {label:'People',navLabel:'People & Organisation',items:[['Staff directory','/people'],['Organisation chart','/people?view=organisation'],['Business cards','/business-cards'],['Workforce & People','/workforce']]},
  ...(a.employee||a.hr||a.manager||a.leadership?[{label:'Performance & Development',items:[...(a.employee?[['My MPC','/employee'],['My CPD & training','/employee/cpd']]:[]),...(a.hr?[['MPC overview','/admin'],['CPD & training','/admin/cpd']]:[])]}]:[]),
- ...(a.employee||a.academic?[{label:'Academic Hub',items:[['Academic Hub','/academic']]}]:[]),
+ ...(a.academic?[{label:'Academic Hub',items:[['Academic Hub','/academic']]}]:[]),
  {label:'Life at IUC',navLabel:'NADI Connect',items:[['Community','/#community'],['Calendar','/#nadi-calendar'],['IUC Culture','/culture'],['Employment policies','/policies'],['IUC systems','/#iuc-systems'],['Help & contact','/#help']]},
  ...(a.hr||a.manager||a.leadership||a.payroll||a.payrollSummary?[{label:'Management',navLabel:'Management & Administration',items:[
  ...(a.manager?[['Team dashboard','/manager'],['Team appointments','/manager/appointments'],['Team attendance','/manager/attendance'],['Team leave & approvals','/manager/leave'],...(!a.hr?[['Team Connect insights','/manager/connect']]:[])]:[]),

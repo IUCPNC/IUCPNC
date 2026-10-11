@@ -1,3 +1,4 @@
+import {payrollEvidence} from './academic-evidence.js';
 import {payrollAccess,fail,json,requestToken} from './payroll-core.js';
 import {foundationRead,foundationWrite,challenge} from './payroll-foundation.js';
 import {integrationWrite} from './payroll-integration.js';
@@ -14,6 +15,7 @@ export async function payrollRoute(request,env,{user}){
  try{
   if(!env.DB)throw fail('Payroll storage is unavailable.',503);const a=await payrollAccess(env,user);
   if(request.method==='GET'){
+   if(path==='/api/payroll/academic-evidence')return json({records:await payrollEvidence(env,user)});
    if(path==='/api/payroll/payslip-preview'){const c=await configuration(env.DB);requireRead(a,c.data.entity);const r=await runRecord(env.DB,url.searchParams.get('run')||'',c.data.entity),l=(await runLines(env.DB,r.id)).find(l=>l.employee_id===url.searchParams.get('employeeId'));if(!l)throw fail('Payslip preview not found.',404);return pdfResponse(await payslipPdf(l.snapshot,{reference:r.id,preview:r.mode!=='authoritative'||!l.published_at}),'NADI-Payslip-Preview.pdf');}
    if(path==='/api/payroll/annual-preview'){const c=await configuration(env.DB);requireRead(a,c.data.entity);const r=await env.DB.prepare('SELECT data_json,status FROM payroll_annual_statements WHERE id=?').bind(url.searchParams.get('id')||'').first();if(!r)throw fail('Annual statement not found.',404);return pdfResponse(await eaPdf(JSON.parse(r.data_json),{draft:r.status!=='issued'}),'NADI-EA-Draft.pdf');}
    for(const read of [foundationRead,processingRead,governanceRead,selfserviceRead,reportsRead]){const result=await read(env,user,a,url);if(result)return result;}

@@ -14,7 +14,7 @@ export async function sessionWrite(db,env,user,a,path,b){
  const match=path.match(/^sessions\/([^/]+)$/);if(!match)return null;const s=await session(db,match[1]);if(!sees(a,s))throw fail('This teaching session is outside your academic access.',403);const action=b.action,ss=[],d={...s.data},revision=s.revision?.workflow?{...s.revision}:null;let value;
  if(action==='Save'||action==='Request rescheduling'){
   if(['Verified','Completed'].includes(s.status))throw fail('Verified delivery is retained. Use an audited delivery correction.',409);
-  if(action==='Save'){requireRole(a,'administrator',s.programme_id);ss.push(...grantAssert(db,a,user,'administrator',s.programme_id));}else{if(s.employee_id!==a.employeeId)throw fail('Only the assigned lecturer can request rescheduling.',403);ss.push(...ownAssert(db,a,user,s.employee_id));}
+  if(action==='Save'){requireRole(a,'administrator',s.programme_id);ss.push(...grantAssert(db,a,user,'administrator',s.programme_id));}else{if(s.employee_id!==a.employeeId)throw fail('Only the assigned lecturer can request rescheduling.',403);ss.push(...ownAssert(db,a,user,s.employee_id,s.programme_id));}
   const proposed=await resolveSession(db,b);if(proposed.programme_id!==s.programme_id||proposed.allocation_id!==s.allocation_id)throw fail('Use Replacement to change the teaching allocation.');proposed.updated_by=user.email;
   if(s.publication==='Published')value={revision_json:JSON.stringify({...proposed,workflow:'Draft',requestedBy:user.email,reason:clean(b.reason||'',2000)})};else value={...columns(proposed),data_json:JSON.stringify(proposed.data),publication:'Draft'};
  }else if(action==='Replacement'){
@@ -47,7 +47,7 @@ export async function sessionWrite(db,env,user,a,path,b){
 async function deliveryWrite(db,env,user,a,s,b){
  const action=b.action,own=s.employee_id===a.employeeId,d=await q(db,'SELECT * FROM academic_delivery WHERE session_id=?',s.id).first(),ss=[];let state,values;
  if(s.publication!=='Published')throw fail('Teaching can be recorded only against an official published session.');
- if(['Start','Submit','Complete'].includes(action)){if(!own)throw fail('Only the assigned lecturer can confirm teaching delivery.',403);ss.push(...ownAssert(db,a,user,s.employee_id));}
+ if(['Start','Submit','Complete'].includes(action)){if(!own)throw fail('Only the assigned lecturer can confirm teaching delivery.',403);ss.push(...ownAssert(db,a,user,s.employee_id,s.programme_id));}
  if(action==='Start'){
   if(s.status!=='Scheduled'||s.date!==today())throw fail('Start the scheduled class on its teaching date.');state='In Progress';values={started_at:now(),status:state,remarks:'',minutes:0,updated_at:now()};
  }else if(action==='Submit'){
